@@ -10,7 +10,7 @@
 
 
 @interface PeopleSearchViewController : UITableViewController {
-    
+    NSDictionary *items;
 }
 
 @end
