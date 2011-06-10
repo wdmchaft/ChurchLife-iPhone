@@ -1,0 +1,268 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		BA1951F313A1986E00AA6F59 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA1951F213A1986E00AA6F59 /* UIKit.framework */; };
+		BA1951F513A1986E00AA6F59 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA1951F413A1986E00AA6F59 /* Foundation.framework */; };
+		BA1951F713A1986E00AA6F59 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA1951F613A1986E00AA6F59 /* CoreGraphics.framework */; };
+		BA1951FD13A1986E00AA6F59 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BA1951FB13A1986E00AA6F59 /* InfoPlist.strings */; };
+		BA19520013A1986E00AA6F59 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BA1951FF13A1986E00AA6F59 /* main.m */; };
+		BA19520313A1986E00AA6F59 /* ChurchLifeAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BA19520213A1986E00AA6F59 /* ChurchLifeAppDelegate.m */; };
+		BA19520613A1986E00AA6F59 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA19520413A1986E00AA6F59 /* MainWindow.xib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		BA1951EE13A1986E00AA6F59 /* ChurchLife.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChurchLife.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		BA1951F213A1986E00AA6F59 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		BA1951F413A1986E00AA6F59 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		BA1951F613A1986E00AA6F59 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		BA1951FA13A1986E00AA6F59 /* ChurchLife-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ChurchLife-Info.plist"; sourceTree = "<group>"; };
+		BA1951FC13A1986E00AA6F59 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		BA1951FE13A1986E00AA6F59 /* ChurchLife-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ChurchLife-Prefix.pch"; sourceTree = "<group>"; };
+		BA1951FF13A1986E00AA6F59 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		BA19520113A1986E00AA6F59 /* ChurchLifeAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChurchLifeAppDelegate.h; sourceTree = "<group>"; };
+		BA19520213A1986E00AA6F59 /* ChurchLifeAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChurchLifeAppDelegate.m; sourceTree = "<group>"; };
+		BA19520513A1986E00AA6F59 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		BA1951EB13A1986E00AA6F59 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BA1951F313A1986E00AA6F59 /* UIKit.framework in Frameworks */,
+				BA1951F513A1986E00AA6F59 /* Foundation.framework in Frameworks */,
+				BA1951F713A1986E00AA6F59 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		BA1951E313A1986E00AA6F59 = {
+			isa = PBXGroup;
+			children = (
+				BA1951F813A1986E00AA6F59 /* ChurchLife */,
+				BA1951F113A1986E00AA6F59 /* Frameworks */,
+				BA1951EF13A1986E00AA6F59 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		BA1951EF13A1986E00AA6F59 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BA1951EE13A1986E00AA6F59 /* ChurchLife.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		BA1951F113A1986E00AA6F59 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BA1951F213A1986E00AA6F59 /* UIKit.framework */,
+				BA1951F413A1986E00AA6F59 /* Foundation.framework */,
+				BA1951F613A1986E00AA6F59 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BA1951F813A1986E00AA6F59 /* ChurchLife */ = {
+			isa = PBXGroup;
+			children = (
+				BA19520113A1986E00AA6F59 /* ChurchLifeAppDelegate.h */,
+				BA19520213A1986E00AA6F59 /* ChurchLifeAppDelegate.m */,
+				BA19520413A1986E00AA6F59 /* MainWindow.xib */,
+				BA1951F913A1986E00AA6F59 /* Supporting Files */,
+			);
+			path = ChurchLife;
+			sourceTree = "<group>";
+		};
+		BA1951F913A1986E00AA6F59 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				BA1951FA13A1986E00AA6F59 /* ChurchLife-Info.plist */,
+				BA1951FB13A1986E00AA6F59 /* InfoPlist.strings */,
+				BA1951FE13A1986E00AA6F59 /* ChurchLife-Prefix.pch */,
+				BA1951FF13A1986E00AA6F59 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		BA1951ED13A1986E00AA6F59 /* ChurchLife */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BA19521513A1986E00AA6F59 /* Build configuration list for PBXNativeTarget "ChurchLife" */;
+			buildPhases = (
+				BA1951EA13A1986E00AA6F59 /* Sources */,
+				BA1951EB13A1986E00AA6F59 /* Frameworks */,
+				BA1951EC13A1986E00AA6F59 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ChurchLife;
+			productName = ChurchLife;
+			productReference = BA1951EE13A1986E00AA6F59 /* ChurchLife.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		BA1951E513A1986E00AA6F59 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				ORGANIZATIONNAME = "ACS Technologies";
+			};
+			buildConfigurationList = BA1951E813A1986E00AA6F59 /* Build configuration list for PBXProject "ChurchLife" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = BA1951E313A1986E00AA6F59;
+			productRefGroup = BA1951EF13A1986E00AA6F59 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				BA1951ED13A1986E00AA6F59 /* ChurchLife */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		BA1951EC13A1986E00AA6F59 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BA1951FD13A1986E00AA6F59 /* InfoPlist.strings in Resources */,
+				BA19520613A1986E00AA6F59 /* MainWindow.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		BA1951EA13A1986E00AA6F59 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BA19520013A1986E00AA6F59 /* main.m in Sources */,
+				BA19520313A1986E00AA6F59 /* ChurchLifeAppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		BA1951FB13A1986E00AA6F59 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BA1951FC13A1986E00AA6F59 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		BA19520413A1986E00AA6F59 /* MainWindow.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BA19520513A1986E00AA6F59 /* en */,
+			);
+			name = MainWindow.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		BA19521313A1986E00AA6F59 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		BA19521413A1986E00AA6F59 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+			};
+			name = Release;
+		};
+		BA19521613A1986E00AA6F59 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "ChurchLife/ChurchLife-Prefix.pch";
+				INFOPLIST_FILE = "ChurchLife/ChurchLife-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		BA19521713A1986E00AA6F59 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "ChurchLife/ChurchLife-Prefix.pch";
+				INFOPLIST_FILE = "ChurchLife/ChurchLife-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALIDATE_PRODUCT = YES;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		BA1951E813A1986E00AA6F59 /* Build configuration list for PBXProject "ChurchLife" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BA19521313A1986E00AA6F59 /* Debug */,
+				BA19521413A1986E00AA6F59 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BA19521513A1986E00AA6F59 /* Build configuration list for PBXNativeTarget "ChurchLife" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BA19521613A1986E00AA6F59 /* Debug */,
+				BA19521713A1986E00AA6F59 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = BA1951E513A1986E00AA6F59 /* Project object */;
+}
