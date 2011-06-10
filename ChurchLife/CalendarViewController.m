@@ -1,15 +1,15 @@
 //
-//  PeopleSearchViewController.m
+//  CalendarViewController.m
 //  ChurchLife
 //
 //  Created by Jamey on 6/9/11.
 //  Copyright 2011 ACS Technologies. All rights reserved.
 //
 
-#import "PeopleSearchViewController.h"
+#import "CalendarViewController.h"
 
 
-@implementation PeopleSearchViewController
+@implementation CalendarViewController
 
 - (id)initWithStyle:(UITableViewStyle)style
 {

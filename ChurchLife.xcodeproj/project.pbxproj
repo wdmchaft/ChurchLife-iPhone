@@ -14,6 +14,12 @@
 		BA19520013A1986E00AA6F59 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BA1951FF13A1986E00AA6F59 /* main.m */; };
 		BA19520313A1986E00AA6F59 /* ChurchLifeAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BA19520213A1986E00AA6F59 /* ChurchLifeAppDelegate.m */; };
 		BA19520613A1986E00AA6F59 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA19520413A1986E00AA6F59 /* MainWindow.xib */; };
+		BA19522B13A19AFC00AA6F59 /* PeopleSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA19522913A19AFC00AA6F59 /* PeopleSearchViewController.m */; };
+		BA19522C13A19AFC00AA6F59 /* PeopleSearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA19522A13A19AFC00AA6F59 /* PeopleSearchViewController.xib */; };
+		BA19523113A19B9700AA6F59 /* CalendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA19522F13A19B9700AA6F59 /* CalendarViewController.m */; };
+		BA19523213A19B9700AA6F59 /* CalendarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA19523013A19B9700AA6F59 /* CalendarViewController.xib */; };
+		BA19523613A19BAD00AA6F59 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA19523413A19BAD00AA6F59 /* SettingsViewController.m */; };
+		BA19523713A19BAD00AA6F59 /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA19523513A19BAD00AA6F59 /* SettingsViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +34,15 @@
 		BA19520113A1986E00AA6F59 /* ChurchLifeAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChurchLifeAppDelegate.h; sourceTree = "<group>"; };
 		BA19520213A1986E00AA6F59 /* ChurchLifeAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChurchLifeAppDelegate.m; sourceTree = "<group>"; };
 		BA19520513A1986E00AA6F59 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
+		BA19522813A19AFC00AA6F59 /* PeopleSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PeopleSearchViewController.h; sourceTree = "<group>"; };
+		BA19522913A19AFC00AA6F59 /* PeopleSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PeopleSearchViewController.m; sourceTree = "<group>"; };
+		BA19522A13A19AFC00AA6F59 /* PeopleSearchViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PeopleSearchViewController.xib; sourceTree = "<group>"; };
+		BA19522E13A19B9700AA6F59 /* CalendarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarViewController.h; sourceTree = "<group>"; };
+		BA19522F13A19B9700AA6F59 /* CalendarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarViewController.m; sourceTree = "<group>"; };
+		BA19523013A19B9700AA6F59 /* CalendarViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CalendarViewController.xib; sourceTree = "<group>"; };
+		BA19523313A19BAD00AA6F59 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
+		BA19523413A19BAD00AA6F59 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
+		BA19523513A19BAD00AA6F59 /* SettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +93,15 @@
 				BA19520213A1986E00AA6F59 /* ChurchLifeAppDelegate.m */,
 				BA19520413A1986E00AA6F59 /* MainWindow.xib */,
 				BA1951F913A1986E00AA6F59 /* Supporting Files */,
+				BA19522813A19AFC00AA6F59 /* PeopleSearchViewController.h */,
+				BA19522913A19AFC00AA6F59 /* PeopleSearchViewController.m */,
+				BA19522A13A19AFC00AA6F59 /* PeopleSearchViewController.xib */,
+				BA19522E13A19B9700AA6F59 /* CalendarViewController.h */,
+				BA19522F13A19B9700AA6F59 /* CalendarViewController.m */,
+				BA19523013A19B9700AA6F59 /* CalendarViewController.xib */,
+				BA19523313A19BAD00AA6F59 /* SettingsViewController.h */,
+				BA19523413A19BAD00AA6F59 /* SettingsViewController.m */,
+				BA19523513A19BAD00AA6F59 /* SettingsViewController.xib */,
 			);
 			path = ChurchLife;
 			sourceTree = "<group>";
@@ -145,6 +169,9 @@
 			files = (
 				BA1951FD13A1986E00AA6F59 /* InfoPlist.strings in Resources */,
 				BA19520613A1986E00AA6F59 /* MainWindow.xib in Resources */,
+				BA19522C13A19AFC00AA6F59 /* PeopleSearchViewController.xib in Resources */,
+				BA19523213A19B9700AA6F59 /* CalendarViewController.xib in Resources */,
+				BA19523713A19BAD00AA6F59 /* SettingsViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -157,6 +184,9 @@
 			files = (
 				BA19520013A1986E00AA6F59 /* main.m in Sources */,
 				BA19520313A1986E00AA6F59 /* ChurchLifeAppDelegate.m in Sources */,
+				BA19522B13A19AFC00AA6F59 /* PeopleSearchViewController.m in Sources */,
+				BA19523113A19B9700AA6F59 /* CalendarViewController.m in Sources */,
+				BA19523613A19BAD00AA6F59 /* SettingsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -261,6 +291,7 @@
 				BA19521713A1986E00AA6F59 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
