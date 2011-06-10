@@ -20,6 +20,7 @@
 		BA19523213A19B9700AA6F59 /* CalendarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA19523013A19B9700AA6F59 /* CalendarViewController.xib */; };
 		BA19523613A19BAD00AA6F59 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA19523413A19BAD00AA6F59 /* SettingsViewController.m */; };
 		BA19523713A19BAD00AA6F59 /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA19523513A19BAD00AA6F59 /* SettingsViewController.xib */; };
+		BA24F5D313A2B36A006AE9C9 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = BA24F5D013A2B36A006AE9C9 /* JSONKit.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +44,8 @@
 		BA19523313A19BAD00AA6F59 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		BA19523413A19BAD00AA6F59 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		BA19523513A19BAD00AA6F59 /* SettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsViewController.xib; sourceTree = "<group>"; };
+		BA24F5CF13A2B36A006AE9C9 /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JSONKit.h; path = JSONKit/JSONKit.h; sourceTree = "<group>"; };
+		BA24F5D013A2B36A006AE9C9 /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JSONKit.m; path = JSONKit/JSONKit.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +92,7 @@
 		BA1951F813A1986E00AA6F59 /* ChurchLife */ = {
 			isa = PBXGroup;
 			children = (
+				BA24F5C613A2B338006AE9C9 /* JSONKit */,
 				BA19520113A1986E00AA6F59 /* ChurchLifeAppDelegate.h */,
 				BA19520213A1986E00AA6F59 /* ChurchLifeAppDelegate.m */,
 				BA19520413A1986E00AA6F59 /* MainWindow.xib */,
@@ -115,6 +119,15 @@
 				BA1951FF13A1986E00AA6F59 /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		BA24F5C613A2B338006AE9C9 /* JSONKit */ = {
+			isa = PBXGroup;
+			children = (
+				BA24F5CF13A2B36A006AE9C9 /* JSONKit.h */,
+				BA24F5D013A2B36A006AE9C9 /* JSONKit.m */,
+			);
+			name = JSONKit;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -187,6 +200,7 @@
 				BA19522B13A19AFC00AA6F59 /* PeopleSearchViewController.m in Sources */,
 				BA19523113A19B9700AA6F59 /* CalendarViewController.m in Sources */,
 				BA19523613A19BAD00AA6F59 /* SettingsViewController.m in Sources */,
+				BA24F5D313A2B36A006AE9C9 /* JSONKit.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -7,6 +7,7 @@
 //
 
 #import "PeopleSearchViewController.h"
+#import "JSONKit.h"
 
 
 @implementation PeopleSearchViewController
@@ -39,6 +40,13 @@
 {
     [super viewDidLoad];
 
+    NSString *jsonUrl = @"http://api.twitter.com/1/trends/daily.json";
+    NSData *jsonData = [NSData dataWithContentsOfURL:[NSURL URLWithString:jsonUrl]];
+    
+    JSONDecoder *jsonKitDecoder = [JSONDecoder decoder];
+    items = [jsonKitDecoder parseJSONData:jsonData];
+	
+    NSLog(@"total items: %d", [items count]);
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
@@ -83,16 +91,14 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
     // Return the number of sections.
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return 5;
+    return 5; //[items count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -105,6 +111,7 @@
     }
     
     // Configure the cell...
+    cell.textLabel.text = @"value";
     
     return cell;
 }

@@ -83,14 +83,12 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
     // Return the number of sections.
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
     // Return the number of rows in the section.
     return 5;
 }
@@ -105,6 +103,7 @@
     }
     
     // Configure the cell...
+    cell.textLabel.text = @"event";
     
     return cell;
 }
