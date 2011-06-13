@@ -64,6 +64,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    self.tableView.separatorColor = [UIColor colorWithRed:.52 green:.48 blue:.41 alpha:1];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -111,6 +112,13 @@
     }
     
     // Configure the cell...
+    UIView *view = [[UIView alloc] initWithFrame:cell.frame];
+    view.backgroundColor = [UIColor whiteColor];
+    cell.selectedBackgroundView = view;
+    [view release];
+
+    cell.textLabel.textColor = [UIColor colorWithRed:.204 green:.275 blue:.459 alpha:1];
+    cell.textLabel.highlightedTextColor = cell.textLabel.textColor;
     cell.textLabel.text = @"value";
     
     return cell;
