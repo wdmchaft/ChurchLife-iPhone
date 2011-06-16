@@ -7,6 +7,7 @@
 //
 
 #import "CalendarViewController.h"
+#import "CalendarCell.h"
 
 
 @implementation CalendarViewController
@@ -96,16 +97,22 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
+    static NSString *CellIdentifier = @"CalendarCell";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    CalendarCell *cell = (CalendarCell *) [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        NSArray *topLevelObjects = [[NSBundle mainBundle]
+                                    loadNibNamed:@"CalendarCell" 
+                                    owner:nil options:nil];
+        
+        for (id currentObject in topLevelObjects){
+            if ([currentObject isKindOfClass:[UITableViewCell class]]){
+                cell = (CalendarCell *) currentObject;
+                break;
+            }
+        }
     }
-    
-    // Configure the cell...
-    cell.textLabel.textColor = [UIColor colorWithRed:.204 green:.275 blue:.459 alpha:1];
-    cell.textLabel.text = @"event";
     
     return cell;
 }

@@ -21,6 +21,8 @@
 		BA19523613A19BAD00AA6F59 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA19523413A19BAD00AA6F59 /* SettingsViewController.m */; };
 		BA19523713A19BAD00AA6F59 /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA19523513A19BAD00AA6F59 /* SettingsViewController.xib */; };
 		BA24F5D313A2B36A006AE9C9 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = BA24F5D013A2B36A006AE9C9 /* JSONKit.m */; };
+		CEC0CCD213AA91E0009A9418 /* CalendarCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC0CCD113AA91E0009A9418 /* CalendarCell.m */; };
+		CEC0CCD413AA92C9009A9418 /* CalendarCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEC0CCD313AA92C8009A9418 /* CalendarCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +48,9 @@
 		BA19523513A19BAD00AA6F59 /* SettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsViewController.xib; sourceTree = "<group>"; };
 		BA24F5CF13A2B36A006AE9C9 /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JSONKit.h; path = JSONKit/JSONKit.h; sourceTree = "<group>"; };
 		BA24F5D013A2B36A006AE9C9 /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JSONKit.m; path = JSONKit/JSONKit.m; sourceTree = "<group>"; };
+		CEC0CCD013AA91E0009A9418 /* CalendarCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarCell.h; sourceTree = "<group>"; };
+		CEC0CCD113AA91E0009A9418 /* CalendarCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarCell.m; sourceTree = "<group>"; };
+		CEC0CCD313AA92C8009A9418 /* CalendarCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CalendarCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +105,9 @@
 				BA19522813A19AFC00AA6F59 /* PeopleSearchViewController.h */,
 				BA19522913A19AFC00AA6F59 /* PeopleSearchViewController.m */,
 				BA19522A13A19AFC00AA6F59 /* PeopleSearchViewController.xib */,
+				CEC0CCD013AA91E0009A9418 /* CalendarCell.h */,
+				CEC0CCD113AA91E0009A9418 /* CalendarCell.m */,
+				CEC0CCD313AA92C8009A9418 /* CalendarCell.xib */,
 				BA19522E13A19B9700AA6F59 /* CalendarViewController.h */,
 				BA19522F13A19B9700AA6F59 /* CalendarViewController.m */,
 				BA19523013A19B9700AA6F59 /* CalendarViewController.xib */,
@@ -185,6 +193,7 @@
 				BA19522C13A19AFC00AA6F59 /* PeopleSearchViewController.xib in Resources */,
 				BA19523213A19B9700AA6F59 /* CalendarViewController.xib in Resources */,
 				BA19523713A19BAD00AA6F59 /* SettingsViewController.xib in Resources */,
+				CEC0CCD413AA92C9009A9418 /* CalendarCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -201,6 +210,7 @@
 				BA19523113A19B9700AA6F59 /* CalendarViewController.m in Sources */,
 				BA19523613A19BAD00AA6F59 /* SettingsViewController.m in Sources */,
 				BA24F5D313A2B36A006AE9C9 /* JSONKit.m in Sources */,
+				CEC0CCD213AA91E0009A9418 /* CalendarCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
