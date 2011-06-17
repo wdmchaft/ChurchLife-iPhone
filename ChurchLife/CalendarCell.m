@@ -33,6 +33,16 @@
     view.backgroundColor = [UIColor whiteColor];
     self.selectedBackgroundView = view;
     [view release];
+    
+    UIImage *image = [UIImage imageNamed:@"disclosure-arrow.png"];
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    CGRect frame = CGRectMake(0.0, 0.0, image.size.width, image.size.height);
+    button.frame = frame;
+    
+    [button setBackgroundImage:image forState:UIControlStateNormal];
+    [button addTarget:self.superview.superview action:@selector(checkButtonTapped:event:) forControlEvents:UIControlEventTouchUpInside];
+    
+    self.accessoryView = button;
 }
 
 - (void)dealloc

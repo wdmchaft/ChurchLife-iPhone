@@ -29,6 +29,7 @@
 		CE446FCD13ABCB9800621058 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = CE446FC913ABCB9800621058 /* icon.png */; };
 		CE446FCE13ABCB9800621058 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE446FCA13ABCB9800621058 /* icon@2x.png */; };
 		CE446FCF13ABCB9800621058 /* icon512.png in Resources */ = {isa = PBXBuildFile; fileRef = CE446FCB13ABCB9800621058 /* icon512.png */; };
+		CE446FD213ABCDF100621058 /* disclosure-arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = CE446FD113ABCDF100621058 /* disclosure-arrow.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -63,6 +64,7 @@
 		CE446FC913ABCB9800621058 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		CE446FCA13ABCB9800621058 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
 		CE446FCB13ABCB9800621058 /* icon512.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon512.png; sourceTree = "<group>"; };
+		CE446FD113ABCDF100621058 /* disclosure-arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "disclosure-arrow.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,6 +156,7 @@
 		CE446FC113ABCB4300621058 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				CE446FD013ABCDE300621058 /* images */,
 				CE446FC313ABCB6800621058 /* icons */,
 				CE446FC213ABCB5600621058 /* splash */,
 			);
@@ -178,6 +181,14 @@
 				CE446FCB13ABCB9800621058 /* icon512.png */,
 			);
 			name = icons;
+			sourceTree = "<group>";
+		};
+		CE446FD013ABCDE300621058 /* images */ = {
+			isa = PBXGroup;
+			children = (
+				CE446FD113ABCDF100621058 /* disclosure-arrow.png */,
+			);
+			name = images;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -242,6 +253,7 @@
 				CE446FCD13ABCB9800621058 /* icon.png in Resources */,
 				CE446FCE13ABCB9800621058 /* icon@2x.png in Resources */,
 				CE446FCF13ABCB9800621058 /* icon512.png in Resources */,
+				CE446FD213ABCDF100621058 /* disclosure-arrow.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
