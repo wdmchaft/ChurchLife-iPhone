@@ -114,7 +114,35 @@
         }
     }
     
+    UIImage *image = [UIImage imageNamed:@"disclosure-arrow.png"];
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    CGRect frame = CGRectMake(0.0, 0.0, image.size.width, image.size.height);
+    button.frame = frame;
+    
+    [button setBackgroundImage:image forState:UIControlStateNormal];
+    
+    cell.accessoryView = button;
+    
+    [button addTarget:self action:@selector(disclosureTapped:event:) forControlEvents:UIControlEventTouchUpInside];
+    
     return cell;
+}
+
+- (void)disclosureTapped:(id)sender event:(id)event
+{
+    NSSet *touches = [event allTouches];
+    UITouch *touch = [touches anyObject];
+    CGPoint currentTouchPosition = [touch locationInView:self.tableView];
+    NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:currentTouchPosition];
+    if (indexPath != nil)
+    {
+        [self tableView: self.tableView accessoryButtonTappedForRowWithIndexPath:indexPath];
+    }
+}
+
+- (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
+{
+    //show detail
 }
 
 /*
