@@ -8,6 +8,7 @@
 
 #import "PeopleSearchViewController.h"
 #import "JSONKit.h"
+#import "QuartzCore/QuartzCore.h"
 
 
 @implementation PeopleSearchViewController
@@ -65,6 +66,17 @@
 {
     [super viewWillAppear:animated];
     self.tableView.separatorColor = [UIColor colorWithRed:.52 green:.48 blue:.41 alpha:1];
+    
+    //stop drawing separators for blank rows
+    self.tableView.tableFooterView = [[[UIView alloc] init] autorelease];
+    
+    //draw gradient background
+    UIView *v = [[[UIView alloc] initWithFrame:self.tableView.frame] autorelease];
+    CAGradientLayer *gradient = [CAGradientLayer layer];
+    gradient.frame = v.bounds;
+    gradient.colors = [NSArray arrayWithObjects:(id)[[UIColor colorWithRed:.96 green:.96 blue:.96 alpha:1.0] CGColor], (id)[[UIColor colorWithRed:.8 green:.78 blue:.74 alpha:1.0] CGColor], nil];
+    [v.layer insertSublayer:gradient atIndex:0];     
+    self.tableView.backgroundView = v;
 }
 
 - (void)viewDidAppear:(BOOL)animated
