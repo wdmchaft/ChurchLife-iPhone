@@ -23,6 +23,12 @@
 		BAB3262913ABAD8400F8B2AD /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = BAB3262813ABAD8400F8B2AD /* JSONKit.m */; };
 		CE446FB413ABC7C600621058 /* CalendarCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE446FB213ABC7C600621058 /* CalendarCell.m */; };
 		CE446FB513ABC7C600621058 /* CalendarCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE446FB313ABC7C600621058 /* CalendarCell.xib */; };
+		CE446FC613ABCB8500621058 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = CE446FC413ABCB8500621058 /* Default.png */; };
+		CE446FC713ABCB8500621058 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE446FC513ABCB8500621058 /* Default@2x.png */; };
+		CE446FCC13ABCB9800621058 /* icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = CE446FC813ABCB9800621058 /* icon-72.png */; };
+		CE446FCD13ABCB9800621058 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = CE446FC913ABCB9800621058 /* icon.png */; };
+		CE446FCE13ABCB9800621058 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE446FCA13ABCB9800621058 /* icon@2x.png */; };
+		CE446FCF13ABCB9800621058 /* icon512.png in Resources */ = {isa = PBXBuildFile; fileRef = CE446FCB13ABCB9800621058 /* icon512.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,6 +57,12 @@
 		CE446FB113ABC7C600621058 /* CalendarCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarCell.h; sourceTree = "<group>"; };
 		CE446FB213ABC7C600621058 /* CalendarCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarCell.m; sourceTree = "<group>"; };
 		CE446FB313ABC7C600621058 /* CalendarCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CalendarCell.xib; sourceTree = "<group>"; };
+		CE446FC413ABCB8500621058 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		CE446FC513ABCB8500621058 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		CE446FC813ABCB9800621058 /* icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-72.png"; sourceTree = "<group>"; };
+		CE446FC913ABCB9800621058 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
+		CE446FCA13ABCB9800621058 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
+		CE446FCB13ABCB9800621058 /* icon512.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon512.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +109,7 @@
 		BA1951F813A1986E00AA6F59 /* ChurchLife */ = {
 			isa = PBXGroup;
 			children = (
+				CE446FC113ABCB4300621058 /* Resources */,
 				BAB3262613ABAD4300F8B2AD /* json */,
 				BA19520113A1986E00AA6F59 /* ChurchLifeAppDelegate.h */,
 				BA19520213A1986E00AA6F59 /* ChurchLifeAppDelegate.m */,
@@ -136,6 +149,35 @@
 				BAB3262813ABAD8400F8B2AD /* JSONKit.m */,
 			);
 			name = json;
+			sourceTree = "<group>";
+		};
+		CE446FC113ABCB4300621058 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				CE446FC313ABCB6800621058 /* icons */,
+				CE446FC213ABCB5600621058 /* splash */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		CE446FC213ABCB5600621058 /* splash */ = {
+			isa = PBXGroup;
+			children = (
+				CE446FC413ABCB8500621058 /* Default.png */,
+				CE446FC513ABCB8500621058 /* Default@2x.png */,
+			);
+			name = splash;
+			sourceTree = "<group>";
+		};
+		CE446FC313ABCB6800621058 /* icons */ = {
+			isa = PBXGroup;
+			children = (
+				CE446FC813ABCB9800621058 /* icon-72.png */,
+				CE446FC913ABCB9800621058 /* icon.png */,
+				CE446FCA13ABCB9800621058 /* icon@2x.png */,
+				CE446FCB13ABCB9800621058 /* icon512.png */,
+			);
+			name = icons;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -194,6 +236,12 @@
 				BA19523213A19B9700AA6F59 /* CalendarViewController.xib in Resources */,
 				BA19523713A19BAD00AA6F59 /* SettingsViewController.xib in Resources */,
 				CE446FB513ABC7C600621058 /* CalendarCell.xib in Resources */,
+				CE446FC613ABCB8500621058 /* Default.png in Resources */,
+				CE446FC713ABCB8500621058 /* Default@2x.png in Resources */,
+				CE446FCC13ABCB9800621058 /* icon-72.png in Resources */,
+				CE446FCD13ABCB9800621058 /* icon.png in Resources */,
+				CE446FCE13ABCB9800621058 /* icon@2x.png in Resources */,
+				CE446FCF13ABCB9800621058 /* icon512.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
