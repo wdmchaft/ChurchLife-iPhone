@@ -40,13 +40,13 @@
 {
     [super viewDidLoad];
 
-    NSString *jsonUrl = @"http://api.twitter.com/1/trends/daily.json";
-    NSData *jsonData = [NSData dataWithContentsOfURL:[NSURL URLWithString:jsonUrl]];
+    //NSString *jsonUrl = @"http://api.twitter.com/1/trends/daily.json";
+    //NSData *jsonData = [NSData dataWithContentsOfURL:[NSURL URLWithString:jsonUrl]];
     
-    JSONDecoder *jsonKitDecoder = [JSONDecoder decoder];
-    items = [jsonKitDecoder parseJSONData:jsonData];
+    //JSONDecoder *jsonKitDecoder = [JSONDecoder decoder];
+    //items = [jsonKitDecoder parseJSONData:jsonData];
 	
-    NSLog(@"total items: %d", [items count]);
+    //NSLog(@"total items: %d", [items count]);
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  

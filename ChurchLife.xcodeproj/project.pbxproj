@@ -21,6 +21,7 @@
 		BA19523613A19BAD00AA6F59 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA19523413A19BAD00AA6F59 /* SettingsViewController.m */; };
 		BA19523713A19BAD00AA6F59 /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA19523513A19BAD00AA6F59 /* SettingsViewController.xib */; };
 		BAB3262913ABAD8400F8B2AD /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = BAB3262813ABAD8400F8B2AD /* JSONKit.m */; };
+		BAB3262E13ABBB5000F8B2AD /* AcsLink.m in Sources */ = {isa = PBXBuildFile; fileRef = BAB3262D13ABBB5000F8B2AD /* AcsLink.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +47,8 @@
 		BA19523513A19BAD00AA6F59 /* SettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsViewController.xib; sourceTree = "<group>"; };
 		BAB3262713ABAD8400F8B2AD /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JSONKit.h; path = json/JSONKit.h; sourceTree = "<group>"; };
 		BAB3262813ABAD8400F8B2AD /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JSONKit.m; path = json/JSONKit.m; sourceTree = "<group>"; };
+		BAB3262C13ABBB5000F8B2AD /* AcsLink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AcsLink.h; sourceTree = "<group>"; };
+		BAB3262D13ABBB5000F8B2AD /* AcsLink.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AcsLink.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +95,7 @@
 		BA1951F813A1986E00AA6F59 /* ChurchLife */ = {
 			isa = PBXGroup;
 			children = (
+				BAB3262B13ABBB1700F8B2AD /* Acs */,
 				BAB3262613ABAD4300F8B2AD /* json */,
 				BA19520113A1986E00AA6F59 /* ChurchLifeAppDelegate.h */,
 				BA19520213A1986E00AA6F59 /* ChurchLifeAppDelegate.m */,
@@ -128,6 +132,15 @@
 				BAB3262813ABAD8400F8B2AD /* JSONKit.m */,
 			);
 			name = json;
+			sourceTree = "<group>";
+		};
+		BAB3262B13ABBB1700F8B2AD /* Acs */ = {
+			isa = PBXGroup;
+			children = (
+				BAB3262C13ABBB5000F8B2AD /* AcsLink.h */,
+				BAB3262D13ABBB5000F8B2AD /* AcsLink.m */,
+			);
+			name = Acs;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -201,6 +214,7 @@
 				BA19523113A19B9700AA6F59 /* CalendarViewController.m in Sources */,
 				BA19523613A19BAD00AA6F59 /* SettingsViewController.m in Sources */,
 				BAB3262913ABAD8400F8B2AD /* JSONKit.m in Sources */,
+				BAB3262E13ABBB5000F8B2AD /* AcsLink.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
