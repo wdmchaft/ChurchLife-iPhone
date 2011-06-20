@@ -6,6 +6,7 @@
 //  Copyright 2011 ACS Technologies. All rights reserved.
 
 #import "ChurchLifeAppDelegate.h"
+#import "AcsLink.h"
 
 @implementation ChurchLifeAppDelegate
 
@@ -20,6 +21,7 @@
     // Add the tab bar controller's current view as a subview of the window
     self.window.rootViewController = self.tabBarController;
     [self.window makeKeyAndVisible];
+    
     return YES;
 }
 

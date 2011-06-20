@@ -13,6 +13,7 @@
     
 }
 
-//- (NSMutableArray *)IndividualsGetListWithQuery: (NSString *)query;
-
++(NSMutableArray *)IndividualsGetListWithQuery: (NSString *)query;
++(NSString *)GetTokenWithSiteNumber: (int)siteNumber userName:(NSString *)un password:(NSString *) pw;
+     
 @end

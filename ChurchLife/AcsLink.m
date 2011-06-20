@@ -8,31 +8,33 @@
 
 #import "AcsLink.h"
 
-
 @implementation AcsLink
 
-/*
-- (NSMutableArray *)IndividualsGetListWithQuery: (NSString *)query {
-    
-    // create the request
-    NSURLRequest *theRequest=[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.apple.com/"]
-                                              cachePolicy:NSURLRequestUseProtocolCachePolicy
-                                          timeoutInterval:60.0];
-    // create the connection with the request
-    // and start loading the data
-    NSURLConnection *theConnection=[[NSURLConnection alloc] initWithRequest:theRequest delegate:self];
-    if (theConnection) {
-        // Create the NSMutableData that will hold
-        // the received data
-        // receivedData is declared as a method instance elsewhere
-        receivedData=[[NSMutableData data] retain];
-    } else {
-        // inform the user that the download could not be made
-    } 
-    
++ (NSMutableArray *)IndividualsGetListWithQuery: (NSString *)query {
+    return nil; 
 }
 
- -(NSString *)GetTokenWithSiteNumber: (int)siteNumber {
+
++(NSString *)GetTokenWithSiteNumber: (int)siteNumber userName:(NSString *)un password:(NSString *) pw {
+    NSURL *url = [NSURL URLWithString:@"https://secure.accessacs.com/link/v1/json/account/signinwithusername"];    
+    NSError *error;
+    NSURLResponse *response;
+    NSData *dataReply;
+    NSString *stringReply;
+    NSString* content = @"sitenumber=106217&username=admin&password=password";
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL: url];
+    [request setHTTPMethod: @"POST"];
+    [request setHTTPBody:[content dataUsingEncoding: NSASCIIStringEncoding]];
+    dataReply = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+    stringReply = [[NSString alloc] initWithData:dataReply encoding:NSUTF8StringEncoding];
+
+    if (error != nil) {
+        //[self handleError:err];
+    }
+
+    [stringReply release];
+    return @"";
+    
  }
- */
+
 @end

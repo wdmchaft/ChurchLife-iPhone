@@ -7,7 +7,7 @@
 //
 
 #import "PeopleDetailViewController.h"
-
+#import "AcsLink.h"
 
 @implementation PeopleDetailViewController
 
@@ -40,6 +40,8 @@
     [super viewDidLoad];
  
     self.title = @"James Aaron";
+    
+    [AcsLink GetTokenWithSiteNumber:106217 userName:@"admin" password:@"password"];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;

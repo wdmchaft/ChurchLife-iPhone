@@ -23,6 +23,10 @@
 		BA6E19C213AFC10100C18960 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA6E19C113AFC10100C18960 /* QuartzCore.framework */; };
 		BA6E1A0213AFCB4300C18960 /* PeopleDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA6E1A0013AFCB4300C18960 /* PeopleDetailViewController.m */; };
 		BA6E1A0313AFCB4300C18960 /* PeopleDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA6E1A0113AFCB4300C18960 /* PeopleDetailViewController.xib */; };
+		BA6E1A2B13AFE6FD00C18960 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA6E1A2A13AFE6FC00C18960 /* CFNetwork.framework */; };
+		BA6E1A2D13AFE70600C18960 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA6E1A2C13AFE70600C18960 /* SystemConfiguration.framework */; };
+		BA6E1A2F13AFE71100C18960 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA6E1A2E13AFE71100C18960 /* MobileCoreServices.framework */; };
+		BA6E1A3113AFE73500C18960 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BA6E1A3013AFE73500C18960 /* libz.dylib */; };
 		BAB3262913ABAD8400F8B2AD /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = BAB3262813ABAD8400F8B2AD /* JSONKit.m */; };
 		BAB3262E13ABBB5000F8B2AD /* AcsLink.m in Sources */ = {isa = PBXBuildFile; fileRef = BAB3262D13ABBB5000F8B2AD /* AcsLink.m */; };
 		CE19BEB013AFBD1700A62939 /* calendar.png in Resources */ = {isa = PBXBuildFile; fileRef = CE19BEA413AFBD1700A62939 /* calendar.png */; };
@@ -67,6 +71,10 @@
 		BA6E19FF13AFCB4300C18960 /* PeopleDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PeopleDetailViewController.h; sourceTree = "<group>"; };
 		BA6E1A0013AFCB4300C18960 /* PeopleDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PeopleDetailViewController.m; sourceTree = "<group>"; };
 		BA6E1A0113AFCB4300C18960 /* PeopleDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PeopleDetailViewController.xib; sourceTree = "<group>"; };
+		BA6E1A2A13AFE6FC00C18960 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		BA6E1A2C13AFE70600C18960 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		BA6E1A2E13AFE71100C18960 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		BA6E1A3013AFE73500C18960 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		BAB3262713ABAD8400F8B2AD /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JSONKit.h; path = json/JSONKit.h; sourceTree = "<group>"; };
 		BAB3262813ABAD8400F8B2AD /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JSONKit.m; path = json/JSONKit.m; sourceTree = "<group>"; };
 		BAB3262C13ABBB5000F8B2AD /* AcsLink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AcsLink.h; sourceTree = "<group>"; };
@@ -94,6 +102,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BA6E1A3113AFE73500C18960 /* libz.dylib in Frameworks */,
+				BA6E1A2F13AFE71100C18960 /* MobileCoreServices.framework in Frameworks */,
+				BA6E1A2D13AFE70600C18960 /* SystemConfiguration.framework in Frameworks */,
+				BA6E1A2B13AFE6FD00C18960 /* CFNetwork.framework in Frameworks */,
 				BA6E19C213AFC10100C18960 /* QuartzCore.framework in Frameworks */,
 				BA1951F313A1986E00AA6F59 /* UIKit.framework in Frameworks */,
 				BA1951F513A1986E00AA6F59 /* Foundation.framework in Frameworks */,
@@ -107,6 +119,10 @@
 		BA1951E313A1986E00AA6F59 = {
 			isa = PBXGroup;
 			children = (
+				BA6E1A3013AFE73500C18960 /* libz.dylib */,
+				BA6E1A2E13AFE71100C18960 /* MobileCoreServices.framework */,
+				BA6E1A2C13AFE70600C18960 /* SystemConfiguration.framework */,
+				BA6E1A2A13AFE6FC00C18960 /* CFNetwork.framework */,
 				BA1951F813A1986E00AA6F59 /* ChurchLife */,
 				BA1951F113A1986E00AA6F59 /* Frameworks */,
 				BA1951EF13A1986E00AA6F59 /* Products */,
@@ -135,16 +151,16 @@
 		BA1951F813A1986E00AA6F59 /* ChurchLife */ = {
 			isa = PBXGroup;
 			children = (
+				BAB3262B13ABBB1700F8B2AD /* Acs */,
+				BAB3262613ABAD4300F8B2AD /* json */,
+				CE19BEA113AFBCCF00A62939 /* Resources */,
+				BA1951F913A1986E00AA6F59 /* Supporting Files */,
 				CE19BEC013AFBD9500A62939 /* CalendarCell.h */,
 				CE19BEC113AFBD9500A62939 /* CalendarCell.m */,
 				CE19BEC213AFBD9500A62939 /* CalendarCell.xib */,
-				CE19BEA113AFBCCF00A62939 /* Resources */,
-				BAB3262B13ABBB1700F8B2AD /* Acs */,
-				BAB3262613ABAD4300F8B2AD /* json */,
 				BA19520113A1986E00AA6F59 /* ChurchLifeAppDelegate.h */,
 				BA19520213A1986E00AA6F59 /* ChurchLifeAppDelegate.m */,
 				BA19520413A1986E00AA6F59 /* MainWindow.xib */,
-				BA1951F913A1986E00AA6F59 /* Supporting Files */,
 				BA19522813A19AFC00AA6F59 /* PeopleSearchViewController.h */,
 				BA19522913A19AFC00AA6F59 /* PeopleSearchViewController.m */,
 				BA19522A13A19AFC00AA6F59 /* PeopleSearchViewController.xib */,
