@@ -7,8 +7,6 @@
 //
 
 #import "SettingsViewController.h"
-#import "QuartzCore/QuartzCore.h"
-
 
 @implementation SettingsViewController
 

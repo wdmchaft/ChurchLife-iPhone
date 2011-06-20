@@ -13,6 +13,6 @@
     
 }
 
-//- (NSMutableArray *)IndividualsGetListWithQuery: NSString *query;
+//- (NSMutableArray *)IndividualsGetListWithQuery: (NSString *)query;
 
 @end

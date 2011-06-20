@@ -8,8 +8,6 @@
 
 #import "PeopleSearchViewController.h"
 #import "JSONKit.h"
-#import <QuartzCore/QuartzCore.h>
-
 
 @implementation PeopleSearchViewController
 

@@ -8,8 +8,6 @@
 
 #import "CalendarViewController.h"
 #import "CalendarCell.h"
-#import "QuartzCore/QuartzCore.h"
-
 
 @implementation CalendarViewController
 

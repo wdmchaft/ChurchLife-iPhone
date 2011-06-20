@@ -20,6 +20,7 @@
 		BA19523213A19B9700AA6F59 /* CalendarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA19523013A19B9700AA6F59 /* CalendarViewController.xib */; };
 		BA19523613A19BAD00AA6F59 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA19523413A19BAD00AA6F59 /* SettingsViewController.m */; };
 		BA19523713A19BAD00AA6F59 /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA19523513A19BAD00AA6F59 /* SettingsViewController.xib */; };
+		BA41296F13AFB7D100AED3F6 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA41296E13AFB7D100AED3F6 /* QuartzCore.framework */; };
 		BAB3262913ABAD8400F8B2AD /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = BAB3262813ABAD8400F8B2AD /* JSONKit.m */; };
 		BAB3262E13ABBB5000F8B2AD /* AcsLink.m in Sources */ = {isa = PBXBuildFile; fileRef = BAB3262D13ABBB5000F8B2AD /* AcsLink.m */; };
 /* End PBXBuildFile section */
@@ -45,6 +46,7 @@
 		BA19523313A19BAD00AA6F59 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		BA19523413A19BAD00AA6F59 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		BA19523513A19BAD00AA6F59 /* SettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsViewController.xib; sourceTree = "<group>"; };
+		BA41296E13AFB7D100AED3F6 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		BAB3262713ABAD8400F8B2AD /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JSONKit.h; path = json/JSONKit.h; sourceTree = "<group>"; };
 		BAB3262813ABAD8400F8B2AD /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JSONKit.m; path = json/JSONKit.m; sourceTree = "<group>"; };
 		BAB3262C13ABBB5000F8B2AD /* AcsLink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AcsLink.h; sourceTree = "<group>"; };
@@ -56,6 +58,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BA41296F13AFB7D100AED3F6 /* QuartzCore.framework in Frameworks */,
 				BA1951F313A1986E00AA6F59 /* UIKit.framework in Frameworks */,
 				BA1951F513A1986E00AA6F59 /* Foundation.framework in Frameworks */,
 				BA1951F713A1986E00AA6F59 /* CoreGraphics.framework in Frameworks */,
@@ -68,6 +71,7 @@
 		BA1951E313A1986E00AA6F59 = {
 			isa = PBXGroup;
 			children = (
+				BA41296E13AFB7D100AED3F6 /* QuartzCore.framework */,
 				BA1951F813A1986E00AA6F59 /* ChurchLife */,
 				BA1951F113A1986E00AA6F59 /* Frameworks */,
 				BA1951EF13A1986E00AA6F59 /* Products */,
