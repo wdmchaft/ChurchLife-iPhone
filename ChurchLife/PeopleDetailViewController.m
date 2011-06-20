@@ -1,16 +1,15 @@
 //
-//  PeopleSearchViewController.m
+//  PeopleDetailViewController.m
 //  ChurchLife
 //
-//  Created by Jamey on 6/9/11.
+//  Created by Jamey on 6/20/11.
 //  Copyright 2011 ACS Technologies. All rights reserved.
 //
 
-#import "PeopleSearchViewController.h"
 #import "PeopleDetailViewController.h"
-#import "JSONKit.h"
 
-@implementation PeopleSearchViewController
+
+@implementation PeopleDetailViewController
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -39,14 +38,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    //NSString *jsonUrl = @"http://api.twitter.com/1/trends/daily.json";
-    //NSData *jsonData = [NSData dataWithContentsOfURL:[NSURL URLWithString:jsonUrl]];
+ 
+    self.title = @"James Aaron";
     
-    //JSONDecoder *jsonKitDecoder = [JSONDecoder decoder];
-    //items = [jsonKitDecoder parseJSONData:jsonData];
-	
-    //NSLog(@"total items: %d", [items count]);
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
@@ -64,18 +58,16 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    self.tableView.separatorColor = [UIColor colorWithRed:.52 green:.48 blue:.41 alpha:1];
-    
-    //stop drawing separators for blank rows
-    self.tableView.tableFooterView = [[[UIView alloc] init] autorelease];
     
     //draw gradient background
+    /*
     UIView *v = [[[UIView alloc] initWithFrame:self.tableView.frame] autorelease];
     CAGradientLayer *gradient = [CAGradientLayer layer];
     gradient.frame = v.bounds;
     gradient.colors = [NSArray arrayWithObjects:(id)[[UIColor colorWithRed:.96 green:.96 blue:.96 alpha:1.0] CGColor], (id)[[UIColor colorWithRed:.8 green:.78 blue:.74 alpha:1.0] CGColor], nil];
     [v.layer insertSublayer:gradient atIndex:0];     
     self.tableView.backgroundView = v;
+    */
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -103,37 +95,35 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
+#warning Potentially incomplete method implementation.
     // Return the number of sections.
-    return 1;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+#warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return 5; //[items count];
+    return 5;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
     
-    UITableViewCell *cell = (UITableViewCell *)
-        [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
     
     // Configure the cell...
-    UIView *view = [[UIView alloc] initWithFrame:cell.frame];
-    view.backgroundColor = [UIColor whiteColor];
-    cell.selectedBackgroundView = view;
-    [view release];
-
-    cell.textLabel.textColor = [UIColor colorWithRed:.204 green:.275 blue:.459 alpha:1];
-    cell.textLabel.highlightedTextColor = cell.textLabel.textColor;
-    cell.textLabel.text = @"value";
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    
+    if(indexPath.row % 2 == 0) {
+        cell.textLabel.text = @"Navigate in app";
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    } else {
+        cell.textLabel.text = @"Launch Browser, Phone, etc";
+        cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
+    }
     return cell;
 }
 
@@ -180,9 +170,14 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    PeopleDetailViewController *peopleDetailViewController = [[PeopleDetailViewController alloc] initWithNibName:@"PeopleDetailViewController" bundle:nil];
-    [self.navigationController pushViewController:peopleDetailViewController animated:YES];
-    [peopleDetailViewController release];
+    // Navigation logic may go here. Create and push another view controller.
+    /*
+     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
+     // ...
+     // Pass the selected object to the new view controller.
+     [self.navigationController pushViewController:detailViewController animated:YES];
+     [detailViewController release];
+     */
 }
 
 @end

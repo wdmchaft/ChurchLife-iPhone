@@ -20,7 +20,9 @@
 		BA19523213A19B9700AA6F59 /* CalendarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA19523013A19B9700AA6F59 /* CalendarViewController.xib */; };
 		BA19523613A19BAD00AA6F59 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA19523413A19BAD00AA6F59 /* SettingsViewController.m */; };
 		BA19523713A19BAD00AA6F59 /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA19523513A19BAD00AA6F59 /* SettingsViewController.xib */; };
-		BA41296F13AFB7D100AED3F6 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA41296E13AFB7D100AED3F6 /* QuartzCore.framework */; };
+		BA6E19C213AFC10100C18960 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA6E19C113AFC10100C18960 /* QuartzCore.framework */; };
+		BA6E1A0213AFCB4300C18960 /* PeopleDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA6E1A0013AFCB4300C18960 /* PeopleDetailViewController.m */; };
+		BA6E1A0313AFCB4300C18960 /* PeopleDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA6E1A0113AFCB4300C18960 /* PeopleDetailViewController.xib */; };
 		BAB3262913ABAD8400F8B2AD /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = BAB3262813ABAD8400F8B2AD /* JSONKit.m */; };
 		BAB3262E13ABBB5000F8B2AD /* AcsLink.m in Sources */ = {isa = PBXBuildFile; fileRef = BAB3262D13ABBB5000F8B2AD /* AcsLink.m */; };
 		CE19BEB013AFBD1700A62939 /* calendar.png in Resources */ = {isa = PBXBuildFile; fileRef = CE19BEA413AFBD1700A62939 /* calendar.png */; };
@@ -35,7 +37,6 @@
 		CE19BEB913AFBD1700A62939 /* people@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE19BEAD13AFBD1700A62939 /* people@2x.png */; };
 		CE19BEBA13AFBD1700A62939 /* settings.png in Resources */ = {isa = PBXBuildFile; fileRef = CE19BEAE13AFBD1700A62939 /* settings.png */; };
 		CE19BEBB13AFBD1700A62939 /* settings@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE19BEAF13AFBD1700A62939 /* settings@2x.png */; };
-		CE19BEBD13AFBD4400A62939 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE19BEBC13AFBD4400A62939 /* QuartzCore.framework */; };
 		CE19BEBF13AFBD7A00A62939 /* disclosure-arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = CE19BEBE13AFBD7A00A62939 /* disclosure-arrow.png */; };
 		CE19BEC313AFBD9500A62939 /* CalendarCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE19BEC113AFBD9500A62939 /* CalendarCell.m */; };
 		CE19BEC413AFBD9500A62939 /* CalendarCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE19BEC213AFBD9500A62939 /* CalendarCell.xib */; };
@@ -62,7 +63,10 @@
 		BA19523313A19BAD00AA6F59 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		BA19523413A19BAD00AA6F59 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		BA19523513A19BAD00AA6F59 /* SettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsViewController.xib; sourceTree = "<group>"; };
-		BA41296E13AFB7D100AED3F6 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		BA6E19C113AFC10100C18960 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		BA6E19FF13AFCB4300C18960 /* PeopleDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PeopleDetailViewController.h; sourceTree = "<group>"; };
+		BA6E1A0013AFCB4300C18960 /* PeopleDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PeopleDetailViewController.m; sourceTree = "<group>"; };
+		BA6E1A0113AFCB4300C18960 /* PeopleDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PeopleDetailViewController.xib; sourceTree = "<group>"; };
 		BAB3262713ABAD8400F8B2AD /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JSONKit.h; path = json/JSONKit.h; sourceTree = "<group>"; };
 		BAB3262813ABAD8400F8B2AD /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JSONKit.m; path = json/JSONKit.m; sourceTree = "<group>"; };
 		BAB3262C13ABBB5000F8B2AD /* AcsLink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AcsLink.h; sourceTree = "<group>"; };
@@ -79,7 +83,6 @@
 		CE19BEAD13AFBD1700A62939 /* people@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "people@2x.png"; sourceTree = "<group>"; };
 		CE19BEAE13AFBD1700A62939 /* settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settings.png; sourceTree = "<group>"; };
 		CE19BEAF13AFBD1700A62939 /* settings@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "settings@2x.png"; sourceTree = "<group>"; };
-		CE19BEBC13AFBD4400A62939 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		CE19BEBE13AFBD7A00A62939 /* disclosure-arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "disclosure-arrow.png"; sourceTree = "<group>"; };
 		CE19BEC013AFBD9500A62939 /* CalendarCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarCell.h; sourceTree = "<group>"; };
 		CE19BEC113AFBD9500A62939 /* CalendarCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarCell.m; sourceTree = "<group>"; };
@@ -91,8 +94,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-<<<<<<< HEAD
-				BA41296F13AFB7D100AED3F6 /* QuartzCore.framework in Frameworks */,
+				BA6E19C213AFC10100C18960 /* QuartzCore.framework in Frameworks */,
 				BA1951F313A1986E00AA6F59 /* UIKit.framework in Frameworks */,
 				BA1951F513A1986E00AA6F59 /* Foundation.framework in Frameworks */,
 				BA1951F713A1986E00AA6F59 /* CoreGraphics.framework in Frameworks */,
@@ -105,7 +107,6 @@
 		BA1951E313A1986E00AA6F59 = {
 			isa = PBXGroup;
 			children = (
-				BA41296E13AFB7D100AED3F6 /* QuartzCore.framework */,
 				BA1951F813A1986E00AA6F59 /* ChurchLife */,
 				BA1951F113A1986E00AA6F59 /* Frameworks */,
 				BA1951EF13A1986E00AA6F59 /* Products */,
@@ -123,7 +124,7 @@
 		BA1951F113A1986E00AA6F59 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				CE19BEBC13AFBD4400A62939 /* QuartzCore.framework */,
+				BA6E19C113AFC10100C18960 /* QuartzCore.framework */,
 				BA1951F213A1986E00AA6F59 /* UIKit.framework */,
 				BA1951F413A1986E00AA6F59 /* Foundation.framework */,
 				BA1951F613A1986E00AA6F59 /* CoreGraphics.framework */,
@@ -153,6 +154,9 @@
 				BA19523313A19BAD00AA6F59 /* SettingsViewController.h */,
 				BA19523413A19BAD00AA6F59 /* SettingsViewController.m */,
 				BA19523513A19BAD00AA6F59 /* SettingsViewController.xib */,
+				BA6E19FF13AFCB4300C18960 /* PeopleDetailViewController.h */,
+				BA6E1A0013AFCB4300C18960 /* PeopleDetailViewController.m */,
+				BA6E1A0113AFCB4300C18960 /* PeopleDetailViewController.xib */,
 			);
 			path = ChurchLife;
 			sourceTree = "<group>";
@@ -283,6 +287,7 @@
 				CE19BEBB13AFBD1700A62939 /* settings@2x.png in Resources */,
 				CE19BEBF13AFBD7A00A62939 /* disclosure-arrow.png in Resources */,
 				CE19BEC413AFBD9500A62939 /* CalendarCell.xib in Resources */,
+				BA6E1A0313AFCB4300C18960 /* PeopleDetailViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -301,6 +306,7 @@
 				BAB3262913ABAD8400F8B2AD /* JSONKit.m in Sources */,
 				BAB3262E13ABBB5000F8B2AD /* AcsLink.m in Sources */,
 				CE19BEC313AFBD9500A62939 /* CalendarCell.m in Sources */,
+				BA6E1A0213AFCB4300C18960 /* PeopleDetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
