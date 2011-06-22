@@ -8,19 +8,16 @@
 
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
+#import "SplitCell.h"
 
 @interface CalendarDetailViewController : UIViewController {
     IBOutlet UIButton *redRect;
-    IBOutlet UIButton *locRectLeft;
-    IBOutlet UIButton *locRectRight;
-    IBOutlet UIButton *descRectLeft;
-    IBOutlet UIButton *descRectRight;
+    IBOutlet UIButton *whiteRect;
+    SplitCell *splitCell;
 }
 
 @property (nonatomic, retain) IBOutlet UIButton *redRect;
-@property (nonatomic, retain) IBOutlet UIButton *locRectLeft;
-@property (nonatomic, retain) IBOutlet UIButton *locRectRight;
-@property (nonatomic, retain) IBOutlet UIButton *descRectLeft;
-@property (nonatomic, retain) IBOutlet UIButton *descRectRight;
+@property (nonatomic, retain) IBOutlet UIButton *whiteRect;
+@property (nonatomic, assign) IBOutlet SplitCell *splitCell;
 
 @end

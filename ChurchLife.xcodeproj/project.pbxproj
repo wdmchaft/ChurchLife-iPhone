@@ -46,6 +46,8 @@
 		CE19BEC413AFBD9500A62939 /* CalendarCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE19BEC213AFBD9500A62939 /* CalendarCell.xib */; };
 		CE19BEDC13B0D86300A62939 /* CalendarDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE19BEDA13B0D86200A62939 /* CalendarDetailViewController.m */; };
 		CE19BEDD13B0D86300A62939 /* CalendarDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE19BEDB13B0D86200A62939 /* CalendarDetailViewController.xib */; };
+		CE19BEE413B1226800A62939 /* SplitCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE19BEE313B1226700A62939 /* SplitCell.m */; };
+		CE19BEE613B1229000A62939 /* SplitCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE19BEE513B1228F00A62939 /* SplitCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -100,6 +102,9 @@
 		CE19BED913B0D86100A62939 /* CalendarDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarDetailViewController.h; sourceTree = "<group>"; };
 		CE19BEDA13B0D86200A62939 /* CalendarDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarDetailViewController.m; sourceTree = "<group>"; };
 		CE19BEDB13B0D86200A62939 /* CalendarDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CalendarDetailViewController.xib; sourceTree = "<group>"; };
+		CE19BEE213B1226700A62939 /* SplitCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SplitCell.h; path = ChurchLife.xcodeproj/SplitCell.h; sourceTree = SOURCE_ROOT; };
+		CE19BEE313B1226700A62939 /* SplitCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SplitCell.m; path = ChurchLife.xcodeproj/SplitCell.m; sourceTree = SOURCE_ROOT; };
+		CE19BEE513B1228F00A62939 /* SplitCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SplitCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,6 +168,9 @@
 				CE19BEC013AFBD9500A62939 /* CalendarCell.h */,
 				CE19BEC113AFBD9500A62939 /* CalendarCell.m */,
 				CE19BEC213AFBD9500A62939 /* CalendarCell.xib */,
+				CE19BEE213B1226700A62939 /* SplitCell.h */,
+				CE19BEE313B1226700A62939 /* SplitCell.m */,
+				CE19BEE513B1228F00A62939 /* SplitCell.xib */,
 				BA19520113A1986E00AA6F59 /* ChurchLifeAppDelegate.h */,
 				BA19520213A1986E00AA6F59 /* ChurchLifeAppDelegate.m */,
 				BA19520413A1986E00AA6F59 /* MainWindow.xib */,
@@ -313,6 +321,7 @@
 				CE19BEC413AFBD9500A62939 /* CalendarCell.xib in Resources */,
 				BA6E1A0313AFCB4300C18960 /* PeopleDetailViewController.xib in Resources */,
 				CE19BEDD13B0D86300A62939 /* CalendarDetailViewController.xib in Resources */,
+				CE19BEE613B1229000A62939 /* SplitCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -333,6 +342,7 @@
 				CE19BEC313AFBD9500A62939 /* CalendarCell.m in Sources */,
 				BA6E1A0213AFCB4300C18960 /* PeopleDetailViewController.m in Sources */,
 				CE19BEDC13B0D86300A62939 /* CalendarDetailViewController.m in Sources */,
+				CE19BEE413B1226800A62939 /* SplitCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -12,10 +12,8 @@
 @implementation CalendarDetailViewController
 
 @synthesize redRect;
-@synthesize locRectLeft;
-@synthesize locRectRight;
-@synthesize descRectLeft;
-@synthesize descRectRight;
+@synthesize whiteRect;
+@synthesize splitCell;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -51,22 +49,13 @@
 {
     [super viewWillAppear:animated];
     
-    //draw gradient background
-    CAGradientLayer *gradient = [CAGradientLayer layer];
-    gradient.frame = self.view.bounds;
-    gradient.colors = [NSArray arrayWithObjects:(id)[[UIColor colorWithRed:.96 green:.96 blue:.96 alpha:1.0] CGColor], (id)[[UIColor colorWithRed:.8 green:.78 blue:.74 alpha:1.0] CGColor], nil];
-    [[self.view layer] insertSublayer:gradient atIndex:0];     
-    
+    //round corners and add borders
+    [[redRect layer] setBorderColor:[[UIColor lightGrayColor] CGColor]];
+    [[whiteRect layer] setBorderColor:[[UIColor lightGrayColor] CGColor]];    
     [[redRect layer] setCornerRadius:8.0f];
     [[redRect layer] setMasksToBounds:YES];
-    [[locRectLeft layer] setCornerRadius:8.0f];
-    [[locRectLeft layer] setMasksToBounds:YES];
-    [[locRectRight layer] setCornerRadius:8.0f];
-    [[locRectRight layer] setMasksToBounds:YES];
-    [[descRectLeft layer] setCornerRadius:8.0f];
-    [[descRectLeft layer] setMasksToBounds:YES];
-    [[descRectRight layer] setCornerRadius:8.0f];
-    [[descRectRight layer] setMasksToBounds:YES];
+    [[redRect layer] setBorderWidth:1.0f];
+    [[whiteRect layer] setBorderWidth:1.0f];
 }
 
 - (void)viewDidUnload
@@ -80,6 +69,43 @@
 {
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    // Return the number of sections.
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 2;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{    
+    static NSString *CellIdentifier = @"SplitCell";
+    
+    SplitCell *cell = (SplitCell *) [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil)
+    {
+        [[NSBundle mainBundle] loadNibNamed:@"SplitCell" owner:self options:nil];
+        cell = splitCell;
+        self.splitCell = nil;
+    }
+    
+    if(indexPath.row == 0) {
+        cell.name.text = @"location";
+    } else {
+        cell.name.text = @"description";
+    }
+    
+    return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 36.0f;
 }
 
 @end

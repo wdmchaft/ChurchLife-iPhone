@@ -1,24 +1,24 @@
 //
-//  CalendarCell.m
+//  SplitCell.m
 //  ChurchLife
 //
-//  Created by user on 6/16/11.
+//  Created by user on 6/21/11.
 //  Copyright 2011 ACS Technologies. All rights reserved.
 //
 
-#import "CalendarCell.h"
+#import "SplitCell.h"
 
 
-@implementation CalendarCell
+@implementation SplitCell
 
-@synthesize eventLabel;
-@synthesize timeLabel;
-@synthesize dateLabel;
+@synthesize name;
+@synthesize contents;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
+        // Initialization code
     }
     return self;
 }
@@ -28,10 +28,6 @@
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
-    /*UIView *view = [[UIView alloc] initWithFrame:self.frame];
-    view.backgroundColor = [UIColor whiteColor];
-    self.selectedBackgroundView = view;
-    [view release];*/
 }
 
 - (void)dealloc

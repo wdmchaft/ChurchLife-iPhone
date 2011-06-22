@@ -8,9 +8,10 @@
 
 #import "CalendarViewController.h"
 #import "CalendarDetailViewController.h"
-#import "CalendarCell.h"
 
 @implementation CalendarViewController
+
+@synthesize calendarCell;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -57,18 +58,10 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    self.tableView.separatorColor = [UIColor colorWithRed:.52 green:.48 blue:.41 alpha:1];
+    //self.tableView.separatorColor = [UIColor colorWithRed:.52 green:.48 blue:.41 alpha:1];
     
     //stop drawing separators for blank rows
     self.tableView.tableFooterView = [[[UIView alloc] init] autorelease];
-    
-    //draw gradient background
-    UIView *v = [[[UIView alloc] initWithFrame:self.tableView.frame] autorelease];
-    CAGradientLayer *gradient = [CAGradientLayer layer];
-    gradient.frame = v.bounds;
-    gradient.colors = [NSArray arrayWithObjects:(id)[[UIColor colorWithRed:.96 green:.96 blue:.96 alpha:1.0] CGColor], (id)[[UIColor colorWithRed:.8 green:.78 blue:.74 alpha:1.0] CGColor], nil];
-    [v.layer insertSublayer:gradient atIndex:0];     
-    self.tableView.backgroundView = v;
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -107,48 +100,18 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+{    
     static NSString *CellIdentifier = @"CalendarCell";
     
     CalendarCell *cell = (CalendarCell *) [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    
-    if (cell == nil) {
-        NSArray *topLevelObjects = [[NSBundle mainBundle]
-                                    loadNibNamed:@"CalendarCell" 
-                                    owner:nil options:nil];
-        
-        for (id currentObject in topLevelObjects){
-            if ([currentObject isKindOfClass:[UITableViewCell class]]){
-                cell = (CalendarCell *) currentObject;
-                break;
-            }
-        }
+    if (cell == nil)
+    {
+        [[NSBundle mainBundle] loadNibNamed:@"CalendarCell" owner:self options:nil];
+        cell = calendarCell;
+        self.calendarCell = nil;
     }
-    
-    UIImage *image = [UIImage imageNamed:@"disclosure-arrow.png"];
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    CGRect frame = CGRectMake(0.0, 0.0, image.size.width, image.size.height);
-    button.frame = frame;
-    
-    [button setBackgroundImage:image forState:UIControlStateNormal];
-    
-    cell.accessoryView = button;
-    
-    [button addTarget:self action:@selector(disclosureTapped:event:) forControlEvents:UIControlEventTouchUpInside];
     
     return cell;
-}
-
-- (void)disclosureTapped:(id)sender event:(id)event
-{
-    NSSet *touches = [event allTouches];
-    UITouch *touch = [touches anyObject];
-    CGPoint currentTouchPosition = [touch locationInView:self.tableView];
-    NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:currentTouchPosition];
-    if (indexPath != nil)
-    {
-        [self tableView: self.tableView accessoryButtonTappedForRowWithIndexPath:indexPath];
-    }
 }
 
 - (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath

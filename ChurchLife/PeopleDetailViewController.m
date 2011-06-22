@@ -60,16 +60,6 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
-    //draw gradient background
-    /*
-    UIView *v = [[[UIView alloc] initWithFrame:self.tableView.frame] autorelease];
-    CAGradientLayer *gradient = [CAGradientLayer layer];
-    gradient.frame = v.bounds;
-    gradient.colors = [NSArray arrayWithObjects:(id)[[UIColor colorWithRed:.96 green:.96 blue:.96 alpha:1.0] CGColor], (id)[[UIColor colorWithRed:.8 green:.78 blue:.74 alpha:1.0] CGColor], nil];
-    [v.layer insertSublayer:gradient atIndex:0];     
-    self.tableView.backgroundView = v;
-    */
 }
 
 - (void)viewDidAppear:(BOOL)animated
