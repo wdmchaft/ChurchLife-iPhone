@@ -11,9 +11,12 @@
 
 @implementation PeopleDetailViewController
 
-- (id)initWithStyle:(UITableViewStyle)style
+@synthesize splitCell;
+@synthesize tableView;
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
-    self = [super initWithStyle:style];
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
     }
@@ -40,6 +43,8 @@
     [super viewDidLoad];
  
     self.title = @"James Aaron";
+    UIScrollView *scrollView = (UIScrollView *)self.view;
+    scrollView.contentSize = CGSizeMake(self.view.frame.size.width, 600.0f);
     
     [AcsLink GetTokenWithSiteNumber:106217 userName:@"admin" password:@"password"];
     
@@ -60,6 +65,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    tableView.backgroundColor = [UIColor clearColor];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -89,33 +95,47 @@
 {
 #warning Potentially incomplete method implementation.
     // Return the number of sections.
-    return 3;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
 #warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return 5;
+    if (section == 0)
+    {
+        return 3;
+    }
+    else
+    {
+        return 2;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
+    static NSString *CellIdentifier = @"SplitCell";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+    SplitCell *cell = (SplitCell *) [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil)
+    {
+        [[NSBundle mainBundle] loadNibNamed:@"SplitCell" owner:self options:nil];
+        cell = splitCell;
+        self.splitCell = nil;
     }
     
     // Configure the cell...
-    if(indexPath.row % 2 == 0) {
-        cell.textLabel.text = @"Navigate in app";
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    } else {
-        cell.textLabel.text = @"Launch Browser, Phone, etc";
-        cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
+    if (indexPath.section == 0)
+    {
+        cell.name.text = [NSString stringWithFormat:@"%@ %@", @"Address", [[NSNumber numberWithInt:indexPath.row+1] stringValue]];
+        cell.contents.text = @"123 Sample Rd";
     }
+    else
+    {
+        cell.name.text = [NSString stringWithFormat:@"%@ %@", @"Phone", [[NSNumber numberWithInt:indexPath.row+1] stringValue]];
+        cell.contents.text = @"(843) 555-5555";
+    }
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     return cell;
 }
 

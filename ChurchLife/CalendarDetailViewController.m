@@ -14,6 +14,7 @@
 @synthesize redRect;
 @synthesize whiteRect;
 @synthesize splitCell;
+@synthesize tableView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -48,6 +49,8 @@
 - (void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+    tableView.backgroundColor = [UIColor clearColor];
     
     //round corners and add borders
     [[redRect layer] setBorderColor:[[UIColor lightGrayColor] CGColor]];

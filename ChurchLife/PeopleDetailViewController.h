@@ -8,10 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
+#import "SplitCell.h"
 
-
-@interface PeopleDetailViewController : UITableViewController {
-    
+@interface PeopleDetailViewController : UIViewController {
+    SplitCell *splitCell;
+    IBOutlet UITableView *tableView;
 }
+
+@property (nonatomic, assign) IBOutlet SplitCell *splitCell;
+@property (nonatomic, retain) IBOutlet UITableView *tableView;
 
 @end
