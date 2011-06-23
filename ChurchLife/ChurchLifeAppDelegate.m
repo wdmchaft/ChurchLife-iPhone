@@ -6,6 +6,7 @@
 //  Copyright 2011 ACS Technologies. All rights reserved.
 
 #import "ChurchLifeAppDelegate.h"
+#import "LoginViewController.h"
 #import "AcsLink.h"
 
 @implementation ChurchLifeAppDelegate
@@ -21,6 +22,12 @@
     // Add the tab bar controller's current view as a subview of the window
     self.window.rootViewController = self.tabBarController;
     [self.window makeKeyAndVisible];
+    
+    LoginViewController *loginViewController = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
+    UINavigationController *navagitaionController = [[UINavigationController alloc] initWithRootViewController:loginViewController];
+    [loginViewController release];
+    [self.tabBarController presentModalViewController:navagitaionController animated:true]; 
+    [navagitaionController release];
     
     return YES;
 }

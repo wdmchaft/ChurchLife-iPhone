@@ -20,6 +20,8 @@
 		BA19523213A19B9700AA6F59 /* CalendarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA19523013A19B9700AA6F59 /* CalendarViewController.xib */; };
 		BA19523613A19BAD00AA6F59 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA19523413A19BAD00AA6F59 /* SettingsViewController.m */; };
 		BA19523713A19BAD00AA6F59 /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA19523513A19BAD00AA6F59 /* SettingsViewController.xib */; };
+		BA25AC9913B38ED3002AA61A /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA25AC9713B38ED3002AA61A /* LoginViewController.m */; };
+		BA25AC9A13B38ED3002AA61A /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA25AC9813B38ED3002AA61A /* LoginViewController.xib */; };
 		BA6E19C213AFC10100C18960 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA6E19C113AFC10100C18960 /* QuartzCore.framework */; };
 		BA6E1A0213AFCB4300C18960 /* PeopleDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA6E1A0013AFCB4300C18960 /* PeopleDetailViewController.m */; };
 		BA6E1A0313AFCB4300C18960 /* PeopleDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA6E1A0113AFCB4300C18960 /* PeopleDetailViewController.xib */; };
@@ -71,6 +73,9 @@
 		BA19523313A19BAD00AA6F59 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		BA19523413A19BAD00AA6F59 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		BA19523513A19BAD00AA6F59 /* SettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsViewController.xib; sourceTree = "<group>"; };
+		BA25AC9613B38ED3002AA61A /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		BA25AC9713B38ED3002AA61A /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		BA25AC9813B38ED3002AA61A /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
 		BA6E19C113AFC10100C18960 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		BA6E19FF13AFCB4300C18960 /* PeopleDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PeopleDetailViewController.h; sourceTree = "<group>"; };
 		BA6E1A0013AFCB4300C18960 /* PeopleDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PeopleDetailViewController.m; sourceTree = "<group>"; };
@@ -189,6 +194,9 @@
 				BA6E19FF13AFCB4300C18960 /* PeopleDetailViewController.h */,
 				BA6E1A0013AFCB4300C18960 /* PeopleDetailViewController.m */,
 				BA6E1A0113AFCB4300C18960 /* PeopleDetailViewController.xib */,
+				BA25AC9613B38ED3002AA61A /* LoginViewController.h */,
+				BA25AC9713B38ED3002AA61A /* LoginViewController.m */,
+				BA25AC9813B38ED3002AA61A /* LoginViewController.xib */,
 			);
 			path = ChurchLife;
 			sourceTree = "<group>";
@@ -322,6 +330,7 @@
 				BA6E1A0313AFCB4300C18960 /* PeopleDetailViewController.xib in Resources */,
 				CE19BEDD13B0D86300A62939 /* CalendarDetailViewController.xib in Resources */,
 				CE19BEE613B1229000A62939 /* SplitCell.xib in Resources */,
+				BA25AC9A13B38ED3002AA61A /* LoginViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -343,6 +352,7 @@
 				BA6E1A0213AFCB4300C18960 /* PeopleDetailViewController.m in Sources */,
 				CE19BEDC13B0D86300A62939 /* CalendarDetailViewController.m in Sources */,
 				CE19BEE413B1226800A62939 /* SplitCell.m in Sources */,
+				BA25AC9913B38ED3002AA61A /* LoginViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
