@@ -10,7 +10,18 @@
 
 
 @interface LoginViewController : UIViewController {
-    
+    IBOutlet UITextField *username;
+    IBOutlet UITextField *password;
+    IBOutlet UITextField *sitenumber;
+    IBOutlet UISwitch *rememberMe;
 }
--(IBAction) signIn;
+
+@property (nonatomic, retain) IBOutlet UITextField *username;
+@property (nonatomic, retain) IBOutlet UITextField *password;
+@property (nonatomic, retain) IBOutlet UITextField *sitenumber;
+@property (nonatomic, retain) IBOutlet UISwitch *rememberMe;
+
+- (IBAction) signIn;
+- (IBAction) textFieldDoneEditing:(id)sender;
+- (IBAction) backgroundClicked:(id)sender;
 @end

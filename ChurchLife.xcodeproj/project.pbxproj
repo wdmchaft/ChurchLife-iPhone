@@ -50,7 +50,8 @@
 		CE19BEDD13B0D86300A62939 /* CalendarDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE19BEDB13B0D86200A62939 /* CalendarDetailViewController.xib */; };
 		CE19BEE413B1226800A62939 /* SplitCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE19BEE313B1226700A62939 /* SplitCell.m */; };
 		CE19BEE613B1229000A62939 /* SplitCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE19BEE513B1228F00A62939 /* SplitCell.xib */; };
-		CEDB83B213B3BF7800FEC747 /* no-person-photo.png in Resources */ = {isa = PBXBuildFile; fileRef = CEDB83B113B3BF7800FEC747 /* no-person-photo.png */; };
+		CEDB83BB13B5110B00FEC747 /* churchlife.logo.login.png in Resources */ = {isa = PBXBuildFile; fileRef = CEDB83BA13B5110A00FEC747 /* churchlife.logo.login.png */; };
+		CEDB83BD13B5112A00FEC747 /* no-person-photo.png in Resources */ = {isa = PBXBuildFile; fileRef = CEDB83BC13B5112A00FEC747 /* no-person-photo.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -111,7 +112,8 @@
 		CE19BEE213B1226700A62939 /* SplitCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SplitCell.h; path = ChurchLife.xcodeproj/SplitCell.h; sourceTree = SOURCE_ROOT; };
 		CE19BEE313B1226700A62939 /* SplitCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SplitCell.m; path = ChurchLife.xcodeproj/SplitCell.m; sourceTree = SOURCE_ROOT; };
 		CE19BEE513B1228F00A62939 /* SplitCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SplitCell.xib; sourceTree = "<group>"; };
-		CEDB83B113B3BF7800FEC747 /* no-person-photo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "no-person-photo.png"; path = "../../Desktop/AcsChurchLife-1.0b10/www/images/no-person-photo.png"; sourceTree = "<group>"; };
+		CEDB83BA13B5110A00FEC747 /* churchlife.logo.login.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = churchlife.logo.login.png; sourceTree = "<group>"; };
+		CEDB83BC13B5112A00FEC747 /* no-person-photo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "no-person-photo.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -243,7 +245,8 @@
 		CE19BEA313AFBCD900A62939 /* images */ = {
 			isa = PBXGroup;
 			children = (
-				CEDB83B113B3BF7800FEC747 /* no-person-photo.png */,
+				CEDB83BC13B5112A00FEC747 /* no-person-photo.png */,
+				CEDB83BA13B5110A00FEC747 /* churchlife.logo.login.png */,
 				CE19BEBE13AFBD7A00A62939 /* disclosure-arrow.png */,
 				CE19BEA413AFBD1700A62939 /* calendar.png */,
 				CE19BEA513AFBD1700A62939 /* calendar@2x.png */,
@@ -334,7 +337,8 @@
 				CE19BEDD13B0D86300A62939 /* CalendarDetailViewController.xib in Resources */,
 				CE19BEE613B1229000A62939 /* SplitCell.xib in Resources */,
 				BA25AC9A13B38ED3002AA61A /* LoginViewController.xib in Resources */,
-				CEDB83B213B3BF7800FEC747 /* no-person-photo.png in Resources */,
+				CEDB83BB13B5110B00FEC747 /* churchlife.logo.login.png in Resources */,
+				CEDB83BD13B5112A00FEC747 /* no-person-photo.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

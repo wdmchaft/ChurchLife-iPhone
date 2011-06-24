@@ -11,6 +11,11 @@
 
 @implementation LoginViewController
 
+@synthesize username;
+@synthesize password;
+@synthesize sitenumber;
+@synthesize rememberMe;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -54,8 +59,20 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
--(IBAction) signIn {
+- (IBAction) signIn {
     [self.navigationController dismissModalViewControllerAnimated:true];
+}
+
+- (IBAction) textFieldDoneEditing:(id)sender
+{
+    [sender resignFirstResponder];
+}
+
+- (IBAction) backgroundClicked:(id)sender
+{
+    [username resignFirstResponder];
+    [password resignFirstResponder];
+    [sitenumber resignFirstResponder];
 }
 
 @end
