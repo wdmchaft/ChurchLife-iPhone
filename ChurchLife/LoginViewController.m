@@ -43,7 +43,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     // Do any additional setup after loading the view from its nib.
+    UIScrollView *scrollView = (UIScrollView *)self.view;
+    scrollView.contentSize = CGSizeMake(self.view.frame.size.width, self.view.frame.size.height + 150.0f);
 }
 
 - (void)viewDidUnload
