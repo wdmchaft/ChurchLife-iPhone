@@ -7,13 +7,20 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "JSONKit.h"
+#import "CurrentIdentity.h"
 
 
 @interface AcsLink : NSObject {
     
 }
 
-+(NSMutableArray *)IndividualsGetListWithQuery: (NSString *)query;
-+(NSString *)GetTokenWithSiteNumber: (int)siteNumber userName:(NSString *)un password:(NSString *) pw;
++(NSMutableArray *)IndividualsGetListWithQuery:(NSString *)query;
++(BOOL)LoginWithUsername:(int)siteNumber userName:(NSString *)userName password:(NSString *)password;
++(NSString *)LoginWithEmail:(NSString *)email password:(NSString *)password;
++(NSString *)IndividualSearch: (int) siteNumber searchText:(NSString *)searchText firstResult:(int)first maxResults:(int)max;
++(NSString *)GetIndividual:(int) siteNumber indvID:(int)indvID;
++(NSString *)EventSearch:(int) siteNumber startDate:(NSDate *)startDate stopDate:(NSDate *)stopDate firstResult:(int)first maxResults:(int)max;
++(NSString *)GetEvent:(int) siteNumber eventID:(NSString *)eventID;
      
 @end

@@ -46,7 +46,7 @@
     UIScrollView *scrollView = (UIScrollView *)self.view;
     scrollView.contentSize = CGSizeMake(self.view.frame.size.width, 600.0f);
     
-    [AcsLink GetTokenWithSiteNumber:106217 userName:@"admin" password:@"password"];
+    [AcsLink LoginWithUsername:106217 userName:@"admin" password:@"password"];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;

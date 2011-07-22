@@ -24,10 +24,10 @@
     [self.window makeKeyAndVisible];
     
     LoginViewController *loginViewController = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
-    UINavigationController *navagitaionController = [[UINavigationController alloc] initWithRootViewController:loginViewController];
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:loginViewController];
     [loginViewController release];
-    [self.tabBarController presentModalViewController:navagitaionController animated:true]; 
-    [navagitaionController release];
+    [self.tabBarController presentModalViewController:navigationController animated:true]; 
+    [navigationController release];
     
     return YES;
 }

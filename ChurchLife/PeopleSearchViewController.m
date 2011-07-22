@@ -164,6 +164,9 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    //UIView *view = [[[NSBundle mainBundle] loadNibNamed:@"LoadingView" owner:self options:nil] objectAtIndex:0];
+    //[self.view addSubview:view];
+    
     PeopleDetailViewController *peopleDetailViewController = [[PeopleDetailViewController alloc] initWithNibName:@"PeopleDetailViewController" bundle:nil];
     [self.navigationController pushViewController:peopleDetailViewController animated:YES];
     [peopleDetailViewController release];
