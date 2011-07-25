@@ -46,7 +46,13 @@
     UIScrollView *scrollView = (UIScrollView *)self.view;
     scrollView.contentSize = CGSizeMake(self.view.frame.size.width, 600.0f);
     
-    [AcsLink LoginWithUsername:106217 userName:@"admin" password:@"password"];
+    //[AcsLink LoginWithUsername:106217 userName:@"admin" password:@"password"];
+    NSMutableArray *array = [AcsLink LoginWithEmail:@"william.griggs@acstechnologies.com" password:@"password"];
+    /*for (int i = 0; i < [array count]; i++)
+    {
+        AcsLogin *login = (AcsLogin *) [array objectAtIndex:i];
+        NSLog(@"User: %@", login.userName);
+    }*/
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;

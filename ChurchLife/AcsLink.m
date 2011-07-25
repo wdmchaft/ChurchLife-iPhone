@@ -15,11 +15,11 @@
 }
 
 +(BOOL)LoginWithUsername: (int)siteNumber userName:(NSString *)userName password:(NSString *)password {   
-    NSURL *url = [NSURL URLWithString:@"http://labs.acstechnologies.com/api/account/validate"];
+    NSURL *url = [NSURL URLWithString:@"http://secure.accessacs.com/api/account/validate"];
     NSError *error;
     NSURLResponse *response;
     NSData *dataReply;
-    NSString *content = @"sitenumber=106217&username=admin&password=password";
+    NSString *content = [NSString stringWithFormat:@"sitenumber=%d&username=%@&password=%@", siteNumber, userName, password];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL: url];
     [request setHTTPMethod: @"POST"];
     [request setHTTPBody:[content dataUsingEncoding: NSASCIIStringEncoding]];
@@ -44,10 +44,10 @@
             identity.siteNumber = [d valueForKey:@"SiteNumber"];
             identity.userName = [d valueForKey:@"UserName"];
             
-            /*NSLog(@"email: %@", identity.emailAddress);
+            NSLog(@"email: %@", identity.emailAddress);
             NSLog(@"siteName: %@", identity.siteName);
             NSLog(@"siteNumber: %@", identity.siteNumber);
-            NSLog(@"username: %@", identity.userName);*/
+            NSLog(@"username: %@", identity.userName);
             
             return YES;
         }
@@ -58,8 +58,56 @@
         return NO;
  }
 
-+(NSString *)LoginWithEmail: (NSString *)email password:(NSString *)password{
++(NSMutableArray *)LoginWithEmail: (NSString *)email password:(NSString *)password{
+    NSURL *url = [NSURL URLWithString:@"http://secure.accessacs.com/api/account/findbyemail"];
+    NSError *error;
+    NSURLResponse *response;
+    NSData *dataReply;
+    NSString *content = [NSString stringWithFormat:@"email=%@&password=%@", email, password];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL: url];
+    [request setHTTPMethod: @"POST"];
+    [request setHTTPBody:[content dataUsingEncoding: NSASCIIStringEncoding]];
+    dataReply = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
     
+    if (error != nil) {
+        //[self handleError:err];
+    }
+    
+    JSONDecoder *decoder = [JSONDecoder decoder];   
+    NSDictionary *decodedResponse = [decoder objectWithData:dataReply];
+    
+    //NSLog(@"response: %@", [decodedResponse description]);
+    
+    if ([decodedResponse count] > 1) {
+        NSString * status = [decodedResponse objectForKey:[[decodedResponse allKeys]objectAtIndex:0]];
+        if ([status isEqualToString:@"Success"])
+        {
+            NSArray *allData = [decodedResponse objectForKey:[[decodedResponse allKeys]objectAtIndex:1]];
+            
+            //NSLog(@"alldata: %@", [allData description]);
+    
+            NSMutableArray *results = [[NSMutableArray alloc] initWithCapacity:[allData count]];
+            
+            for (int i = 0; i < [allData count]; i++)
+            {
+                NSDictionary *loginData = [allData objectAtIndex:i];//[allData objectForKey:[[allData allKeys]objectAtIndex:i]];
+                
+                AcsLogin *login = [AcsLogin alloc];  
+                login.siteNumber = [loginData valueForKey:@"SiteNumber"];
+                login.emailAddress = [loginData valueForKey:@"Email"];
+                login.userName = [loginData valueForKey:@"UserName"];
+                login.siteName = [loginData valueForKey:@"SiteName"];
+                
+                [results addObject:login];
+            }
+            
+            return results;
+        }
+        else
+            return nil;
+    }
+    else
+        return nil;
 }
 
 +(NSString *)IndividualSearch: (int) siteNumber searchText:(NSString *)searchText firstResult:(int)first maxResults:(int)max{
