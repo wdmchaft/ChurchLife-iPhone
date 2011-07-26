@@ -11,10 +11,13 @@
 
 @implementation LoginViewController
 
+@synthesize email;
 @synthesize username;
-@synthesize password;
 @synthesize sitenumber;
-@synthesize rememberMe;
+@synthesize password1;
+@synthesize rememberMe1;
+@synthesize password2;
+@synthesize rememberMe2;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -40,13 +43,38 @@
 
 #pragma mark - View lifecycle
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [self.navigationController setNavigationBarHidden:YES animated:animated];
+    [super viewWillAppear:animated];
+}
+
+- (void) viewWillDisappear:(BOOL)animated
+{
+    [self.navigationController setNavigationBarHidden:NO animated:animated];
+    [super viewWillDisappear:animated];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
     // Do any additional setup after loading the view from its nib.
     UIScrollView *scrollView = (UIScrollView *)self.view;
-    scrollView.contentSize = CGSizeMake(self.view.frame.size.width, self.view.frame.size.height + 150.0f);
+    scrollView.pagingEnabled = YES;
+    scrollView.showsHorizontalScrollIndicator = NO;
+    scrollView.showsVerticalScrollIndicator = NO;
+    
+    CGRect frame;
+    frame.origin.x = scrollView.frame.size.width;
+    frame.origin.y = 0;
+    frame.size = scrollView.frame.size;
+    
+    UIView *subview = [[[NSBundle mainBundle] loadNibNamed:@"LoginView2" owner:self options:nil] objectAtIndex:0];
+    [subview setFrame:frame];
+    
+    [scrollView addSubview:subview];    
+    scrollView.contentSize = CGSizeMake(self.view.frame.size.width*2, self.view.frame.size.height);
 }
 
 - (void)viewDidUnload
@@ -73,9 +101,13 @@
 
 - (IBAction) backgroundClicked:(id)sender
 {
+    [email resignFirstResponder];
     [username resignFirstResponder];
-    [password resignFirstResponder];
     [sitenumber resignFirstResponder];
+    [password1 resignFirstResponder];
+    [rememberMe1 resignFirstResponder];
+    [password2 resignFirstResponder];
+    [rememberMe2 resignFirstResponder];
 }
 
 @end
