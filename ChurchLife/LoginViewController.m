@@ -18,6 +18,8 @@
 @synthesize rememberMe1;
 @synthesize password2;
 @synthesize rememberMe2;
+@synthesize scrollView;
+@synthesize pageControl;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -60,7 +62,6 @@
     [super viewDidLoad];
     
     // Do any additional setup after loading the view from its nib.
-    UIScrollView *scrollView = (UIScrollView *)self.view;
     scrollView.pagingEnabled = YES;
     scrollView.showsHorizontalScrollIndicator = NO;
     scrollView.showsVerticalScrollIndicator = NO;
@@ -74,7 +75,9 @@
     [subview setFrame:frame];
     
     [scrollView addSubview:subview];    
-    scrollView.contentSize = CGSizeMake(self.view.frame.size.width*2, self.view.frame.size.height);
+    scrollView.contentSize = CGSizeMake(scrollView.frame.size.width*2, scrollView.frame.size.height);
+    
+    pageControlBeingUsed = NO;
 }
 
 - (void)viewDidUnload
@@ -108,6 +111,34 @@
     [rememberMe1 resignFirstResponder];
     [password2 resignFirstResponder];
     [rememberMe2 resignFirstResponder];
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)sender {
+    // Update the page when more than 50% of the previous/next page is visible
+    if (!pageControlBeingUsed)
+    {
+      CGFloat pageWidth = scrollView.frame.size.width;
+      int page = floor((scrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1;
+      pageControl.currentPage = page;
+    }
+}
+
+- (IBAction)changePage {
+    // update the scroll view to the appropriate page
+    CGRect frame;
+    frame.origin.x = scrollView.frame.size.width * pageControl.currentPage;
+    frame.origin.y = 0;
+    frame.size = scrollView.frame.size;
+    [scrollView scrollRectToVisible:frame animated:YES];
+    pageControlBeingUsed = YES;
+}
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    pageControlBeingUsed = NO;
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    pageControlBeingUsed = NO;
 }
 
 @end

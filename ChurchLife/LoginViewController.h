@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 
-@interface LoginViewController : UIViewController {
+@interface LoginViewController : UIViewController <UIScrollViewDelegate> {
     IBOutlet UITextField *email;
     IBOutlet UITextField *username;
     IBOutlet UITextField *sitenumber;
@@ -17,6 +17,9 @@
     IBOutlet UISwitch *rememberMe1;
     IBOutlet UITextField *password2;
     IBOutlet UISwitch *rememberMe2;
+    IBOutlet UIScrollView *scrollView;
+    IBOutlet UIPageControl *pageControl;
+    BOOL pageControlBeingUsed;
 }
 
 @property (nonatomic, retain) IBOutlet UITextField *email;
@@ -26,8 +29,11 @@
 @property (nonatomic, retain) IBOutlet UISwitch *rememberMe1;
 @property (nonatomic, retain) IBOutlet UITextField *password2;
 @property (nonatomic, retain) IBOutlet UISwitch *rememberMe2;
+@property (nonatomic, retain) IBOutlet UIScrollView *scrollView;
+@property (nonatomic, retain) IBOutlet UIPageControl *pageControl;
 
 - (IBAction) signIn;
 - (IBAction) textFieldDoneEditing:(id)sender;
 - (IBAction) backgroundClicked:(id)sender;
+- (IBAction)changePage;
 @end
