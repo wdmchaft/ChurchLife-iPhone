@@ -17,7 +17,7 @@
 }
 
 +(NSMutableArray *)IndividualsGetListWithQuery:(NSString *)query;
-+(BOOL)LoginWithUsername:(int)siteNumber userName:(NSString *)userName password:(NSString *)password;
++(BOOL)LoginBySite:(int)siteNumber userName:(NSString *)userName password:(NSString *)password;
 +(NSMutableArray *)LoginWithEmail:(NSString *)email password:(NSString *)password;
 +(NSString *)IndividualSearch: (int) siteNumber searchText:(NSString *)searchText firstResult:(int)first maxResults:(int)max;
 +(NSString *)GetIndividual:(int) siteNumber indvID:(int)indvID;

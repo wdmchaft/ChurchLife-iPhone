@@ -20,6 +20,8 @@ static NSString *dataFile = @"data.plist";
     IBOutlet UISwitch *rememberMe2;
     IBOutlet UIScrollView *scrollView;
     IBOutlet UIPageControl *pageControl;
+    IBOutlet UILabel *invalidLogin1;
+    IBOutlet UILabel *invalidLogin2;
     BOOL pageControlBeingUsed;
 }
 
@@ -32,6 +34,8 @@ static NSString *dataFile = @"data.plist";
 @property (nonatomic, retain) IBOutlet UISwitch *rememberMe2;
 @property (nonatomic, retain) IBOutlet UIScrollView *scrollView;
 @property (nonatomic, retain) IBOutlet UIPageControl *pageControl;
+@property (nonatomic, retain) IBOutlet UILabel *invalidLogin1;
+@property (nonatomic, retain) IBOutlet UILabel *invalidLogin2;
 
 - (NSString *)dataFilePath;
 - (IBAction) signIn:(id)sender;

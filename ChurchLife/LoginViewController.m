@@ -7,6 +7,7 @@
 //
 
 #import "LoginViewController.h"
+#import "AcsLink.h"
 
 
 @implementation LoginViewController
@@ -20,6 +21,8 @@
 @synthesize rememberMe2;
 @synthesize scrollView;
 @synthesize pageControl;
+@synthesize invalidLogin1;
+@synthesize invalidLogin2;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -96,7 +99,7 @@
             username.text = [array objectAtIndex:1];
             sitenumber.text = [array objectAtIndex:2];
             password2.text = [array objectAtIndex:3];
-            [scrollView setContentOffset:CGPointMake(frame.size.width, 0) animated:YES];
+            [scrollView setContentOffset:CGPointMake(frame.size.width, 0) animated:NO];
             pageControl.currentPage = 1;
         }
     }
@@ -135,6 +138,18 @@
             if ([[NSFileManager defaultManager] removeItemAtPath:filePath error:&error] != YES)
                 NSLog(@"Unable to delete file: %@", [error localizedDescription]);
         }
+        
+        NSMutableArray *logins = [AcsLink LoginWithEmail:email.text password:password1.text];
+        if ((logins == nil) || ([logins count] == 0))
+        {
+            invalidLogin1.hidden = NO;
+            invalidLogin2.hidden = YES;
+            return;
+        }
+        else //display possible logins
+        {
+            NSLog(@"Possible logins: %d", [logins count]);
+        }
     }
     else if ([(UIButton *)sender tag] == 2) //using alternate login page
     {
@@ -154,6 +169,14 @@
             NSString *filePath = [self dataFilePath];
             if ([[NSFileManager defaultManager] removeItemAtPath:filePath error:&error] != YES)
                 NSLog(@"Unable to delete file: %@", [error localizedDescription]);
+        }
+        
+        BOOL success = [AcsLink LoginBySite:[sitenumber.text integerValue] userName:username.text password:password2.text];
+        if (success == NO)
+        {
+            invalidLogin2.hidden = NO;
+            invalidLogin1.hidden = YES;
+            return;
         }
     }
     

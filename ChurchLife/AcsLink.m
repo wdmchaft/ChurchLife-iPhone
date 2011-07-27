@@ -14,7 +14,7 @@
     return nil; 
 }
 
-+(BOOL)LoginWithUsername: (int)siteNumber userName:(NSString *)userName password:(NSString *)password {   
++(BOOL)LoginBySite: (int)siteNumber userName:(NSString *)userName password:(NSString *)password {   
     NSURL *url = [NSURL URLWithString:@"http://secure.accessacs.com/api/account/validate"];
     NSError *error;
     NSURLResponse *response;
