@@ -78,6 +78,28 @@
     scrollView.contentSize = CGSizeMake(scrollView.frame.size.width*2, scrollView.frame.size.height);
     
     pageControlBeingUsed = NO;
+    
+    //load from preferences
+    NSString *filePath = [self dataFilePath];
+    if ([[NSFileManager defaultManager] fileExistsAtPath:filePath])
+    {
+        NSArray *array = [[NSArray alloc] initWithContentsOfFile:filePath];
+        NSString *lastPage = [array objectAtIndex:0];
+        
+        if ([lastPage isEqualToString:@"1"])
+        {
+            email.text = [array objectAtIndex:1];
+            password1.text = [array objectAtIndex:2];
+        }
+        else if ([lastPage isEqualToString:@"2"])
+        {
+            username.text = [array objectAtIndex:1];
+            sitenumber.text = [array objectAtIndex:2];
+            password2.text = [array objectAtIndex:3];
+            [scrollView setContentOffset:CGPointMake(frame.size.width, 0) animated:YES];
+            pageControl.currentPage = 1;
+        }
+    }
 }
 
 - (void)viewDidUnload
@@ -93,7 +115,48 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
-- (IBAction) signIn {
+- (IBAction) signIn:(id)sender
+{    
+    if ([(UIButton *)sender tag] == 1) //on first login page
+    {
+        if (rememberMe1.on)
+        {
+          NSMutableArray *array = [[NSMutableArray alloc] init];
+          [array addObject:@"1"];
+          [array addObject:email.text];
+          [array addObject:password1.text];
+          [array writeToFile:[self dataFilePath] atomically:YES];
+          [array release];
+        }
+        else //delete preferences file
+        {
+            NSError *error;
+            NSString *filePath = [self dataFilePath];
+            if ([[NSFileManager defaultManager] removeItemAtPath:filePath error:&error] != YES)
+                NSLog(@"Unable to delete file: %@", [error localizedDescription]);
+        }
+    }
+    else if ([(UIButton *)sender tag] == 2) //using alternate login page
+    {
+        if (rememberMe2.on)
+        {
+            NSMutableArray *array = [[NSMutableArray alloc] init];
+            [array addObject:@"2"];
+            [array addObject:username.text];
+            [array addObject:sitenumber.text];
+            [array addObject:password2.text];
+            [array writeToFile:[self dataFilePath] atomically:YES];
+            [array release];
+        }
+        else //delete preferences file
+        {
+            NSError *error;
+            NSString *filePath = [self dataFilePath];
+            if ([[NSFileManager defaultManager] removeItemAtPath:filePath error:&error] != YES)
+                NSLog(@"Unable to delete file: %@", [error localizedDescription]);
+        }
+    }
+    
     [self.navigationController dismissModalViewControllerAnimated:true];
 }
 
@@ -139,6 +202,13 @@
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
     pageControlBeingUsed = NO;
+}
+
+- (NSString *)dataFilePath
+{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    return [documentsDirectory stringByAppendingPathComponent:dataFile];
 }
 
 @end

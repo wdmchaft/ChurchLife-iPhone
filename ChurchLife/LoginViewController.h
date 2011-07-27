@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
+static NSString *dataFile = @"data.plist";
 
 @interface LoginViewController : UIViewController <UIScrollViewDelegate> {
     IBOutlet UITextField *email;
@@ -32,7 +33,8 @@
 @property (nonatomic, retain) IBOutlet UIScrollView *scrollView;
 @property (nonatomic, retain) IBOutlet UIPageControl *pageControl;
 
-- (IBAction) signIn;
+- (NSString *)dataFilePath;
+- (IBAction) signIn:(id)sender;
 - (IBAction) textFieldDoneEditing:(id)sender;
 - (IBAction) backgroundClicked:(id)sender;
 - (IBAction)changePage;
