@@ -121,24 +121,7 @@
 - (IBAction) signIn:(id)sender
 {    
     if ([(UIButton *)sender tag] == 1) //on first login page
-    {
-        if (rememberMe1.on)
-        {
-          NSMutableArray *array = [[NSMutableArray alloc] init];
-          [array addObject:@"1"];
-          [array addObject:email.text];
-          [array addObject:password1.text];
-          [array writeToFile:[self dataFilePath] atomically:YES];
-          [array release];
-        }
-        else //delete preferences file
-        {
-            NSError *error;
-            NSString *filePath = [self dataFilePath];
-            if ([[NSFileManager defaultManager] removeItemAtPath:filePath error:&error] != YES)
-                NSLog(@"Unable to delete file: %@", [error localizedDescription]);
-        }
-        
+    {        
         NSMutableArray *logins = [AcsLink LoginWithEmail:email.text password:password1.text];
         if ((logins == nil) || ([logins count] == 0))
         {
@@ -149,34 +132,52 @@
         else //display possible logins
         {
             NSLog(@"Possible logins: %d", [logins count]);
+            if (rememberMe1.on)
+            {
+                NSMutableArray *array = [[NSMutableArray alloc] init];
+                [array addObject:@"1"];
+                [array addObject:email.text];
+                [array addObject:password1.text];
+                [array writeToFile:[self dataFilePath] atomically:YES];
+                [array release];
+            }
+            else //delete preferences file
+            {
+                NSError *error;
+                NSString *filePath = [self dataFilePath];
+                if ([[NSFileManager defaultManager] removeItemAtPath:filePath error:&error] != YES)
+                    NSLog(@"Unable to delete file: %@", [error localizedDescription]);
+            }
         }
     }
     else if ([(UIButton *)sender tag] == 2) //using alternate login page
-    {
-        if (rememberMe2.on)
-        {
-            NSMutableArray *array = [[NSMutableArray alloc] init];
-            [array addObject:@"2"];
-            [array addObject:username.text];
-            [array addObject:sitenumber.text];
-            [array addObject:password2.text];
-            [array writeToFile:[self dataFilePath] atomically:YES];
-            [array release];
-        }
-        else //delete preferences file
-        {
-            NSError *error;
-            NSString *filePath = [self dataFilePath];
-            if ([[NSFileManager defaultManager] removeItemAtPath:filePath error:&error] != YES)
-                NSLog(@"Unable to delete file: %@", [error localizedDescription]);
-        }
-        
+    {        
         BOOL success = [AcsLink LoginBySite:[sitenumber.text integerValue] userName:username.text password:password2.text];
         if (success == NO)
         {
             invalidLogin2.hidden = NO;
             invalidLogin1.hidden = YES;
             return;
+        }
+        else
+        {
+            if (rememberMe2.on)
+            {
+                NSMutableArray *array = [[NSMutableArray alloc] init];
+                [array addObject:@"2"];
+                [array addObject:username.text];
+                [array addObject:sitenumber.text];
+                [array addObject:password2.text];
+                [array writeToFile:[self dataFilePath] atomically:YES];
+                [array release];
+            }
+            else //delete preferences file
+            {
+                NSError *error;
+                NSString *filePath = [self dataFilePath];
+                if ([[NSFileManager defaultManager] removeItemAtPath:filePath error:&error] != YES)
+                    NSLog(@"Unable to delete file: %@", [error localizedDescription]);
+            }
         }
     }
     

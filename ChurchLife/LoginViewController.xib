@@ -88,7 +88,7 @@
 								<string key="NSFrame">{{83, 260}, {155, 37}}</string>
 								<reference key="NSSuperview" ref="825231133"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="130797009"/>
+								<reference key="NSNextKeyView" ref="811552937"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<int key="IBUITag">1</int>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -252,7 +252,7 @@
 									<string key="NSResourceName">churchlife.logo.login.png</string>
 								</object>
 							</object>
-							<object class="IBUILabel" id="130797009">
+							<object class="IBUILabel" id="811552937">
 								<reference key="NSNextResponder" ref="825231133"/>
 								<int key="NSvFlags">-2147483356</int>
 								<string key="NSFrame">{{23, 314}, {274, 50}}</string>
@@ -428,7 +428,7 @@
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">invalidLogin1</string>
 						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="130797009"/>
+						<reference key="destination" ref="811552937"/>
 					</object>
 					<int key="connectionID">52</int>
 				</object>
@@ -477,7 +477,7 @@
 							<reference ref="992348967"/>
 							<reference ref="41775437"/>
 							<reference ref="375052899"/>
-							<reference ref="130797009"/>
+							<reference ref="811552937"/>
 						</object>
 						<reference key="parent" ref="191373211"/>
 					</object>
@@ -533,7 +533,7 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">51</int>
-						<reference key="object" ref="130797009"/>
+						<reference key="object" ref="811552937"/>
 						<reference key="parent" ref="825231133"/>
 					</object>
 				</object>
