@@ -43,11 +43,13 @@
             identity.siteName = [d valueForKey:@"SiteName"];
             identity.siteNumber = [d valueForKey:@"SiteNumber"];
             identity.userName = [d valueForKey:@"UserName"];
+            identity.password = password;
             
             NSLog(@"email: %@", identity.emailAddress);
             NSLog(@"siteName: %@", identity.siteName);
             NSLog(@"siteNumber: %@", identity.siteNumber);
             NSLog(@"username: %@", identity.userName);
+            NSLog(@"password: %@", identity.password);
             
             return YES;
         }

@@ -15,5 +15,6 @@
 @synthesize emailAddress;
 @synthesize userName;
 @synthesize siteName;
+@synthesize password;
 
 @end

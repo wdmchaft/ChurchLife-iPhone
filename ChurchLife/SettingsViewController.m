@@ -7,8 +7,11 @@
 //
 
 #import "SettingsViewController.h"
+#import "ChurchLifeAppDelegate.h"
 
 @implementation SettingsViewController
+
+@synthesize logout;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -56,6 +59,13 @@
 {
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+- (IBAction)logoutClicked:(id)sender;
+{
+    ChurchLifeAppDelegate *appDelegate = (ChurchLifeAppDelegate *)[[UIApplication sharedApplication] delegate];
+    [appDelegate deletePreferences];
+    [appDelegate showLoginForm];      
 }
 
 @end

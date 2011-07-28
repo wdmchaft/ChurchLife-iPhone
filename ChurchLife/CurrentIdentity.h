@@ -14,12 +14,14 @@
     NSString *siteName;
     NSString *siteNumber;
     NSString *userName;
+    NSString *password;
 }
 
 @property (nonatomic, retain) NSString *emailAddress;
 @property (nonatomic, retain) NSString *siteName;
 @property (nonatomic, retain) NSString *siteNumber;
 @property (nonatomic, retain) NSString *userName;
+@property (nonatomic, retain) NSString *password;
 
 + (id)sharedIdentity;
 

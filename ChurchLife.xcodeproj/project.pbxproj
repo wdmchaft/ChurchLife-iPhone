@@ -52,6 +52,8 @@
 		CE19BEE613B1229000A62939 /* SplitCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE19BEE513B1228F00A62939 /* SplitCell.xib */; };
 		CE7C201513DF4B4400156654 /* LoginView2.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE7C201413DF4B4400156654 /* LoginView2.xib */; };
 		CE813D1F13DDE7A1000A3515 /* AcsLogin.m in Sources */ = {isa = PBXBuildFile; fileRef = CE813D1E13DDE7A1000A3515 /* AcsLogin.m */; };
+		CE888FBD13E1A46A005966C3 /* UserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE888FBB13E1A469005966C3 /* UserViewController.m */; };
+		CE888FBE13E1A46A005966C3 /* UserViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE888FBC13E1A46A005966C3 /* UserViewController.xib */; };
 		CE9E11C713DA0F4300C08319 /* CurrentIdentity.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9E11C613DA0F4300C08319 /* CurrentIdentity.m */; };
 		CEBE8DD513D0BCD200B52044 /* LoadingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEBE8DD413D0BCD200B52044 /* LoadingView.xib */; };
 		CEDB83BB13B5110B00FEC747 /* churchlife.logo.login.png in Resources */ = {isa = PBXBuildFile; fileRef = CEDB83BA13B5110A00FEC747 /* churchlife.logo.login.png */; };
@@ -119,6 +121,9 @@
 		CE7C201413DF4B4400156654 /* LoginView2.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginView2.xib; sourceTree = "<group>"; };
 		CE813D1D13DDE7A1000A3515 /* AcsLogin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AcsLogin.h; sourceTree = "<group>"; };
 		CE813D1E13DDE7A1000A3515 /* AcsLogin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AcsLogin.m; sourceTree = "<group>"; };
+		CE888FBA13E1A469005966C3 /* UserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserViewController.h; sourceTree = "<group>"; };
+		CE888FBB13E1A469005966C3 /* UserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserViewController.m; sourceTree = "<group>"; };
+		CE888FBC13E1A46A005966C3 /* UserViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserViewController.xib; sourceTree = "<group>"; };
 		CE9E11C513DA0F4300C08319 /* CurrentIdentity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurrentIdentity.h; sourceTree = "<group>"; };
 		CE9E11C613DA0F4300C08319 /* CurrentIdentity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurrentIdentity.m; sourceTree = "<group>"; };
 		CEBE8DD413D0BCD200B52044 /* LoadingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoadingView.xib; sourceTree = "<group>"; };
@@ -211,6 +216,9 @@
 				BA6E1A0113AFCB4300C18960 /* PeopleDetailViewController.xib */,
 				BA25AC9613B38ED3002AA61A /* LoginViewController.h */,
 				BA25AC9713B38ED3002AA61A /* LoginViewController.m */,
+				CE888FBA13E1A469005966C3 /* UserViewController.h */,
+				CE888FBB13E1A469005966C3 /* UserViewController.m */,
+				CE888FBC13E1A46A005966C3 /* UserViewController.xib */,
 				BA25AC9813B38ED3002AA61A /* LoginViewController.xib */,
 				CE7C201413DF4B4400156654 /* LoginView2.xib */,
 			);
@@ -365,6 +373,7 @@
 				CEDB83BD13B5112A00FEC747 /* no-person-photo.png in Resources */,
 				CEBE8DD513D0BCD200B52044 /* LoadingView.xib in Resources */,
 				CE7C201513DF4B4400156654 /* LoginView2.xib in Resources */,
+				CE888FBE13E1A46A005966C3 /* UserViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -389,6 +398,7 @@
 				BA25AC9913B38ED3002AA61A /* LoginViewController.m in Sources */,
 				CE9E11C713DA0F4300C08319 /* CurrentIdentity.m in Sources */,
 				CE813D1F13DDE7A1000A3515 /* AcsLogin.m in Sources */,
+				CE888FBD13E1A46A005966C3 /* UserViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

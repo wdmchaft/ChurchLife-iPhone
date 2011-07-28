@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AcsLink.h"
+#import "UserViewController.h"
 
 static NSString *dataFile = @"data.plist";
 

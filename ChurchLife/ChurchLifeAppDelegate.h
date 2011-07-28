@@ -15,5 +15,8 @@
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 
 @property (nonatomic, retain) IBOutlet UITabBarController *tabBarController;
+- (NSString *)dataFilePath;
+- (void)deletePreferences;
+- (void)showLoginForm;
 
 @end

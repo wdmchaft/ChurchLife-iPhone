@@ -10,7 +10,11 @@
 #import <QuartzCore/QuartzCore.h>
 
 @interface SettingsViewController : UIViewController {
-    
+    IBOutlet UIButton *logout;
 }
+
+@property (nonatomic, retain) UIButton *logout;
+
+- (IBAction)logoutClicked:(id)sender;
 
 @end

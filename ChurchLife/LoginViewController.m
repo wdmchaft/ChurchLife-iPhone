@@ -7,8 +7,7 @@
 //
 
 #import "LoginViewController.h"
-#import "AcsLink.h"
-
+#import "ChurchLifeAppDelegate.h"
 
 @implementation LoginViewController
 
@@ -81,28 +80,6 @@
     scrollView.contentSize = CGSizeMake(scrollView.frame.size.width*2, scrollView.frame.size.height);
     
     pageControlBeingUsed = NO;
-    
-    //load from preferences
-    NSString *filePath = [self dataFilePath];
-    if ([[NSFileManager defaultManager] fileExistsAtPath:filePath])
-    {
-        NSArray *array = [[NSArray alloc] initWithContentsOfFile:filePath];
-        NSString *lastPage = [array objectAtIndex:0];
-        
-        if ([lastPage isEqualToString:@"1"])
-        {
-            email.text = [array objectAtIndex:1];
-            password1.text = [array objectAtIndex:2];
-        }
-        else if ([lastPage isEqualToString:@"2"])
-        {
-            username.text = [array objectAtIndex:1];
-            sitenumber.text = [array objectAtIndex:2];
-            password2.text = [array objectAtIndex:3];
-            [scrollView setContentOffset:CGPointMake(frame.size.width, 0) animated:NO];
-            pageControl.currentPage = 1;
-        }
-    }
 }
 
 - (void)viewDidUnload
@@ -130,24 +107,21 @@
             return;
         }
         else //display possible logins
-        {
-            NSLog(@"Possible logins: %d", [logins count]);
-            if (rememberMe1.on)
-            {
-                NSMutableArray *array = [[NSMutableArray alloc] init];
-                [array addObject:@"1"];
-                [array addObject:email.text];
-                [array addObject:password1.text];
-                [array writeToFile:[self dataFilePath] atomically:YES];
-                [array release];
-            }
-            else //delete preferences file
-            {
-                NSError *error;
-                NSString *filePath = [self dataFilePath];
-                if ([[NSFileManager defaultManager] removeItemAtPath:filePath error:&error] != YES)
-                    NSLog(@"Unable to delete file: %@", [error localizedDescription]);
-            }
+        {                        
+            UINavigationController *parent = (UINavigationController *)self.parentViewController;
+            UserViewController *users = [[UserViewController alloc] initWithNibName:@"UserViewController" bundle:nil];
+            AcsLogin *credentials = [AcsLogin alloc];
+            credentials.emailAddress = email.text;
+            credentials.password = password1.text;
+            
+            users.users = logins;
+            users.credentials = credentials;
+            users.saveSelection = rememberMe1.on;
+            users.filePath = [self dataFilePath];
+            
+            [parent pushViewController: users animated:YES];
+            [users release];
+            return;
         }
     }
     else if ([(UIButton *)sender tag] == 2) //using alternate login page
@@ -164,7 +138,6 @@
             if (rememberMe2.on)
             {
                 NSMutableArray *array = [[NSMutableArray alloc] init];
-                [array addObject:@"2"];
                 [array addObject:username.text];
                 [array addObject:sitenumber.text];
                 [array addObject:password2.text];
@@ -173,10 +146,8 @@
             }
             else //delete preferences file
             {
-                NSError *error;
-                NSString *filePath = [self dataFilePath];
-                if ([[NSFileManager defaultManager] removeItemAtPath:filePath error:&error] != YES)
-                    NSLog(@"Unable to delete file: %@", [error localizedDescription]);
+                ChurchLifeAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+                [appDelegate deletePreferences];
             }
         }
     }

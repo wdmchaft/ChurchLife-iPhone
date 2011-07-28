@@ -16,6 +16,7 @@ static CurrentIdentity *sharedIdentity = nil;
 @synthesize siteName;
 @synthesize siteNumber;
 @synthesize userName;
+@synthesize password;
 
 #pragma mark Singleton Methods
 + (id)sharedIdentity {
@@ -56,16 +57,17 @@ static CurrentIdentity *sharedIdentity = nil;
         siteName = [[NSString alloc] initWithString:@""];
         siteNumber = [[NSString alloc] initWithString:@""];
         userName = [[NSString alloc] initWithString:@""];
+        password = [[NSString alloc] initWithString:@""];
     }
     return self;
 }
 
 - (void)dealloc {
-    // Should never be called, but just here for clarity really.
     [emailAddress release];
     [siteName release];
     [siteNumber release];
     [userName release];
+    [password release];
     [super dealloc];
 }
 

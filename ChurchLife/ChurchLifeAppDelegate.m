@@ -23,13 +23,55 @@
     self.window.rootViewController = self.tabBarController;
     [self.window makeKeyAndVisible];
     
+    //load from preferences
+    NSString *filePath = [self dataFilePath];
+    BOOL loggedIn = NO;
+    
+    if ([[NSFileManager defaultManager] fileExistsAtPath:filePath])
+    {
+        NSArray *array = [[NSArray alloc] initWithContentsOfFile:filePath];
+        if ([array count] == 3)
+        {
+            NSString *userName = [array objectAtIndex:0];
+            NSString *siteNumber;
+            NSObject *object = [array objectAtIndex:1];
+            if ([object isKindOfClass:[NSString class]])          
+                siteNumber = [array objectAtIndex:1];
+            else if ([object isKindOfClass:[NSNumber class]])
+                siteNumber = [[array objectAtIndex:1] stringValue];
+            NSString *password = [array objectAtIndex:2];
+            
+            loggedIn = [AcsLink LoginBySite:[siteNumber integerValue] userName:userName password:password];
+        }
+        else //file not in correct format. delete it.
+        {
+            [self deletePreferences];
+        }
+    };
+    
+    if (!loggedIn)
+    {
+        [self showLoginForm];
+    }
+    
+    return YES;
+}
+
+- (void)showLoginForm
+{
+    //reset navigation controllers
+    for (int i = 0; i < [self.tabBarController.viewControllers count]; i++)
+    {
+        UINavigationController *nav = (UINavigationController *)[self.tabBarController.viewControllers objectAtIndex:i];
+        [nav popToRootViewControllerAnimated:NO];
+    }    
+    
+    self.tabBarController.selectedViewController = [self.tabBarController.viewControllers objectAtIndex:0];
     LoginViewController *loginViewController = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:loginViewController];
     [loginViewController release];
     [self.tabBarController presentModalViewController:navigationController animated:true]; 
     [navigationController release];
-    
-    return YES;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
@@ -76,6 +118,21 @@
     [_window release];
     [_tabBarController release];
     [super dealloc];
+}
+
+- (NSString *)dataFilePath
+{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    return [documentsDirectory stringByAppendingPathComponent:dataFile];
+}
+
+- (void)deletePreferences
+{
+    NSString *filePath = [self dataFilePath];
+    NSError *error;
+    if ([[NSFileManager defaultManager] removeItemAtPath:filePath error:&error] != YES)
+        NSLog(@"Unable to delete file: %@", [error localizedDescription]);  
 }
 
 /*
