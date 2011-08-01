@@ -112,7 +112,7 @@
         return nil;
 }
 
-+(NSMutableArray *)IndividualSearch: (NSString *)searchText firstResult:(int)first maxResults:(int)max delegate:(NSObject *)delegate{
++(void)IndividualSearch: (NSString *)searchText firstResult:(int)first maxResults:(int)max delegate:(NSObject *)delegate{
     CurrentIdentity *identity = [CurrentIdentity sharedIdentity];
     NSString *urlString = [NSString stringWithFormat:@"https://%@:%@@api.accessacs.com/%@/individuals?searchText=%@&firstResult=%d&maxResults=%d",
                            identity.userName, identity.password, identity.siteNumber, searchText, first, max];
@@ -122,56 +122,6 @@
     responseData = [[NSMutableData data] retain];
 	NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:urlString]];
 	[[NSURLConnection alloc] initWithRequest:request delegate:delegate];
-    
-    
-    /*NSURL *url = [NSURL URLWithString:urlString];
-    NSError *error;
-    NSURLResponse *response;
-    NSData *dataReply;
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL: url];
-    [request setHTTPMethod: @"GET"];
-    dataReply = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-    
-    if (error != nil) {
-        //[self handleError:err];
-    }
-    
-    JSONDecoder *decoder = [JSONDecoder decoder];   
-    NSDictionary *decodedResponse = [decoder objectWithData:dataReply];
-    
-    NSLog(@"response: %@", [decodedResponse description]);*/
-    
-    /*if ([decodedResponse count] > 1) {
-        NSString * status = [decodedResponse objectForKey:[[decodedResponse allKeys]objectAtIndex:0]];
-        if ([status isEqualToString:@"Success"])
-        {
-            NSArray *allData = [decodedResponse objectForKey:[[decodedResponse allKeys]objectAtIndex:1]];
-            
-            //NSLog(@"alldata: %@", [allData description]);
-            
-            NSMutableArray *results = [[NSMutableArray alloc] initWithCapacity:[allData count]];
-            
-            for (int i = 0; i < [allData count]; i++)
-            {
-                NSDictionary *loginData = [allData objectAtIndex:i];//[allData objectForKey:[[allData allKeys]objectAtIndex:i]];
-                
-                AcsLogin *login = [AcsLogin alloc];  
-                login.siteNumber = [loginData valueForKey:@"SiteNumber"];
-                login.emailAddress = [loginData valueForKey:@"Email"];
-                login.userName = [loginData valueForKey:@"UserName"];
-                login.siteName = [loginData valueForKey:@"SiteName"];
-                
-                [results addObject:login];
-            }
-            
-            return results;
-        }
-        else
-            return nil;
-    }
-    else
-        return nil;*/
-    return nil;
 }
 
 +(NSString *)GetIndividual:(int) siteNumber indvID:(int)indvID{
