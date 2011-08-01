@@ -51,6 +51,7 @@
 		CE19BEE413B1226800A62939 /* SplitCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE19BEE313B1226700A62939 /* SplitCell.m */; };
 		CE19BEE613B1229000A62939 /* SplitCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE19BEE513B1228F00A62939 /* SplitCell.xib */; };
 		CE7C201513DF4B4400156654 /* LoginView2.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE7C201413DF4B4400156654 /* LoginView2.xib */; };
+		CE7D042313E72C5500EA42A5 /* AcsIndividual.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7D042213E72C5500EA42A5 /* AcsIndividual.m */; };
 		CE813D1F13DDE7A1000A3515 /* AcsLogin.m in Sources */ = {isa = PBXBuildFile; fileRef = CE813D1E13DDE7A1000A3515 /* AcsLogin.m */; };
 		CE888FBD13E1A46A005966C3 /* UserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE888FBB13E1A469005966C3 /* UserViewController.m */; };
 		CE888FBE13E1A46A005966C3 /* UserViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE888FBC13E1A46A005966C3 /* UserViewController.xib */; };
@@ -119,6 +120,8 @@
 		CE19BEE313B1226700A62939 /* SplitCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SplitCell.m; path = ChurchLife.xcodeproj/SplitCell.m; sourceTree = SOURCE_ROOT; };
 		CE19BEE513B1228F00A62939 /* SplitCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SplitCell.xib; sourceTree = "<group>"; };
 		CE7C201413DF4B4400156654 /* LoginView2.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginView2.xib; sourceTree = "<group>"; };
+		CE7D042113E72C5500EA42A5 /* AcsIndividual.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AcsIndividual.h; sourceTree = "<group>"; };
+		CE7D042213E72C5500EA42A5 /* AcsIndividual.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AcsIndividual.m; sourceTree = "<group>"; };
 		CE813D1D13DDE7A1000A3515 /* AcsLogin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AcsLogin.h; sourceTree = "<group>"; };
 		CE813D1E13DDE7A1000A3515 /* AcsLogin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AcsLogin.m; sourceTree = "<group>"; };
 		CE888FBA13E1A469005966C3 /* UserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserViewController.h; sourceTree = "<group>"; };
@@ -292,6 +295,8 @@
 			children = (
 				CE813D1D13DDE7A1000A3515 /* AcsLogin.h */,
 				CE813D1E13DDE7A1000A3515 /* AcsLogin.m */,
+				CE7D042113E72C5500EA42A5 /* AcsIndividual.h */,
+				CE7D042213E72C5500EA42A5 /* AcsIndividual.m */,
 			);
 			name = classes;
 			sourceTree = "<group>";
@@ -399,6 +404,7 @@
 				CE9E11C713DA0F4300C08319 /* CurrentIdentity.m in Sources */,
 				CE813D1F13DDE7A1000A3515 /* AcsLogin.m in Sources */,
 				CE888FBD13E1A46A005966C3 /* UserViewController.m in Sources */,
+				CE7D042313E72C5500EA42A5 /* AcsIndividual.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -114,7 +114,7 @@
 
 +(NSMutableArray *)IndividualSearch: (NSString *)searchText firstResult:(int)first maxResults:(int)max delegate:(NSObject *)delegate{
     CurrentIdentity *identity = [CurrentIdentity sharedIdentity];
-    NSString *urlString = [NSString stringWithFormat:@"http://%@:%@@secure.accessacs.com/api/%@/individuals?searchText=%@&firstResult=%d&maxResult=%d",
+    NSString *urlString = [NSString stringWithFormat:@"https://%@:%@@api.accessacs.com/%@/individuals?searchText=%@&firstResult=%d&maxResults=%d",
                            identity.userName, identity.password, identity.siteNumber, searchText, first, max];
     
     NSLog(@"url: %@", urlString);

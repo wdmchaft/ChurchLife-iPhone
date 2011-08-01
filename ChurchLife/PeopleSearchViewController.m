@@ -10,6 +10,7 @@
 #import "PeopleDetailViewController.h"
 #import "JSONKit.h"
 #import "AcsLink.h"
+#import "AcsIndividual.h"
 
 @implementation PeopleSearchViewController
 
@@ -43,18 +44,15 @@
 {
     [super viewDidLoad];
 
-    //NSString *jsonUrl = @"http://api.twitter.com/1/trends/daily.json";
-    //NSData *jsonData = [NSData dataWithContentsOfURL:[NSURL URLWithString:jsonUrl]];
+    //Initialize the array.
+    searchResults = [[NSMutableArray alloc] init];
     
-    //JSONDecoder *jsonKitDecoder = [JSONDecoder decoder];
-    //items = [jsonKitDecoder parseJSONData:jsonData];
-	
-    //NSLog(@"total items: %d", [items count]);
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    //Add the search bar
+    self.tableView.tableHeaderView = searchBar;
+    searchBar.autocorrectionType = UITextAutocorrectionTypeNo;
+    
+    searching = NO;
+    letUserSelectRow = YES;
 }
 
 - (void)viewDidUnload
@@ -105,7 +103,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return 5; //[items count];
+    return [searchResults count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -118,50 +116,77 @@
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
     
-    cell.textLabel.text = @"value";
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    AcsIndividual *indv = (AcsIndividual *)[searchResults objectAtIndex:indexPath.row];
+    cell.textLabel.text = [NSString stringWithFormat:@"%@ %@", indv.firstName, indv.lastName];
+    if ([cell.textLabel.text isEqualToString:@"View More..."])
+        cell.accessoryType = UITableViewCellAccessoryNone;
+    else
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
     return cell;
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
+- (void) searchBarTextDidBeginEditing:(UISearchBar *)theSearchBar {
+    
+    searching = YES;
+    letUserSelectRow = NO;
+    self.tableView.scrollEnabled = NO;
+    
+    //Add the done button.
+    self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc]
+                                               initWithBarButtonSystemItem:UIBarButtonSystemItemDone
+                                               target:self action:@selector(doneSearching_Clicked:)] autorelease];
 }
-*/
 
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
+- (NSIndexPath *)tableView :(UITableView *)theTableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if(letUserSelectRow)
+        return indexPath;
+    else
+        return nil;
 }
-*/
 
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
+- (void)searchBar:(UISearchBar *)theSearchBar textDidChange:(NSString *)searchText {
+    
+    if([searchText length] > 0) {
+        
+        searching = YES;
+        letUserSelectRow = YES;
+        self.tableView.scrollEnabled = YES;
+        //[self searchTableView];
+    }
+    else {
+        
+        searching = NO;
+        letUserSelectRow = NO;
+        self.tableView.scrollEnabled = NO;
+    }
+    
+    [self.tableView reloadData];
 }
-*/
 
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
+- (void) searchBarSearchButtonClicked:(UISearchBar *)theSearchBar {
+    
+    [self searchTableView];
 }
-*/
+
+- (void) searchTableView {
+    
+    [AcsLink IndividualSearch:searchBar.text firstResult:0 maxResults:25 delegate:self];
+}
+
+- (void) doneSearching_Clicked:(id)sender {
+    
+    searchBar.text = @"";
+    [searchBar resignFirstResponder];
+    
+    letUserSelectRow = YES;
+    searching = NO;
+    self.navigationItem.rightBarButtonItem = nil;
+    self.tableView.scrollEnabled = YES;
+    
+    [self.tableView reloadData];
+}
 
 #pragma mark - Table view delegate
 
@@ -169,14 +194,6 @@
 {
     //UIView *view = [[[NSBundle mainBundle] loadNibNamed:@"LoadingView" owner:self options:nil] objectAtIndex:0];
     //[self.view addSubview:view];
-    
-    //[AcsLink LoginWithUsername:106217 userName:@"admin" password:@"password"];
-    NSMutableArray *array = [AcsLink IndividualSearch:@"aa" firstResult:0 maxResults:25 delegate:self];
-    /*for (int i = 0; i < [array count]; i++)
-     {
-     AcsLogin *login = (AcsLogin *) [array objectAtIndex:i];
-     NSLog(@"User: %@", login.userName);
-     }*/
     
     PeopleDetailViewController *peopleDetailViewController = [[PeopleDetailViewController alloc] initWithNibName:@"PeopleDetailViewController" bundle:nil];
     [self.navigationController pushViewController:peopleDetailViewController animated:YES];
@@ -200,8 +217,61 @@
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
 	[connection release];
-    NSString *responseString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
-    NSLog(@"response string: %@", responseString);
+    JSONDecoder *decoder = [JSONDecoder decoder];   
+    NSDictionary *decodedResponse = [decoder objectWithData:responseData];
+    
+    if ([decodedResponse count] > 1) {
+        NSString * status =  [decodedResponse valueForKey:@"Message"];
+        if ([status isEqualToString:@"Success"])
+        {
+            NSDictionary *results = [decodedResponse objectForKey:@"Data"];
+            NSLog (@"results: %@", [results description]);
+            BOOL hasMore = [[results valueForKey:@"HasMore"] boolValue];
+            
+            NSArray *individuals = [results valueForKey:@"Data"];
+            //NSLog(@"individuals: %@", [individuals description]);
+            
+            if (searchResults != nil)
+                [searchResults release];
+            
+            searchResults = [[NSMutableArray alloc] initWithCapacity:[individuals count]];
+            
+            for (int i = 0; i < [individuals count]; i++)
+            {
+                NSDictionary *indvData = [individuals objectAtIndex:i];
+                //NSLog(@"Indv Data: %@", [indvData description]);
+                
+                AcsIndividual *indv = [AcsIndividual alloc];  
+                indv.indvID = [indvData valueForKey:@"IndvId"];
+                indv.familyID = [indvData valueForKey:@"PrimFamily"];
+                indv.firstName = [indvData valueForKey:@"FirstName"];
+                indv.middleName = [indvData valueForKey:@"MiddleName"];
+                indv.lastName = [indvData valueForKey:@"LastName"];
+                indv.title = [indvData valueForKey:@"Title"];
+                indv.suffix = [indvData valueForKey:@"Suffix"];
+                indv.pictureURL = [indvData valueForKey:@"PictureUrl"];
+                indv.unlisted = [indvData valueForKey:@"Unlisted"];
+                
+                [searchResults addObject:indv];
+            }
+            
+            //add row to show more if required
+            if (hasMore)
+            {
+                AcsIndividual *indv = [AcsIndividual alloc];
+                indv.indvID = @"-1";
+                indv.firstName = @"View";
+                indv.lastName = @"More...";
+                [searchResults addObject:indv];
+            }
+            
+            [searchBar resignFirstResponder];
+            self.navigationItem.rightBarButtonItem = nil;
+            [self.tableView reloadData];
+        }
+    }   
+    
+    
 	[responseData release];
 }
 

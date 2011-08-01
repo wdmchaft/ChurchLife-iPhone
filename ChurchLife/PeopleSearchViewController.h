@@ -10,11 +10,17 @@
 #import <QuartzCore/QuartzCore.h>
 
 
-@interface PeopleSearchViewController : UITableViewController <UISearchDisplayDelegate> {
+@interface PeopleSearchViewController : UITableViewController {
     NSDictionary *items;
     IBOutlet UISearchBar *searchBar;
+    NSMutableArray *searchResults;
+    BOOL searching;
+    BOOL letUserSelectRow;
 }
 
 @property (nonatomic, retain) UISearchBar *searchBar;
+
+- (void) searchTableView;
+- (void) doneSearching_Clicked:(id)sender;
 
 @end
