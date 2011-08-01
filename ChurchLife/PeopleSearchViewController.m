@@ -9,8 +9,11 @@
 #import "PeopleSearchViewController.h"
 #import "PeopleDetailViewController.h"
 #import "JSONKit.h"
+#import "AcsLink.h"
 
 @implementation PeopleSearchViewController
+
+@synthesize searchBar;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -167,9 +170,39 @@
     //UIView *view = [[[NSBundle mainBundle] loadNibNamed:@"LoadingView" owner:self options:nil] objectAtIndex:0];
     //[self.view addSubview:view];
     
+    //[AcsLink LoginWithUsername:106217 userName:@"admin" password:@"password"];
+    NSMutableArray *array = [AcsLink IndividualSearch:@"aa" firstResult:0 maxResults:25 delegate:self];
+    /*for (int i = 0; i < [array count]; i++)
+     {
+     AcsLogin *login = (AcsLogin *) [array objectAtIndex:i];
+     NSLog(@"User: %@", login.userName);
+     }*/
+    
     PeopleDetailViewController *peopleDetailViewController = [[PeopleDetailViewController alloc] initWithNibName:@"PeopleDetailViewController" bundle:nil];
     [self.navigationController pushViewController:peopleDetailViewController animated:YES];
     [peopleDetailViewController release];
+}
+
+- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
+	[responseData setLength:0];
+    NSLog(@"received response");
+}
+
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
+	[responseData appendData:data];
+    NSLog(@"received data");
+}
+
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
+    NSLog(@"error");
+	//label.text = [NSString stringWithFormat:@"Connection failed: %@", [error description]];
+}
+
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
+	[connection release];
+    NSString *responseString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
+    NSLog(@"response string: %@", responseString);
+	[responseData release];
 }
 
 @end
