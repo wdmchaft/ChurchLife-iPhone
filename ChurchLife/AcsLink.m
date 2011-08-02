@@ -7,6 +7,7 @@
 //
 
 #import "AcsLink.h"
+#import "Base64.h"
 
 @implementation AcsLink
 
@@ -114,13 +115,26 @@
 
 +(void)IndividualSearch: (NSString *)searchText firstResult:(int)first maxResults:(int)max delegate:(NSObject *)delegate{
     CurrentIdentity *identity = [CurrentIdentity sharedIdentity];
-    NSString *urlString = [NSString stringWithFormat:@"https://%@:%@@api.accessacs.com/%@/individuals?searchText=%@&firstResult=%d&maxResults=%d",
-                           identity.userName, identity.password, identity.siteNumber, searchText, first, max];
+    NSString *urlString = [NSString stringWithFormat:@"https://api.accessacs.com/%@/individuals?searchText=%@&firstResult=%d&maxResults=%d",
+                           identity.siteNumber, searchText, first, max];
     
     NSLog(@"url: %@", urlString);
     
     responseData = [[NSMutableData data] retain];
-	NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:urlString]];
+	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlString]];
+    NSMutableString *dataStr = [NSMutableString stringWithFormat:@"%@:%@", identity.userName, identity.password];
+    NSData *encodeData = [dataStr dataUsingEncoding:NSUTF8StringEncoding];
+    char encodeArray[512];
+    
+    memset(encodeArray, '\0', sizeof(encodeArray));
+    
+    // Base64 Encode username and password
+    base64encode([encodeData length], (char *)[encodeData bytes], sizeof(encodeArray), encodeArray);
+    dataStr = [NSString stringWithCString:encodeArray encoding:NSUTF8StringEncoding];
+    NSString *authenticationString = [@"" stringByAppendingFormat:@"Basic %@", dataStr];
+    
+    [request addValue:authenticationString forHTTPHeaderField:@"Authorization"];
+    
 	[[NSURLConnection alloc] initWithRequest:request delegate:delegate];
 }
 
