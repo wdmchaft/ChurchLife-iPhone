@@ -173,6 +173,8 @@
 - (void) searchTableView {
     
     [AcsLink IndividualSearch:searchBar.text firstResult:0 maxResults:25 delegate:self];
+    lastSearch = [NSMutableString stringWithString:searchBar.text];
+    [lastSearch retain];
 }
 
 - (void) doneSearching_Clicked:(id)sender {
@@ -195,9 +197,16 @@
     //UIView *view = [[[NSBundle mainBundle] loadNibNamed:@"LoadingView" owner:self options:nil] objectAtIndex:0];
     //[self.view addSubview:view];
     
-    PeopleDetailViewController *peopleDetailViewController = [[PeopleDetailViewController alloc] initWithNibName:@"PeopleDetailViewController" bundle:nil];
-    [self.navigationController pushViewController:peopleDetailViewController animated:YES];
-    [peopleDetailViewController release];
+    AcsIndividual *indv = (AcsIndividual *)[searchResults objectAtIndex:indexPath.row];
+    NSString *name = [NSString stringWithFormat:@"%@ %@", indv.firstName, indv.lastName];
+    if ([name isEqualToString:@"View More..."])
+        [AcsLink IndividualSearch:lastSearch firstResult:[searchResults count]-1 maxResults:25 delegate:self];
+    else
+    {
+        PeopleDetailViewController *peopleDetailViewController = [[PeopleDetailViewController alloc] initWithNibName:@"PeopleDetailViewController" bundle:nil];
+        [self.navigationController pushViewController:peopleDetailViewController animated:YES];
+        [peopleDetailViewController release];
+    }
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
@@ -227,14 +236,21 @@
             NSDictionary *results = [decodedResponse objectForKey:@"Data"];
             NSLog (@"results: %@", [results description]);
             BOOL hasMore = [[results valueForKey:@"HasMore"] boolValue];
+            int firstResult = [[results valueForKey:@"FirstResult"] intValue];
             
             NSArray *individuals = [results valueForKey:@"Data"];
             //NSLog(@"individuals: %@", [individuals description]);
             
             if (searchResults != nil)
-                [searchResults release];
-            
-            searchResults = [[NSMutableArray alloc] initWithCapacity:[individuals count]];
+            {
+                if (firstResult == 0) //loading more
+                {
+                    [searchResults release];
+                    searchResults = [[NSMutableArray alloc] initWithCapacity:[individuals count]];
+                }
+                else
+                    [searchResults removeObjectAtIndex:[searchResults count]-1];
+            }
             
             for (int i = 0; i < [individuals count]; i++)
             {

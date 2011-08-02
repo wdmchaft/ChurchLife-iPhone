@@ -16,6 +16,7 @@
     NSMutableArray *searchResults;
     BOOL searching;
     BOOL letUserSelectRow;
+    NSMutableString *lastSearch;
 }
 
 @property (nonatomic, retain) UISearchBar *searchBar;
