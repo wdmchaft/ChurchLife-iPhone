@@ -8,10 +8,12 @@
 
 #import "SettingsViewController.h"
 #import "ChurchLifeAppDelegate.h"
+#import "CurrentIdentity.h";
 
 @implementation SettingsViewController
 
 @synthesize logout;
+@synthesize siteName;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -46,6 +48,8 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    CurrentIdentity *identity = [CurrentIdentity sharedIdentity];
+    siteName.text = identity.siteName;
 }
 
 - (void)viewDidUnload

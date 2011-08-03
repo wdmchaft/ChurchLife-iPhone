@@ -292,4 +292,11 @@ NSMutableData *responseData;
     }   
 }
 
+- (void)clearData
+{
+    searchBar.text = @"";
+    [searchResults removeAllObjects];
+    [self.tableView reloadData];
+}
+
 @end

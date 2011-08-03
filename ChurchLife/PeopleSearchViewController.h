@@ -23,5 +23,6 @@
 
 - (void) searchTableView;
 - (void) doneSearching_Clicked:(id)sender;
+- (void) clearData;
 
 @end

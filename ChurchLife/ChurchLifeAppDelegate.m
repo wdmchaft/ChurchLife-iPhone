@@ -64,6 +64,9 @@
     {
         UINavigationController *nav = (UINavigationController *)[self.tabBarController.viewControllers objectAtIndex:i];
         [nav popToRootViewControllerAnimated:NO];
+        if ([[[nav viewControllers] objectAtIndex:0] respondsToSelector:@selector(clearData)]) {
+            [[[nav viewControllers] objectAtIndex:0] clearData];
+        }
     }    
     
     self.tabBarController.selectedViewController = [self.tabBarController.viewControllers objectAtIndex:0];
