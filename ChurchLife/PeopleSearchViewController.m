@@ -207,9 +207,9 @@ NSMutableData *responseData;
     {
         [AcsLink GetIndividual:indv.indvID];
         
-        //PeopleDetailViewController *peopleDetailViewController = [[PeopleDetailViewController alloc] initWithNibName:@"PeopleDetailViewController" bundle:nil];
-        //[self.navigationController pushViewController:peopleDetailViewController animated:YES];
-        //[peopleDetailViewController release];
+        PeopleDetailViewController *peopleDetailViewController = [[PeopleDetailViewController alloc] initWithNibName:@"PeopleDetailViewController" bundle:nil];
+        [self.navigationController pushViewController:peopleDetailViewController animated:YES];
+        [peopleDetailViewController release];
     }
 }
 
