@@ -11,12 +11,9 @@
 #import "CurrentIdentity.h"
 #import "AcsLogin.h"
 
-NSMutableData *responseData;
-
 @interface AcsLink : NSObject {
 }
 
-+(NSMutableArray *)IndividualsGetListWithQuery:(NSString *)query;
 +(BOOL)LoginBySite:(int)siteNumber userName:(NSString *)userName password:(NSString *)password;
 +(NSMutableArray *)LoginWithEmail:(NSString *)email password:(NSString *)password;
 +(void)IndividualSearch: (NSString *)searchText firstResult:(int)first maxResults:(int)max delegate:(NSObject *)delegate;

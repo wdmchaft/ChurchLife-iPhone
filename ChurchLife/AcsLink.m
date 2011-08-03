@@ -11,10 +11,6 @@
 
 @implementation AcsLink
 
-+(NSMutableArray *)IndividualsGetListWithQuery: (NSString *)query {
-    return nil; 
-}
-
 +(BOOL)LoginBySite: (int)siteNumber userName:(NSString *)userName password:(NSString *)password {   
     NSURL *url = [NSURL URLWithString:@"https://api.accessacs.com/account/validate"];
     NSError *error;
@@ -120,7 +116,6 @@
     
     NSLog(@"url: %@", urlString);
     
-    responseData = [[NSMutableData data] retain];
 	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlString]];
     NSMutableString *dataStr = [NSMutableString stringWithFormat:@"%@:%@", identity.userName, identity.password];
     NSData *encodeData = [dataStr dataUsingEncoding:NSUTF8StringEncoding];

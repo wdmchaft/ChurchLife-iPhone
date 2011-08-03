@@ -16,6 +16,8 @@
 
 @synthesize searchBar;
 
+NSMutableData *responseData;
+
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
@@ -53,19 +55,19 @@
     
     searching = NO;
     letUserSelectRow = YES;
+    
+    responseData = [[NSMutableData data] retain];
 }
 
 - (void)viewDidUnload
 {
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
+    [responseData release];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    //self.tableView.separatorColor = [UIColor colorWithRed:.52 green:.48 blue:.41 alpha:1];
     
     //stop drawing separators for blank rows
     self.tableView.tableFooterView = [[[UIView alloc] init] autorelease];
@@ -286,9 +288,6 @@
             [self.tableView reloadData];
         }
     }   
-    
-    
-	[responseData release];
 }
 
 @end
