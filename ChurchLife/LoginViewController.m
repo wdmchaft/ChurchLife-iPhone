@@ -146,7 +146,7 @@
             }
             else //delete preferences file
             {
-                ChurchLifeAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+                ChurchLifeAppDelegate *appDelegate = (ChurchLifeAppDelegate *)[[UIApplication sharedApplication] delegate];
                 [appDelegate deletePreferences];
             }
         }

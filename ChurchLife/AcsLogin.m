@@ -2,7 +2,7 @@
 //  AcsLogin.m
 //  ChurchLife
 //
-//  Created by user on 7/25/11.
+//  Created by Michael on 7/25/11.
 //  Copyright 2011 ACS Technologies. All rights reserved.
 //
 

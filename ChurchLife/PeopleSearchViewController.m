@@ -205,9 +205,11 @@ NSMutableData *responseData;
         [AcsLink IndividualSearch:lastSearch firstResult:[searchResults count]-1 maxResults:25 delegate:self];
     else
     {
-        PeopleDetailViewController *peopleDetailViewController = [[PeopleDetailViewController alloc] initWithNibName:@"PeopleDetailViewController" bundle:nil];
-        [self.navigationController pushViewController:peopleDetailViewController animated:YES];
-        [peopleDetailViewController release];
+        [AcsLink GetIndividual:indv.indvID];
+        
+        //PeopleDetailViewController *peopleDetailViewController = [[PeopleDetailViewController alloc] initWithNibName:@"PeopleDetailViewController" bundle:nil];
+        //[self.navigationController pushViewController:peopleDetailViewController animated:YES];
+        //[peopleDetailViewController release];
     }
 }
 
@@ -260,7 +262,7 @@ NSMutableData *responseData;
                 //NSLog(@"Indv Data: %@", [indvData description]);
                 
                 AcsIndividual *indv = [AcsIndividual alloc];  
-                indv.indvID = [indvData valueForKey:@"IndvId"];
+                indv.indvID = [[indvData valueForKey:@"IndvId"] intValue];
                 indv.familyID = [indvData valueForKey:@"PrimFamily"];
                 indv.firstName = [indvData valueForKey:@"FirstName"];
                 indv.middleName = [indvData valueForKey:@"MiddleName"];
@@ -268,7 +270,7 @@ NSMutableData *responseData;
                 indv.title = [indvData valueForKey:@"Title"];
                 indv.suffix = [indvData valueForKey:@"Suffix"];
                 indv.pictureURL = [indvData valueForKey:@"PictureUrl"];
-                indv.unlisted = [indvData valueForKey:@"Unlisted"];
+                indv.unlisted = [[indvData valueForKey:@"Unlisted"] boolValue];
                 
                 [searchResults addObject:indv];
             }
@@ -277,7 +279,7 @@ NSMutableData *responseData;
             if (hasMore)
             {
                 AcsIndividual *indv = [AcsIndividual alloc];
-                indv.indvID = @"-1";
+                indv.indvID = -1;
                 indv.firstName = @"View";
                 indv.lastName = @"More...";
                 [searchResults addObject:indv];

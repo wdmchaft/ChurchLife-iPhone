@@ -133,8 +133,142 @@
 	[[NSURLConnection alloc] initWithRequest:request delegate:delegate];
 }
 
-+(NSString *)GetIndividual:(int) siteNumber indvID:(int)indvID{
++(AcsIndividual *)GetIndividual:(int)indvID{
+    CurrentIdentity *identity = [CurrentIdentity sharedIdentity];
+    NSString *urlString = [NSString stringWithFormat:@"https://api.accessacs.com/%@/individual/%d", identity.siteNumber, indvID];    
+    NSURL *url = [NSURL URLWithString:urlString];    
+    NSError *error;
+    NSURLResponse *response;
+    NSData *dataReply;
     
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL: url];
+    [request setHTTPMethod: @"GET"];
+    NSMutableString *dataStr = [NSMutableString stringWithFormat:@"%@:%@", identity.userName, identity.password];
+    NSData *encodeData = [dataStr dataUsingEncoding:NSUTF8StringEncoding];
+    char encodeArray[512];
+    
+    memset(encodeArray, '\0', sizeof(encodeArray));
+    
+    // Base64 Encode username and password
+    base64encode([encodeData length], (char *)[encodeData bytes], sizeof(encodeArray), encodeArray);
+    dataStr = [NSString stringWithCString:encodeArray encoding:NSUTF8StringEncoding];
+    NSString *authenticationString = [@"" stringByAppendingFormat:@"Basic %@", dataStr];
+    
+    [request addValue:authenticationString forHTTPHeaderField:@"Authorization"];
+    dataReply = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+    
+    if (error != nil) {
+        //[self handleError:err];
+    }
+    
+    JSONDecoder *decoder = [JSONDecoder decoder];   
+    NSDictionary *dict = [decoder objectWithData:dataReply];
+    //NSLog(@"response: %@", [dict description]);
+    
+    NSString * status = [dict valueForKey:@"Message"];
+    if ([status isEqualToString:@"Success"])
+    {
+        AcsIndividual *indv = [AcsIndividual alloc];
+        NSDictionary *data = [dict objectForKey:@"Data"];
+        
+        indv.indvID = [[data valueForKey:@"IndvID"] intValue];
+        indv.familyID = [data valueForKey:@"PrimFamily"];
+        indv.firstName = [data valueForKey:@"FirstName"];
+        indv.middleName = [data valueForKey:@"MiddleName"];
+        indv.lastName = [data valueForKey:@"LastName"];
+        indv.goesByName = [data valueForKey:@"GoesbyName"];
+        indv.title = [data valueForKey:@"Title"];
+        indv.suffix = [data valueForKey:@"Suffix"];
+        indv.pictureURL = [data valueForKey:@"PictureUrl"];
+        indv.familyPictureURL = [data valueForKey:@"FamilyPictureUrl"];
+        indv.unlisted = [[data valueForKey:@"Unlisted"] boolValue];
+        
+        //load addresses        
+        NSArray *addresses = [data objectForKey:@"Addresses"];
+        indv.addresses = [[NSMutableArray alloc] initWithCapacity:[addresses count]];
+        for (int i = 0; i < [addresses count]; i++)
+        {
+            NSDictionary *address = (NSDictionary *)[addresses objectAtIndex:i];
+            AcsAddress *addr = [AcsAddress alloc];
+            addr.addressID = [[address valueForKey:@"AddrId"] intValue];
+            addr.addressTypeID = [[address valueForKey:@"AddrTypeId"] intValue];
+            addr.addressType = [address valueForKey:@"AddrType"];
+            addr.addressLine1 = [address valueForKey:@"Address"];
+            addr.addressLine2 = [address valueForKey:@"Address2"];
+            addr.city = [address valueForKey:@"City"];
+            addr.company = [address valueForKey:@"Company"];
+            addr.country = [address valueForKey:@"Country"];
+            addr.latitude = [address valueForKey:@"Latitude"];
+            addr.longitude = [address valueForKey:@"Longitude"];
+            addr.sharedFlag = [address valueForKey:@"SharedFlag"];
+            addr.state = [address valueForKey:@"State"];
+            addr.zipCode = [address valueForKey:@"Zipcode"];
+            
+            [indv.addresses addObject:addr];
+        }
+        
+        //load emails     
+        NSArray *emails = [data objectForKey:@"Emails"];
+        indv.emails = [[NSMutableArray alloc] initWithCapacity:[emails count]];
+        for (int i = 0; i < [emails count]; i++)
+        {
+            NSDictionary *email = (NSDictionary *)[emails objectAtIndex:i];
+            AcsEmail *e = [AcsEmail alloc];
+            e.emailID = [[email valueForKey:@"EmailId"] intValue];
+            e.email = [email valueForKey:@"Email"];
+            e.emailType = [email valueForKey:@"EmailType"];
+            e.listed = [[email valueForKey:@"Listed"] boolValue];
+            e.preferred = [[email valueForKey:@"Preferred"] boolValue];
+            
+            [indv.emails addObject:e];
+        }
+        
+        //load phones
+        NSArray *phones = [data objectForKey:@"Phones"];
+        indv.phones = [[NSMutableArray alloc] initWithCapacity:[phones count]];
+        for (int i = 0; i < [phones count]; i++)
+        {
+            NSDictionary *phone = (NSDictionary *)[phones objectAtIndex:i];
+            AcsPhone *p = [AcsPhone alloc];
+            p.phoneID = [[phone valueForKey:@"PhoneId"] intValue];
+            p.phoneTypeID = [[phone valueForKey:@"PhoneTypeId"] intValue];
+            p.active = [[phone valueForKey:@"Active"] boolValue];
+            p.addressPhone = [[phone valueForKey:@"AddrPhone"] boolValue];
+            p.listed = [[phone valueForKey:@"Listed"] boolValue];
+            p.sharedFlag = [[phone valueForKey:@"SharedFlag"] boolValue];
+            p.areaCode = [phone valueForKey:@"AreaCode"];
+            p.extension = [phone valueForKey:@"Extension"];
+            p.phoneNumber = [phone valueForKey:@"PhoneNumber"];
+            p.phoneType = [phone valueForKey:@"PhoneType"];
+            
+            [indv.phones addObject:p];
+        }
+        
+        //load family members
+        NSArray *familyMembers = [data objectForKey:@"FamilyMembers"];
+        indv.familyMembers = [[NSMutableArray alloc] initWithCapacity:[familyMembers count]];
+        for (int i = 0; i < [familyMembers count]; i++)
+        {
+            NSDictionary *familyMember = (NSDictionary *)[familyMembers objectAtIndex:i];
+            AcsIndividual *f = [AcsIndividual alloc];
+            f.indvID = [[familyMember valueForKey:@"IndvId"] intValue];
+            f.familyID = [familyMember valueForKey:@"PrimFamily"];
+            f.firstName = [familyMember valueForKey:@"FirstName"];
+            f.middleName = [familyMember valueForKey:@"MiddleName"];
+            f.lastName = [familyMember valueForKey:@"LastName"];
+            f.goesByName = [familyMember valueForKey:@"GoesbyName"];
+            f.title = [familyMember valueForKey:@"Title"];
+            f.suffix = [familyMember valueForKey:@"Suffix"];
+            f.pictureURL = [familyMember valueForKey:@"PictureUrl"];
+            f.unlisted = [[familyMember valueForKey:@"Unlisted"] boolValue];
+            
+            [indv.familyMembers addObject:f];
+        }
+        
+        return indv;        
+    }
+    else
+        return nil;
 }
 
 +(NSString *)EventSearch:(int) siteNumber startDate:(NSDate *)startDate stopDate:(NSDate *)stopDate firstResult:(int)first maxResults:(int)max{

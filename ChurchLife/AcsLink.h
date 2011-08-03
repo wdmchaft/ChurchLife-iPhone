@@ -10,6 +10,10 @@
 #import "JSONKit.h"
 #import "CurrentIdentity.h"
 #import "AcsLogin.h"
+#import "AcsIndividual.h"
+#import "AcsAddress.h"
+#import "AcsEmail.h"
+#import "AcsPhone.h"
 
 @interface AcsLink : NSObject {
 }
@@ -17,7 +21,7 @@
 +(BOOL)LoginBySite:(int)siteNumber userName:(NSString *)userName password:(NSString *)password;
 +(NSMutableArray *)LoginWithEmail:(NSString *)email password:(NSString *)password;
 +(void)IndividualSearch: (NSString *)searchText firstResult:(int)first maxResults:(int)max delegate:(NSObject *)delegate;
-+(NSString *)GetIndividual:(int) siteNumber indvID:(int)indvID;
++(AcsIndividual *)GetIndividual:(int)indvID;
 +(NSString *)EventSearch:(int) siteNumber startDate:(NSDate *)startDate stopDate:(NSDate *)stopDate firstResult:(int)first maxResults:(int)max;
 +(NSString *)GetEvent:(int) siteNumber eventID:(NSString *)eventID;
      

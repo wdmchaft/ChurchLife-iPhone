@@ -2,7 +2,7 @@
 //  AcsIndividual.m
 //  ChurchLife
 //
-//  Created by user on 8/1/11.
+//  Created by Michael on 8/1/11.
 //  Copyright 2011 ACS Technologies. All rights reserved.
 //
 
@@ -20,6 +20,11 @@
 @synthesize title;
 @synthesize suffix;
 @synthesize pictureURL;
+@synthesize familyPictureURL;
 @synthesize unlisted;
+@synthesize addresses;
+@synthesize emails;
+@synthesize phones;
+@synthesize familyMembers;
 
 @end

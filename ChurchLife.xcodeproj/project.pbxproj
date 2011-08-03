@@ -53,6 +53,9 @@
 		CE7C201513DF4B4400156654 /* LoginView2.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE7C201413DF4B4400156654 /* LoginView2.xib */; };
 		CE7D042313E72C5500EA42A5 /* AcsIndividual.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7D042213E72C5500EA42A5 /* AcsIndividual.m */; };
 		CE813D1F13DDE7A1000A3515 /* AcsLogin.m in Sources */ = {isa = PBXBuildFile; fileRef = CE813D1E13DDE7A1000A3515 /* AcsLogin.m */; };
+		CE82F02913E9BCE20073EBD8 /* AcsAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = CE82F02813E9BCE20073EBD8 /* AcsAddress.m */; };
+		CE82F02C13E9C00C0073EBD8 /* AcsEmail.m in Sources */ = {isa = PBXBuildFile; fileRef = CE82F02B13E9C00C0073EBD8 /* AcsEmail.m */; };
+		CE82F02F13E9C2970073EBD8 /* AcsPhone.m in Sources */ = {isa = PBXBuildFile; fileRef = CE82F02E13E9C2960073EBD8 /* AcsPhone.m */; };
 		CE888FBD13E1A46A005966C3 /* UserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE888FBB13E1A469005966C3 /* UserViewController.m */; };
 		CE888FBE13E1A46A005966C3 /* UserViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE888FBC13E1A46A005966C3 /* UserViewController.xib */; };
 		CE9E11C713DA0F4300C08319 /* CurrentIdentity.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9E11C613DA0F4300C08319 /* CurrentIdentity.m */; };
@@ -125,6 +128,12 @@
 		CE813D1D13DDE7A1000A3515 /* AcsLogin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AcsLogin.h; sourceTree = "<group>"; };
 		CE813D1E13DDE7A1000A3515 /* AcsLogin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AcsLogin.m; sourceTree = "<group>"; };
 		CE82F02413E84EFE0073EBD8 /* Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Base64.h; sourceTree = "<group>"; };
+		CE82F02713E9BCE20073EBD8 /* AcsAddress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AcsAddress.h; sourceTree = "<group>"; };
+		CE82F02813E9BCE20073EBD8 /* AcsAddress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AcsAddress.m; sourceTree = "<group>"; };
+		CE82F02A13E9C00C0073EBD8 /* AcsEmail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AcsEmail.h; sourceTree = "<group>"; };
+		CE82F02B13E9C00C0073EBD8 /* AcsEmail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AcsEmail.m; sourceTree = "<group>"; };
+		CE82F02D13E9C2960073EBD8 /* AcsPhone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AcsPhone.h; sourceTree = "<group>"; };
+		CE82F02E13E9C2960073EBD8 /* AcsPhone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AcsPhone.m; sourceTree = "<group>"; };
 		CE888FBA13E1A469005966C3 /* UserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserViewController.h; sourceTree = "<group>"; };
 		CE888FBB13E1A469005966C3 /* UserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserViewController.m; sourceTree = "<group>"; };
 		CE888FBC13E1A46A005966C3 /* UserViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserViewController.xib; sourceTree = "<group>"; };
@@ -295,10 +304,16 @@
 		CE813D2113DDE7A8000A3515 /* classes */ = {
 			isa = PBXGroup;
 			children = (
-				CE813D1D13DDE7A1000A3515 /* AcsLogin.h */,
-				CE813D1E13DDE7A1000A3515 /* AcsLogin.m */,
+				CE82F02713E9BCE20073EBD8 /* AcsAddress.h */,
+				CE82F02813E9BCE20073EBD8 /* AcsAddress.m */,
+				CE82F02A13E9C00C0073EBD8 /* AcsEmail.h */,
+				CE82F02B13E9C00C0073EBD8 /* AcsEmail.m */,
 				CE7D042113E72C5500EA42A5 /* AcsIndividual.h */,
 				CE7D042213E72C5500EA42A5 /* AcsIndividual.m */,
+				CE813D1D13DDE7A1000A3515 /* AcsLogin.h */,
+				CE813D1E13DDE7A1000A3515 /* AcsLogin.m */,
+				CE82F02D13E9C2960073EBD8 /* AcsPhone.h */,
+				CE82F02E13E9C2960073EBD8 /* AcsPhone.m */,
 			);
 			name = classes;
 			sourceTree = "<group>";
@@ -415,6 +430,9 @@
 				CE813D1F13DDE7A1000A3515 /* AcsLogin.m in Sources */,
 				CE888FBD13E1A46A005966C3 /* UserViewController.m in Sources */,
 				CE7D042313E72C5500EA42A5 /* AcsIndividual.m in Sources */,
+				CE82F02913E9BCE20073EBD8 /* AcsAddress.m in Sources */,
+				CE82F02C13E9C00C0073EBD8 /* AcsEmail.m in Sources */,
+				CE82F02F13E9C2970073EBD8 /* AcsPhone.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
