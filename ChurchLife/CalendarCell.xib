@@ -50,7 +50,7 @@
 							<object class="IBUILabel" id="787586184">
 								<reference key="NSNextResponder" ref="523449437"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{20, 3}, {95, 21}}</string>
+								<string key="NSFrame">{{20, 3}, {193, 21}}</string>
 								<reference key="NSSuperview" ref="523449437"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="994262528"/>
@@ -62,7 +62,7 @@
 								<string key="IBUIText">Event Name</string>
 								<object class="NSFont" key="IBUIFont">
 									<string key="NSName">Helvetica-Bold</string>
-									<double key="NSSize">17</double>
+									<double key="NSSize">16</double>
 									<int key="NSfFlags">16</int>
 								</object>
 								<object class="NSColor" key="IBUITextColor">
@@ -74,6 +74,7 @@
 									<bytes key="NSRGB">MSAxIDEAA</bytes>
 								</object>
 								<int key="IBUIBaselineAdjustment">1</int>
+								<bool key="IBUIAdjustsFontSizeToFit">NO</bool>
 								<float key="IBUIMinimumFontSize">10</float>
 							</object>
 							<object class="IBUILabel" id="994262528">
@@ -105,10 +106,9 @@
 							<object class="IBUILabel" id="443870906">
 								<reference key="NSNextResponder" ref="523449437"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{194, 11}, {95, 21}}</string>
+								<string key="NSFrame">{{194, 10}, {95, 21}}</string>
 								<reference key="NSSuperview" ref="523449437"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
 								<int key="IBUIContentMode">8</int>

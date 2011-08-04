@@ -14,8 +14,11 @@
 @interface CalendarViewController : UITableViewController {
     CalendarCell *calendarCell;
     NSMutableArray *searchResults;
+    BOOL searchCompleted;
 }
 
 @property (nonatomic, assign) IBOutlet CalendarCell *calendarCell;
+
+- (void)clearData;
 
 @end

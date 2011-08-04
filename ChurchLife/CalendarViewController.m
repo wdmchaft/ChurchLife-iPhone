@@ -51,7 +51,9 @@ NSMutableData *responseData;
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
+    searchResults = [[NSMutableArray alloc] init];
     responseData = [[NSMutableData data] retain];
+    searchCompleted = NO;
 }
 
 - (void)viewDidUnload
@@ -75,7 +77,7 @@ NSMutableData *responseData;
     NSCalendar *calendar = [NSCalendar currentCalendar];
     NSDate *stopDate = [calendar dateByAddingComponents:components toDate:startDate options:0];
     
-    if (searchResults == nil)
+    if (!searchCompleted)
         [AcsLink EventSearch:startDate stopDate:stopDate firstResult:0 maxResults:25 delegate:self];
 }
 
@@ -111,7 +113,7 @@ NSMutableData *responseData;
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return 5;
+    return [searchResults count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -125,6 +127,16 @@ NSMutableData *responseData;
         cell = calendarCell;
         self.calendarCell = nil;
     }
+    
+    AcsEvent *e = (AcsEvent *)[searchResults objectAtIndex:indexPath.row];
+    cell.eventLabel.text = e.eventName;
+    
+    NSDateFormatter* formatter = [[[NSDateFormatter alloc] init] autorelease];
+    [formatter setDateFormat:@"hh:mm a"];
+    cell.timeLabel.text = [[formatter stringFromDate:e.startDate] lowercaseString];
+    
+    [formatter setDateFormat:@"EEE MMM dd"];
+    cell.dateLabel.text = [formatter stringFromDate:e.startDate];
     
     return cell;
 }
@@ -148,7 +160,6 @@ NSMutableData *responseData;
 	[connection release];
     JSONDecoder *decoder = [JSONDecoder decoder];   
     NSDictionary *decodedResponse = [decoder objectWithData:responseData];
-    //NSLog(@"response: %@", [decodedResponse description]);
     
     NSString * status =  [decodedResponse valueForKey:@"Message"];
     if ([status isEqualToString:@"Success"])
@@ -161,17 +172,12 @@ NSMutableData *responseData;
         NSArray *events = [results valueForKey:@"Data"];
         NSLog(@"events: %@", [events description]);
         
-        if (searchResults != nil)
-            [searchResults release];
-        
+        [searchResults release];
         searchResults = [[NSMutableArray alloc] initWithCapacity:[events count]];
-        [searchResults retain];
         
         for (int i = 0; i < [events count]; i++)
         {
-            NSDictionary *eventData = [events objectAtIndex:i];
-            //NSLog(@"Indv Data: %@", [indvData description]);
-            
+            NSDictionary *eventData = [events objectAtIndex:i];            
             AcsEvent *event = [AcsEvent alloc];
             
             event.eventID = [eventData valueForKey:@"EventId"];
@@ -193,7 +199,8 @@ NSMutableData *responseData;
             [searchResults addObject:event];
         }
         
-        //[self.tableView reloadData];*/
+        [self.tableView reloadData];
+        searchCompleted = YES;
     }
 }
 
@@ -250,6 +257,13 @@ NSMutableData *responseData;
     CalendarDetailViewController *calendarDetailViewController = [[CalendarDetailViewController alloc] initWithNibName:@"CalendarDetailViewController" bundle:nil];
     [self.navigationController pushViewController:calendarDetailViewController animated:YES];
     [calendarDetailViewController release];
+}
+
+- (void)clearData
+{
+    searchCompleted = NO;
+    [searchResults removeAllObjects];
+    [self.tableView reloadData];
 }
 
 @end

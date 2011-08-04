@@ -12,7 +12,6 @@
 
 @implementation SettingsViewController
 
-@synthesize logout;
 @synthesize siteName;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
