@@ -22,7 +22,7 @@
 +(NSMutableArray *)LoginWithEmail:(NSString *)email password:(NSString *)password;
 +(void)IndividualSearch: (NSString *)searchText firstResult:(int)first maxResults:(int)max delegate:(NSObject *)delegate;
 +(AcsIndividual *)GetIndividual:(int)indvID;
-+(NSString *)EventSearch:(int) siteNumber startDate:(NSDate *)startDate stopDate:(NSDate *)stopDate firstResult:(int)first maxResults:(int)max;
++(void)EventSearch:(NSDate *)startDate stopDate:(NSDate *)stopDate firstResult:(int)first maxResults:(int)max delegate:(NSObject *)delegate;
 +(NSString *)GetEvent:(int) siteNumber eventID:(NSString *)eventID;
      
 @end

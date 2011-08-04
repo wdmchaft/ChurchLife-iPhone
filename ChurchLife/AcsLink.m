@@ -271,8 +271,32 @@
         return nil;
 }
 
-+(NSString *)EventSearch:(int) siteNumber startDate:(NSDate *)startDate stopDate:(NSDate *)stopDate firstResult:(int)first maxResults:(int)max{
++(void)EventSearch:(NSDate *) startDate stopDate:(NSDate *)stopDate firstResult:(int)first maxResults:(int)max delegate:(NSObject *)delegate{
+    CurrentIdentity *identity = [CurrentIdentity sharedIdentity];
+    NSDateFormatter* formatter = [[[NSDateFormatter alloc] init] autorelease];
+    [formatter setDateFormat:@"MM/dd/yyyy"];
     
+    
+    NSString *urlString = [NSString stringWithFormat:@"https://api.accessacs.com/%@/events?startDate=%@&stopDate=%@&firstResult=%d&maxResults=%d",
+                           identity.siteNumber, [formatter stringFromDate:startDate], [formatter stringFromDate:stopDate], first, max];
+    
+    NSLog(@"url: %@", urlString);
+    
+	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlString]];
+    NSMutableString *dataStr = [NSMutableString stringWithFormat:@"%@:%@", identity.userName, identity.password];
+    NSData *encodeData = [dataStr dataUsingEncoding:NSUTF8StringEncoding];
+    char encodeArray[512];
+    
+    memset(encodeArray, '\0', sizeof(encodeArray));
+    
+    // Base64 Encode username and password
+    base64encode([encodeData length], (char *)[encodeData bytes], sizeof(encodeArray), encodeArray);
+    dataStr = [NSString stringWithCString:encodeArray encoding:NSUTF8StringEncoding];
+    NSString *authenticationString = [@"" stringByAppendingFormat:@"Basic %@", dataStr];
+    
+    [request addValue:authenticationString forHTTPHeaderField:@"Authorization"];
+    
+	[[NSURLConnection alloc] initWithRequest:request delegate:delegate];
 }
 
 +(NSString *)GetEvent:(int) siteNumber eventID:(NSString *)eventID{

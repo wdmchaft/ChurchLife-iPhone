@@ -13,6 +13,7 @@
 //@class CalendarCell;
 @interface CalendarViewController : UITableViewController {
     CalendarCell *calendarCell;
+    NSMutableArray *searchResults;
 }
 
 @property (nonatomic, assign) IBOutlet CalendarCell *calendarCell;
