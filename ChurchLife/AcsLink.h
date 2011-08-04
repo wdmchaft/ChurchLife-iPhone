@@ -14,6 +14,7 @@
 #import "AcsAddress.h"
 #import "AcsEmail.h"
 #import "AcsPhone.h"
+#import "AcsEvent.h"
 
 @interface AcsLink : NSObject {
 }
@@ -23,6 +24,6 @@
 +(void)IndividualSearch: (NSString *)searchText firstResult:(int)first maxResults:(int)max delegate:(NSObject *)delegate;
 +(AcsIndividual *)GetIndividual:(int)indvID;
 +(void)EventSearch:(NSDate *)startDate stopDate:(NSDate *)stopDate firstResult:(int)first maxResults:(int)max delegate:(NSObject *)delegate;
-+(NSString *)GetEvent:(int) siteNumber eventID:(NSString *)eventID;
++(AcsEvent *)GetEvent:(NSString *)eventID;
      
 @end

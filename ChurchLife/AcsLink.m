@@ -299,8 +299,66 @@
 	[[NSURLConnection alloc] initWithRequest:request delegate:delegate];
 }
 
-+(NSString *)GetEvent:(int) siteNumber eventID:(NSString *)eventID{
++(AcsEvent *)GetEvent:(NSString *)eventID{
+    CurrentIdentity *identity = [CurrentIdentity sharedIdentity];
+    NSString *urlString = [NSString stringWithFormat:@"https://api.accessacs.com/%@/event/%@", identity.siteNumber, eventID];    
+    NSURL *url = [NSURL URLWithString:urlString];    
+    NSError *error;
+    NSURLResponse *response;
+    NSData *dataReply;
     
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL: url];
+    [request setHTTPMethod: @"GET"];
+    NSMutableString *dataStr = [NSMutableString stringWithFormat:@"%@:%@", identity.userName, identity.password];
+    NSData *encodeData = [dataStr dataUsingEncoding:NSUTF8StringEncoding];
+    char encodeArray[512];
+    
+    memset(encodeArray, '\0', sizeof(encodeArray));
+    
+    // Base64 Encode username and password
+    base64encode([encodeData length], (char *)[encodeData bytes], sizeof(encodeArray), encodeArray);
+    dataStr = [NSString stringWithCString:encodeArray encoding:NSUTF8StringEncoding];
+    NSString *authenticationString = [@"" stringByAppendingFormat:@"Basic %@", dataStr];
+    
+    [request addValue:authenticationString forHTTPHeaderField:@"Authorization"];
+    dataReply = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+    
+    if (error != nil) {
+        //[self handleError:err];
+    }
+    
+    JSONDecoder *decoder = [JSONDecoder decoder];   
+    NSDictionary *dict = [decoder objectWithData:dataReply];
+    NSLog(@"response: %@", [dict description]);
+    
+    NSString * status = [dict valueForKey:@"Message"];
+    if ([status isEqualToString:@"Success"])
+    {
+        AcsEvent *event = [AcsEvent alloc];
+        NSDictionary *data = [dict objectForKey:@"Data"];
+        
+        event.eventID = [data valueForKey:@"EventId"];
+        event.eventTypeID = [data valueForKey:@"EventTypeId"];
+        event.locationID = [data valueForKey:@"LocationId"];
+        event.calendarID = [data valueForKey:@"CalendarId"];
+        event.parentID = [data valueForKey:@"ParentId"];
+        event.siteID = [data valueForKey:@"SiteId"];
+        event.calendar = [data valueForKey:@"Calendar"];
+        event.description = [data valueForKey:@"Description"];
+        event.eventName = [data valueForKey:@"EventName"];
+        event.location = [data valueForKey:@"Location"];
+        event.note = [data valueForKey:@"Note"];
+        event.status = [data valueForKey:@"Status"];
+        //event.startDate = [data valueForKey:@"StartDate"];
+        //event.stopDate = [data valueForKey:@"StopDate"];
+        event.isPublished = [[data valueForKey:@"IsPublished"] boolValue];
+        event.allowRegistration = [[data valueForKey:@"AllowRegistration"] boolValue];
+        event.isBooked = [[data valueForKey:@"IsBooked"] boolValue];
+        
+        return event;        
+    }
+    else
+        return nil;
 }
 
 @end

@@ -51,8 +51,6 @@ NSMutableData *responseData;
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-    //Initialize the array.
-    searchResults = [[NSMutableArray alloc] init];
     responseData = [[NSMutableData data] retain];
 }
 
@@ -77,7 +75,8 @@ NSMutableData *responseData;
     NSCalendar *calendar = [NSCalendar currentCalendar];
     NSDate *stopDate = [calendar dateByAddingComponents:components toDate:startDate options:0];
     
-    [AcsLink EventSearch:startDate stopDate:stopDate firstResult:0 maxResults:25 delegate:self];
+    if (searchResults == nil)
+        [AcsLink EventSearch:startDate stopDate:stopDate firstResult:0 maxResults:25 delegate:self];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -163,10 +162,10 @@ NSMutableData *responseData;
         NSLog(@"events: %@", [events description]);
         
         if (searchResults != nil)
-        {
             [searchResults release];
-            searchResults = [[NSMutableArray alloc] initWithCapacity:[events count]];
-        }
+        
+        searchResults = [[NSMutableArray alloc] initWithCapacity:[events count]];
+        [searchResults retain];
         
         for (int i = 0; i < [events count]; i++)
         {
@@ -241,6 +240,8 @@ NSMutableData *responseData;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [AcsLink GetEvent:@"4927fd78-2b32-4766-8bba-47c757d1d1da"];
+    
     CalendarDetailViewController *calendarDetailViewController = [[CalendarDetailViewController alloc] initWithNibName:@"CalendarDetailViewController" bundle:nil];
     [self.navigationController pushViewController:calendarDetailViewController animated:YES];
     [calendarDetailViewController release];
