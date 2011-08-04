@@ -155,8 +155,8 @@ NSMutableData *responseData;
     {
         NSDictionary *results = [decodedResponse objectForKey:@"Data"];
         NSLog (@"results: %@", [results description]);
-        BOOL hasMore = [[results valueForKey:@"HasMore"] boolValue];
-        int firstResult = [[results valueForKey:@"FirstResult"] intValue];
+        //BOOL hasMore = [[results valueForKey:@"HasMore"] boolValue];
+        //int firstResult = [[results valueForKey:@"FirstResult"] intValue];
         
         NSArray *events = [results valueForKey:@"Data"];
         NSLog(@"events: %@", [events description]);
@@ -181,8 +181,13 @@ NSMutableData *responseData;
             event.eventName = [eventData valueForKey:@"EventName"];
             event.location = [eventData valueForKey:@"Location"];
             event.note = [eventData valueForKey:@"Note"];
-            //event.startDate = [eventData valueForKey:@"StartDate"];
-            //event.stopDate = [eventData valueForKey:@"StopDate"];
+            
+            //parse dates
+            NSDateFormatter *df = [[[NSDateFormatter alloc] init] autorelease];
+            [df setDateFormat:@"MM/dd/yyyy HH:mm:ss a"];
+            event.startDate = [df dateFromString:[eventData valueForKey:@"StartDate"]];
+            event.stopDate = [df dateFromString:[eventData valueForKey:@"StopDate"]];
+            
             event.isPublished = [[eventData valueForKey:@"IsPublished"] boolValue];
             
             [searchResults addObject:event];

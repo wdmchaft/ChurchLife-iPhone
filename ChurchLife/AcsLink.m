@@ -349,8 +349,13 @@
         event.location = [data valueForKey:@"Location"];
         event.note = [data valueForKey:@"Note"];
         event.status = [data valueForKey:@"Status"];
-        //event.startDate = [data valueForKey:@"StartDate"];
-        //event.stopDate = [data valueForKey:@"StopDate"];
+        
+        //parse dates
+        NSDateFormatter *df = [[[NSDateFormatter alloc] init] autorelease];
+        [df setDateFormat:@"MM/dd/yyyy HH:mm:ss a"];
+        event.startDate = [df dateFromString:[data valueForKey:@"StartDate"]];
+        event.stopDate = [df dateFromString:[data valueForKey:@"StopDate"]];
+
         event.isPublished = [[data valueForKey:@"IsPublished"] boolValue];
         event.allowRegistration = [[data valueForKey:@"AllowRegistration"] boolValue];
         event.isBooked = [[data valueForKey:@"IsBooked"] boolValue];
