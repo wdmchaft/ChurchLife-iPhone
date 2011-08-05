@@ -8,15 +8,17 @@
 
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
+#import "MBProgressHUD.h"
 
 
-@interface PeopleSearchViewController : UITableViewController {
+@interface PeopleSearchViewController : UITableViewController <MBProgressHUDDelegate> {
     NSDictionary *items;
     IBOutlet UISearchBar *searchBar;
     NSMutableArray *searchResults;
     BOOL searching;
     BOOL letUserSelectRow;
     NSMutableString *lastSearch;
+    MBProgressHUD *HUD;
 }
 
 @property (nonatomic, retain) UISearchBar *searchBar;

@@ -168,11 +168,21 @@ NSMutableData *responseData;
 }
 
 - (void) searchBarSearchButtonClicked:(UISearchBar *)theSearchBar {
-    
+    [searchBar resignFirstResponder];
     [self searchTableView];
 }
 
 - (void) searchTableView {
+    // The hud will disable all input on the view (use the highest view possible in the view hierarchy)
+    HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
+    HUD.labelText = @"Loading";
+    [self.navigationController.view addSubview:HUD];
+    
+    // Register for HUD callbacks so we can remove it from the window at the right time
+    HUD.delegate = self;
+    
+    // Show the HUD
+    [HUD show:YES];
     
     [AcsLink IndividualSearch:searchBar.text firstResult:0 maxResults:25 delegate:self];
     lastSearch = [NSMutableString stringWithString:searchBar.text];
@@ -195,14 +205,20 @@ NSMutableData *responseData;
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    //UIView *view = [[[NSBundle mainBundle] loadNibNamed:@"LoadingView" owner:self options:nil] objectAtIndex:0];
-    //[self.view addSubview:view];
-    
+{  
     AcsIndividual *indv = (AcsIndividual *)[searchResults objectAtIndex:indexPath.row];
     NSString *name = [NSString stringWithFormat:@"%@ %@", indv.firstName, indv.lastName];
     if ([name isEqualToString:@"View More..."])
+    {
+        //Show HUD
+        HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
+        HUD.labelText = @"Loading";
+        [self.navigationController.view addSubview:HUD];
+        HUD.delegate = self;
+        [HUD show:YES];
+        
         [AcsLink IndividualSearch:lastSearch firstResult:[searchResults count]-1 maxResults:25 delegate:self];
+    }
     else
     {
         [AcsLink GetIndividual:indv.indvID];
@@ -290,6 +306,7 @@ NSMutableData *responseData;
             [self.tableView reloadData];
         }
     }   
+    [HUD hide:YES];
 }
 
 - (void)clearData
@@ -297,6 +314,13 @@ NSMutableData *responseData;
     searchBar.text = @"";
     [searchResults removeAllObjects];
     [self.tableView reloadData];
+}
+
+- (void)hudWasHidden:(MBProgressHUD *)hud {
+    // Remove HUD from screen when the HUD was hidded
+    [HUD removeFromSuperview];
+    [HUD release];
+	HUD = nil;
 }
 
 @end
