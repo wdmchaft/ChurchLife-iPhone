@@ -9,16 +9,18 @@
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
 #import "CalendarCell.h"
+#import "MBProgressHUD.h"
 
-//@class CalendarCell;
-@interface CalendarViewController : UITableViewController {
+@interface CalendarViewController : UITableViewController <MBProgressHUDDelegate> {
     CalendarCell *calendarCell;
     NSMutableArray *searchResults;
     BOOL searchCompleted;
+    MBProgressHUD *HUD;
 }
 
 @property (nonatomic, assign) IBOutlet CalendarCell *calendarCell;
 
 - (void)clearData;
+- (void)showEventDetails:(id)sender;
 
 @end

@@ -169,6 +169,8 @@ NSMutableData *responseData;
 
 - (void) searchBarSearchButtonClicked:(UISearchBar *)theSearchBar {
     [searchBar resignFirstResponder];
+    letUserSelectRow = YES;
+    self.tableView.scrollEnabled = YES;
     [self searchTableView];
 }
 
@@ -309,11 +311,11 @@ NSMutableData *responseData;
     searchBar.text = @"";
     [searchResults removeAllObjects];
     [self.tableView reloadData];
+    [self.tableView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:YES];
 }
 
 - (void)hudWasHidden:(MBProgressHUD *)hud 
 {
-    // Remove HUD from screen when the HUD was hidded
     [HUD removeFromSuperview];
     [HUD release];
 	HUD = nil;

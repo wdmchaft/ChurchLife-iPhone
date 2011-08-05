@@ -78,7 +78,15 @@ NSMutableData *responseData;
     NSDate *stopDate = [calendar dateByAddingComponents:components toDate:startDate options:0];
     
     if (!searchCompleted)
+    {
+        HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
+        HUD.labelText = @"Loading...";
+        [self.navigationController.view addSubview:HUD];
+        HUD.delegate = self;
+        [HUD show:YES];
+        
         [AcsLink EventSearch:startDate stopDate:stopDate firstResult:0 maxResults:25 delegate:self];
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -202,6 +210,7 @@ NSMutableData *responseData;
         [self.tableView reloadData];
         searchCompleted = YES;
     }
+    [HUD hide:YES];
 }
 
 - (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
@@ -252,11 +261,14 @@ NSMutableData *responseData;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [AcsLink GetEvent:@"4927fd78-2b32-4766-8bba-47c757d1d1da"];
+    AcsEvent *event = (AcsEvent *)[searchResults objectAtIndex:indexPath.row];
     
-    CalendarDetailViewController *calendarDetailViewController = [[CalendarDetailViewController alloc] initWithNibName:@"CalendarDetailViewController" bundle:nil];
-    [self.navigationController pushViewController:calendarDetailViewController animated:YES];
-    [calendarDetailViewController release];
+    //Show HUD
+    HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
+    HUD.labelText = @"Loading...";
+    [self.navigationController.view addSubview:HUD];
+    HUD.delegate = self;
+    [HUD showWhileExecuting:@selector(showEventDetails:) onTarget:self withObject:event animated:YES];
 }
 
 - (void)clearData
@@ -265,5 +277,24 @@ NSMutableData *responseData;
     [searchResults removeAllObjects];
     [self.tableView reloadData];
 }
+
+- (void)hudWasHidden:(MBProgressHUD *)hud 
+{
+    [HUD removeFromSuperview];
+    [HUD release];
+	HUD = nil;
+}
+
+- (void)showEventDetails:(id)sender
+{
+    AcsEvent *event = (AcsEvent *)sender;
+    [AcsLink GetEvent:event.eventID];
+    
+    CalendarDetailViewController *calendarDetailViewController = [[CalendarDetailViewController alloc] initWithNibName:@"CalendarDetailViewController" bundle:nil];
+    [self.navigationController pushViewController:calendarDetailViewController animated:YES];
+    [calendarDetailViewController release];
+    
+}
+
 
 @end
