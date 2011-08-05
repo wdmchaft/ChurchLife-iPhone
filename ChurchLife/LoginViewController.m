@@ -22,6 +22,8 @@
 @synthesize pageControl;
 @synthesize invalidLogin1;
 @synthesize invalidLogin2;
+@synthesize signIn1;
+@synthesize signIn2;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -80,6 +82,10 @@
     scrollView.contentSize = CGSizeMake(scrollView.frame.size.width*2, scrollView.frame.size.height);
     
     pageControlBeingUsed = NO;
+    
+    //setup observers for keyboard
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 }
 
 - (void)viewDidUnload
@@ -97,6 +103,8 @@
 
 - (IBAction) signIn:(id)sender
 {       
+    [self backgroundClicked:nil];
+    
     HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
     [self.navigationController.view addSubview:HUD];
     HUD.delegate = self;
@@ -218,6 +226,35 @@
         
         [self.navigationController dismissModalViewControllerAnimated:true];
     }
+}
+
+- (void) keyboardWillShow: (NSNotification*) aNotification
+{
+    scrollView.scrollEnabled = NO;
+    scrollView.pagingEnabled = NO;
+    NSDictionary* info = [aNotification userInfo];
+    CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    
+    UIButton *signIn;
+    if (pageControl.currentPage == 0)
+        signIn = signIn1;
+    else
+        signIn = signIn2;
+    
+    CGRect aRect = self.view.frame;
+    aRect.size.height -= kbSize.height;
+    if (!CGRectContainsPoint(aRect, signIn.frame.origin) ) {
+        CGPoint scrollPoint = CGPointMake(scrollView.frame.size.width * pageControl.currentPage, signIn.frame.origin.y-kbSize.height+14);
+        [scrollView setContentOffset:scrollPoint animated:YES];
+    }
+}
+
+- (void) keyboardWillHide: (NSNotification*) aNotification
+{
+    CGPoint scrollPoint = CGPointMake(scrollView.frame.size.width * pageControl.currentPage, 0.0);
+    [scrollView setContentOffset:scrollPoint animated:YES];
+    scrollView.pagingEnabled = YES;
+    scrollView.scrollEnabled = YES;
 }
 
 @end

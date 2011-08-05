@@ -235,10 +235,10 @@
 				BA25AC9613B38ED3002AA61A /* LoginViewController.h */,
 				BA25AC9713B38ED3002AA61A /* LoginViewController.m */,
 				BA25AC9813B38ED3002AA61A /* LoginViewController.xib */,
+				CE7C201413DF4B4400156654 /* LoginView2.xib */,
 				CE888FBA13E1A469005966C3 /* UserViewController.h */,
 				CE888FBB13E1A469005966C3 /* UserViewController.m */,
 				CE888FBC13E1A46A005966C3 /* UserViewController.xib */,
-				CE7C201413DF4B4400156654 /* LoginView2.xib */,
 			);
 			path = ChurchLife;
 			sourceTree = "<group>";

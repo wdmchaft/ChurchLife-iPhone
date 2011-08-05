@@ -25,6 +25,8 @@ static NSString *dataFile = @"data.plist";
     IBOutlet UIPageControl *pageControl;
     IBOutlet UILabel *invalidLogin1;
     IBOutlet UILabel *invalidLogin2;
+    IBOutlet UIButton *signIn1;
+    IBOutlet UIButton *signIn2;
     BOOL pageControlBeingUsed;
     MBProgressHUD *HUD;
 }
@@ -40,6 +42,8 @@ static NSString *dataFile = @"data.plist";
 @property (nonatomic, retain) IBOutlet UIPageControl *pageControl;
 @property (nonatomic, retain) IBOutlet UILabel *invalidLogin1;
 @property (nonatomic, retain) IBOutlet UILabel *invalidLogin2;
+@property (nonatomic, retain) IBOutlet UIButton *signIn1;
+@property (nonatomic, retain) IBOutlet UIButton *signIn2;
 
 - (NSString *)dataFilePath;
 - (IBAction) signIn:(id)sender;
