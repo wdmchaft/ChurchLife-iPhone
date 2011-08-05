@@ -9,10 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "AcsLink.h"
 #import "UserViewController.h"
+#import "MBProgressHUD.h"
 
 static NSString *dataFile = @"data.plist";
 
-@interface LoginViewController : UIViewController <UIScrollViewDelegate> {
+@interface LoginViewController : UIViewController <UIScrollViewDelegate, MBProgressHUDDelegate> {
     IBOutlet UITextField *email;
     IBOutlet UITextField *username;
     IBOutlet UITextField *sitenumber;
@@ -25,6 +26,7 @@ static NSString *dataFile = @"data.plist";
     IBOutlet UILabel *invalidLogin1;
     IBOutlet UILabel *invalidLogin2;
     BOOL pageControlBeingUsed;
+    MBProgressHUD *HUD;
 }
 
 @property (nonatomic, retain) IBOutlet UITextField *email;
@@ -44,4 +46,6 @@ static NSString *dataFile = @"data.plist";
 - (IBAction) textFieldDoneEditing:(id)sender;
 - (IBAction) backgroundClicked:(id)sender;
 - (IBAction)changePage;
+- (void)loginWithEmail;
+- (void)loginBySite;
 @end

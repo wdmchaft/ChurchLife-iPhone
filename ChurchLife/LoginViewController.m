@@ -96,63 +96,17 @@
 }
 
 - (IBAction) signIn:(id)sender
-{    
-    if ([(UIButton *)sender tag] == 1) //on first login page
-    {        
-        NSMutableArray *logins = [AcsLink LoginWithEmail:email.text password:password1.text];
-        if ((logins == nil) || ([logins count] == 0))
-        {
-            invalidLogin1.hidden = NO;
-            invalidLogin2.hidden = YES;
-            return;
-        }
-        else //display possible logins
-        {                        
-            UINavigationController *parent = (UINavigationController *)self.parentViewController;
-            UserViewController *users = [[UserViewController alloc] initWithNibName:@"UserViewController" bundle:nil];
-            AcsLogin *credentials = [AcsLogin alloc];
-            credentials.emailAddress = email.text;
-            credentials.password = password1.text;
-            
-            users.users = logins;
-            users.credentials = credentials;
-            users.saveSelection = rememberMe1.on;
-            users.filePath = [self dataFilePath];
-            
-            [parent pushViewController: users animated:YES];
-            [users release];
-            return;
-        }
-    }
-    else if ([(UIButton *)sender tag] == 2) //using alternate login page
-    {        
-        BOOL success = [AcsLink LoginBySite:[sitenumber.text integerValue] userName:username.text password:password2.text];
-        if (success == NO)
-        {
-            invalidLogin2.hidden = NO;
-            invalidLogin1.hidden = YES;
-            return;
-        }
-        else
-        {
-            if (rememberMe2.on)
-            {
-                NSMutableArray *array = [[NSMutableArray alloc] init];
-                [array addObject:username.text];
-                [array addObject:sitenumber.text];
-                [array addObject:password2.text];
-                [array writeToFile:[self dataFilePath] atomically:YES];
-                [array release];
-            }
-            else //delete preferences file
-            {
-                ChurchLifeAppDelegate *appDelegate = (ChurchLifeAppDelegate *)[[UIApplication sharedApplication] delegate];
-                [appDelegate deletePreferences];
-            }
-        }
-    }
+{       
+    HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
+    [self.navigationController.view addSubview:HUD];
+    HUD.delegate = self;
+    HUD.labelText = @"Loading...";
     
-    [self.navigationController dismissModalViewControllerAnimated:true];
+    if ([(UIButton *)sender tag] == 1) //on first login page
+        [HUD showWhileExecuting:@selector(loginWithEmail) onTarget:self withObject:nil animated:YES];
+    
+    else if ([(UIButton *)sender tag] == 2) //using alternate login page        
+        [HUD showWhileExecuting:@selector(loginBySite) onTarget:self withObject:nil animated:YES];
 }
 
 - (IBAction) textFieldDoneEditing:(id)sender
@@ -204,6 +158,66 @@
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
     return [documentsDirectory stringByAppendingPathComponent:dataFile];
+}
+
+- (void)hudWasHidden:(MBProgressHUD *)hud {
+    // Remove HUD from screen when the HUD was hidded
+    [HUD removeFromSuperview];
+    [HUD release];
+	HUD = nil;
+}
+
+- (void)loginWithEmail {
+    NSMutableArray *logins = [AcsLink LoginWithEmail:email.text password:password1.text];
+    if ((logins == nil) || ([logins count] == 0))
+    {
+        invalidLogin1.hidden = NO;
+        invalidLogin2.hidden = YES;
+    }
+    else //display possible logins
+    {                        
+        UINavigationController *parent = (UINavigationController *)self.parentViewController;
+        UserViewController *users = [[UserViewController alloc] initWithNibName:@"UserViewController" bundle:nil];
+        AcsLogin *credentials = [AcsLogin alloc];
+        credentials.emailAddress = email.text;
+        credentials.password = password1.text;
+        
+        users.users = logins;
+        users.credentials = credentials;
+        users.saveSelection = rememberMe1.on;
+        users.filePath = [self dataFilePath];
+        
+        [parent pushViewController: users animated:YES];
+        [users release];
+    }
+}
+
+- (void)loginBySite {
+    BOOL success = [AcsLink LoginBySite:[sitenumber.text integerValue] userName:username.text password:password2.text];
+    if (success == NO)
+    {
+        invalidLogin2.hidden = NO;
+        invalidLogin1.hidden = YES;
+    }
+    else
+    {
+        if (rememberMe2.on)
+        {
+            NSMutableArray *array = [[NSMutableArray alloc] init];
+            [array addObject:username.text];
+            [array addObject:sitenumber.text];
+            [array addObject:password2.text];
+            [array writeToFile:[self dataFilePath] atomically:YES];
+            [array release];
+        }
+        else //delete preferences file
+        {
+            ChurchLifeAppDelegate *appDelegate = (ChurchLifeAppDelegate *)[[UIApplication sharedApplication] delegate];
+            [appDelegate deletePreferences];
+        }
+        
+        [self.navigationController dismissModalViewControllerAnimated:true];
+    }
 }
 
 @end

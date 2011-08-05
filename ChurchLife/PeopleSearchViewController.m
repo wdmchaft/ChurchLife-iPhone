@@ -175,7 +175,7 @@ NSMutableData *responseData;
 - (void) searchTableView {
     // The hud will disable all input on the view (use the highest view possible in the view hierarchy)
     HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
-    HUD.labelText = @"Loading";
+    HUD.labelText = @"Loading...";
     [self.navigationController.view addSubview:HUD];
     
     // Register for HUD callbacks so we can remove it from the window at the right time
@@ -212,7 +212,7 @@ NSMutableData *responseData;
     {
         //Show HUD
         HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
-        HUD.labelText = @"Loading";
+        HUD.labelText = @"Loading...";
         [self.navigationController.view addSubview:HUD];
         HUD.delegate = self;
         [HUD show:YES];
