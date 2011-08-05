@@ -26,5 +26,6 @@
 - (void) searchTableView;
 - (void) doneSearching_Clicked:(id)sender;
 - (void) clearData;
+- (void) showIndividualProfile:(id)sender;
 
 @end

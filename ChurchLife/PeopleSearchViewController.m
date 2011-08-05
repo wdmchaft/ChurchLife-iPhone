@@ -208,25 +208,20 @@ NSMutableData *responseData;
 {  
     AcsIndividual *indv = (AcsIndividual *)[searchResults objectAtIndex:indexPath.row];
     NSString *name = [NSString stringWithFormat:@"%@ %@", indv.firstName, indv.lastName];
+    
+    //Show HUD
+    HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
+    HUD.labelText = @"Loading...";
+    [self.navigationController.view addSubview:HUD];
+    HUD.delegate = self;
+    
     if ([name isEqualToString:@"View More..."])
     {
-        //Show HUD
-        HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
-        HUD.labelText = @"Loading...";
-        [self.navigationController.view addSubview:HUD];
-        HUD.delegate = self;
         [HUD show:YES];
-        
         [AcsLink IndividualSearch:lastSearch firstResult:[searchResults count]-1 maxResults:25 delegate:self];
     }
     else
-    {
-        [AcsLink GetIndividual:indv.indvID];
-        
-        PeopleDetailViewController *peopleDetailViewController = [[PeopleDetailViewController alloc] initWithNibName:@"PeopleDetailViewController" bundle:nil];
-        [self.navigationController pushViewController:peopleDetailViewController animated:YES];
-        [peopleDetailViewController release];
-    }
+        [HUD showWhileExecuting:@selector(showIndividualProfile:) onTarget:self withObject:indv animated:YES];
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
@@ -316,11 +311,22 @@ NSMutableData *responseData;
     [self.tableView reloadData];
 }
 
-- (void)hudWasHidden:(MBProgressHUD *)hud {
+- (void)hudWasHidden:(MBProgressHUD *)hud 
+{
     // Remove HUD from screen when the HUD was hidded
     [HUD removeFromSuperview];
     [HUD release];
 	HUD = nil;
+}
+
+- (void)showIndividualProfile:(id)sender
+{
+    AcsIndividual *indv = (AcsIndividual *)sender;
+    [AcsLink GetIndividual:indv.indvID];
+    
+    PeopleDetailViewController *peopleDetailViewController = [[PeopleDetailViewController alloc] initWithNibName:@"PeopleDetailViewController" bundle:nil];
+    [self.navigationController pushViewController:peopleDetailViewController animated:YES];
+    [peopleDetailViewController release];
 }
 
 @end
