@@ -61,7 +61,6 @@
 		CE888FBD13E1A46A005966C3 /* UserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE888FBB13E1A469005966C3 /* UserViewController.m */; };
 		CE888FBE13E1A46A005966C3 /* UserViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE888FBC13E1A46A005966C3 /* UserViewController.xib */; };
 		CE9E11C713DA0F4300C08319 /* CurrentIdentity.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9E11C613DA0F4300C08319 /* CurrentIdentity.m */; };
-		CEBE8DD513D0BCD200B52044 /* LoadingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEBE8DD413D0BCD200B52044 /* LoadingView.xib */; };
 		CEDB83BB13B5110B00FEC747 /* churchlife.logo.login.png in Resources */ = {isa = PBXBuildFile; fileRef = CEDB83BA13B5110A00FEC747 /* churchlife.logo.login.png */; };
 		CEDB83BD13B5112A00FEC747 /* no-person-photo.png in Resources */ = {isa = PBXBuildFile; fileRef = CEDB83BC13B5112A00FEC747 /* no-person-photo.png */; };
 /* End PBXBuildFile section */
@@ -145,7 +144,6 @@
 		CE888FBC13E1A46A005966C3 /* UserViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserViewController.xib; sourceTree = "<group>"; };
 		CE9E11C513DA0F4300C08319 /* CurrentIdentity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurrentIdentity.h; sourceTree = "<group>"; };
 		CE9E11C613DA0F4300C08319 /* CurrentIdentity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurrentIdentity.m; sourceTree = "<group>"; };
-		CEBE8DD413D0BCD200B52044 /* LoadingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoadingView.xib; sourceTree = "<group>"; };
 		CEDB83BA13B5110A00FEC747 /* churchlife.logo.login.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = churchlife.logo.login.png; sourceTree = "<group>"; };
 		CEDB83BC13B5112A00FEC747 /* no-person-photo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "no-person-photo.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -218,7 +216,6 @@
 				CE19BEE513B1228F00A62939 /* SplitCell.xib */,
 				BA19520113A1986E00AA6F59 /* ChurchLifeAppDelegate.h */,
 				BA19520213A1986E00AA6F59 /* ChurchLifeAppDelegate.m */,
-				CEBE8DD413D0BCD200B52044 /* LoadingView.xib */,
 				BA19520413A1986E00AA6F59 /* MainWindow.xib */,
 				BA19522813A19AFC00AA6F59 /* PeopleSearchViewController.h */,
 				BA19522913A19AFC00AA6F59 /* PeopleSearchViewController.m */,
@@ -419,7 +416,6 @@
 				BA25AC9A13B38ED3002AA61A /* LoginViewController.xib in Resources */,
 				CEDB83BB13B5110B00FEC747 /* churchlife.logo.login.png in Resources */,
 				CEDB83BD13B5112A00FEC747 /* no-person-photo.png in Resources */,
-				CEBE8DD513D0BCD200B52044 /* LoadingView.xib in Resources */,
 				CE7C201513DF4B4400156654 /* LoginView2.xib in Resources */,
 				CE888FBE13E1A46A005966C3 /* UserViewController.xib in Resources */,
 			);
