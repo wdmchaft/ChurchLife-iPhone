@@ -111,8 +111,9 @@
 
 +(void)IndividualSearch: (NSString *)searchText firstResult:(int)first maxResults:(int)max delegate:(NSObject *)delegate{
     CurrentIdentity *identity = [CurrentIdentity sharedIdentity];
+    NSString *search = [searchText stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
     NSString *urlString = [NSString stringWithFormat:@"https://api.accessacs.com/%@/individuals?searchText=%@&firstResult=%d&maxResults=%d",
-                           identity.siteNumber, searchText, first, max];
+                           identity.siteNumber, search, first, max];
     
     NSLog(@"url: %@", urlString);
     
