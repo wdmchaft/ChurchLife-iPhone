@@ -197,7 +197,35 @@ NSMutableData *responseData;
     {
         AcsAddress *a = (AcsAddress *)object;
         cell.name.text = a.addressType;
+        
         cell.contents.text = a.addressLine1;
+        
+        //add address line 2
+        if (![cell.contents.text isEqualToString:@""])
+        {
+            if (![a.addressLine2 isEqualToString:@""])
+                cell.contents.text = [cell.contents.text stringByAppendingFormat:@"\n%@", a.addressLine2];
+        }
+        else
+            cell.contents.text = a.addressLine2;
+        
+        //add city, state, zip
+        NSString *csz = a.city;
+        if (![csz isEqualToString:@""])
+            csz = [csz stringByAppendingFormat:@", %@", a.state];
+        else
+            csz = a.state;
+        
+        if (![csz isEqualToString:@""])
+            csz = [csz stringByAppendingFormat:@" %@", a.zipCode];
+        else
+            csz = a.zipCode;
+        
+        
+        if (![cell.contents.text isEqualToString:@""])
+            cell.contents.text = [cell.contents.text stringByAppendingFormat:@"\n%@", csz];
+        else
+            cell.contents.text = csz;        
     }
     else if ([object isKindOfClass:[AcsIndividual class]])
     {
@@ -218,6 +246,35 @@ NSMutableData *responseData;
     cell.name.text = [cell.name.text lowercaseString];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSMutableArray *data = [activeSections objectAtIndex:indexPath.section];
+    NSObject *object = [data objectAtIndex:indexPath.row];
+    
+    if ([object isKindOfClass:[AcsEmail class]])
+    {
+        //AcsEmail *e = (AcsEmail *)object;
+        return 36.0f;
+    }
+    else if ([object isKindOfClass:[AcsAddress class]])
+    {
+        //AcsAddress *a = (AcsAddress *)object;
+        return 50.0f;
+    }
+    else if ([object isKindOfClass:[AcsIndividual class]])
+    {
+        //AcsIndividual *i = (AcsIndividual *)object;
+        return 36.0f;
+    }
+    else if ([object isKindOfClass:[AcsPhone class]])
+    {
+        //AcsPhone *p = (AcsPhone *)object;
+        return 36.0f;
+    }
+    else
+        return 36.0f;
 }
 
 /*
