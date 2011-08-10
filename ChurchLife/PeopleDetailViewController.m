@@ -17,6 +17,7 @@
 @synthesize indvImage;
 @synthesize indvName;
 @synthesize progress;
+@synthesize activeSections;
 
 NSMutableData *responseData;
 
@@ -25,6 +26,8 @@ NSMutableData *responseData;
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        activeSections = [[NSMutableArray alloc] init];
+        [activeSections retain];
     }
     return self;
 }
@@ -32,6 +35,7 @@ NSMutableData *responseData;
 - (void)dealloc
 {
     [super dealloc];
+    [activeSections release];
 }
 
 - (void)didReceiveMemoryWarning
@@ -64,7 +68,9 @@ NSMutableData *responseData;
     //reset scrollable area
     [tableView layoutIfNeeded];
     UIScrollView *scrollView = (UIScrollView *)self.view;
-    scrollView.contentSize = CGSizeMake(self.view.frame.size.width, [tableView contentSize].height - tableView.frame.origin.y);
+    scrollView.contentSize = CGSizeMake(self.view.frame.size.width, [tableView contentSize].height + tableView.frame.origin.y);
+    
+    tableView.frame = CGRectMake(tableView.frame.origin.x, tableView.frame.origin.y, tableView.contentSize.width, tableView.contentSize.height*2);
 }
 
 - (void)resetLayout
@@ -82,7 +88,7 @@ NSMutableData *responseData;
     //reset scrollable area
     [tableView layoutIfNeeded];
     UIScrollView *scrollView = (UIScrollView *)self.view;
-    scrollView.contentSize = CGSizeMake(self.view.frame.size.width, [tableView contentSize].height - tableView.frame.origin.y);
+    scrollView.contentSize = CGSizeMake(self.view.frame.size.width, [tableView contentSize].height + tableView.frame.origin.y);
 }
 
 - (void)loadIndividualImage
@@ -141,23 +147,28 @@ NSMutableData *responseData;
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
     // Return the number of sections.
-    return 2;
+    //set active sections
+    [activeSections removeAllObjects];
+    
+    if (indv.emails.count > 0)
+        [activeSections addObject:indv.emails];
+    if (indv.addresses.count > 0)
+        [activeSections addObject:indv.addresses];
+    if (indv.familyMembers.count > 0)
+        [activeSections addObject:indv.familyMembers];
+    if (indv.phones.count > 0)
+        [activeSections addObject:indv.phones];
+    
+    NSLog(@"Active sections: %d", [activeSections count]);
+    return [activeSections count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
     // Return the number of rows in the section.
-    if (section == 0)
-    {
-        return 3;
-    }
-    else
-    {
-        return 2;
-    }
+    NSMutableArray *data = [activeSections objectAtIndex:section];   
+    return [data count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -173,16 +184,38 @@ NSMutableData *responseData;
     }
     
     // Configure the cell...
-    if (indexPath.section == 0)
+    NSMutableArray *data = [activeSections objectAtIndex:indexPath.section];
+    NSObject *object = [data objectAtIndex:indexPath.row];
+    
+    if ([object isKindOfClass:[AcsEmail class]])
     {
-        cell.name.text = [NSString stringWithFormat:@"%@ %@", @"Address", [[NSNumber numberWithInt:indexPath.row+1] stringValue]];
-        cell.contents.text = @"123 Sample Rd";
+        AcsEmail *e = (AcsEmail *)object;
+        cell.name.text = e.emailType;
+        cell.contents.text = e.email;
     }
-    else
+    else if ([object isKindOfClass:[AcsAddress class]])
     {
-        cell.name.text = [NSString stringWithFormat:@"%@ %@", @"Phone", [[NSNumber numberWithInt:indexPath.row+1] stringValue]];
-        cell.contents.text = @"(843) 555-5555";
+        AcsAddress *a = (AcsAddress *)object;
+        cell.name.text = a.addressType;
+        cell.contents.text = a.addressLine1;
     }
+    else if ([object isKindOfClass:[AcsIndividual class]])
+    {
+        AcsIndividual *i = (AcsIndividual *)object;
+        if (indexPath.row == 0)
+            cell.name.text = @"Family";
+        else
+            cell.name.text = @"";
+        cell.contents.text = [i.firstName stringByAppendingFormat:@" %@", i.lastName];
+    }
+    else if ([object isKindOfClass:[AcsPhone class]])
+    {
+        AcsPhone *p = (AcsPhone *)object;
+        cell.name.text = p.phoneType;
+        cell.contents.text = p.phoneNumber;
+    }
+    
+    cell.name.text = [cell.name.text lowercaseString];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     return cell;
 }

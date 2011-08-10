@@ -18,6 +18,7 @@
     IBOutlet UIImageView *indvImage;
     IBOutlet UILabel *indvName;
     IBOutlet UIActivityIndicatorView *progress;
+    NSMutableArray *activeSections;
 }
 
 @property (nonatomic, retain) AcsIndividual *indv;
@@ -26,6 +27,7 @@
 @property (nonatomic, retain) IBOutlet UIImageView *indvImage;
 @property (nonatomic, retain) IBOutlet UILabel *indvName;
 @property (nonatomic, retain) IBOutlet UIActivityIndicatorView *progress;
+@property (nonatomic, retain) NSMutableArray *activeSections;
 
 - (void)loadIndividualImage;
 - (void)resetLayout;
