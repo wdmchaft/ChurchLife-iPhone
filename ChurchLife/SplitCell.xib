@@ -51,7 +51,7 @@
 							<object class="IBUIView" id="761812835">
 								<reference key="NSNextResponder" ref="708702154"/>
 								<int key="NSvFlags">276</int>
-								<string key="NSFrame">{{98, 0}, {1, 37}}</string>
+								<string key="NSFrame">{{82, 0}, {1, 37}}</string>
 								<reference key="NSSuperview" ref="708702154"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="413777141"/>
@@ -64,7 +64,7 @@
 							<object class="IBUILabel" id="937973663">
 								<reference key="NSNextResponder" ref="708702154"/>
 								<int key="NSvFlags">276</int>
-								<string key="NSFrame">{{0, 7}, {90, 21}}</string>
+								<string key="NSFrame">{{0, 2}, {76, 30}}</string>
 								<reference key="NSSuperview" ref="708702154"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="761812835"/>
@@ -74,7 +74,7 @@
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<string key="IBUIText">Name</string>
-								<object class="NSFont" key="IBUIFont" id="20259472">
+								<object class="NSFont" key="IBUIFont" id="438248469">
 									<string key="NSName">Helvetica-Bold</string>
 									<double key="NSSize">11</double>
 									<int key="NSfFlags">16</int>
@@ -86,12 +86,14 @@
 								<nil key="IBUIHighlightedColor"/>
 								<int key="IBUIBaselineAdjustment">1</int>
 								<float key="IBUIMinimumFontSize">10</float>
+								<int key="IBUINumberOfLines">2</int>
 								<int key="IBUITextAlignment">2</int>
+								<int key="IBUILineBreakMode">0</int>
 							</object>
 							<object class="IBUILabel" id="413777141">
 								<reference key="NSNextResponder" ref="708702154"/>
-								<int key="NSvFlags">276</int>
-								<string key="NSFrame">{{107, 7}, {193, 21}}</string>
+								<int key="NSvFlags">278</int>
+								<string key="NSFrame">{{89, 7}, {221, 21}}</string>
 								<reference key="NSSuperview" ref="708702154"/>
 								<reference key="NSWindow"/>
 								<bool key="IBUIOpaque">NO</bool>
@@ -100,7 +102,7 @@
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<string key="IBUIText">Contents</string>
-								<reference key="IBUIFont" ref="20259472"/>
+								<reference key="IBUIFont" ref="438248469"/>
 								<object class="NSColor" key="IBUITextColor">
 									<int key="NSColorSpace">1</int>
 									<bytes key="NSRGB">MCAwIDAAA</bytes>
