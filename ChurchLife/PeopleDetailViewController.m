@@ -11,8 +11,14 @@
 
 @implementation PeopleDetailViewController
 
+@synthesize indv;
 @synthesize splitCell;
 @synthesize tableView;
+@synthesize indvImage;
+@synthesize indvName;
+@synthesize progress;
+
+NSMutableData *responseData;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -41,16 +47,50 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
- 
-    self.title = @"James Aaron";
-    UIScrollView *scrollView = (UIScrollView *)self.view;
-    scrollView.contentSize = CGSizeMake(self.view.frame.size.width, 600.0f);
     
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
+    responseData = [[NSMutableData data] retain];
  
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    self.title = @"People";
+    indvName.text = [indv.firstName stringByAppendingFormat:@" %@", indv.lastName]; 
+    NSLog(@"picture url: %@", indv.pictureURL);
+    
+    if (![indv.pictureURL isEqualToString:@""])
+    {
+        [progress startAnimating];
+        indvImage.hidden = YES;
+        [self performSelectorOnMainThread:@selector(loadIndividualImage) withObject:nil waitUntilDone: NO];
+    }
+    
+    //reset scrollable area
+    [tableView layoutIfNeeded];
+    UIScrollView *scrollView = (UIScrollView *)self.view;
+    scrollView.contentSize = CGSizeMake(self.view.frame.size.width, [tableView contentSize].height - tableView.frame.origin.y);
+}
+
+- (void)resetLayout
+{
+    //set frame for name label
+    CGRect frameRect = indvName.frame;
+    frameRect.origin.x = indvImage.frame.origin.x + indvImage.frame.size.width + 10.0f;
+    indvName.frame = frameRect;
+    
+    //set frame for tableview
+    frameRect = tableView.frame;
+    frameRect.origin.y = indvImage.frame.origin.y + indvImage.frame.size.height + 10.0f;
+    tableView.frame = frameRect;
+    
+    //reset scrollable area
+    [tableView layoutIfNeeded];
+    UIScrollView *scrollView = (UIScrollView *)self.view;
+    scrollView.contentSize = CGSizeMake(self.view.frame.size.width, [tableView contentSize].height - tableView.frame.origin.y);
+}
+
+- (void)loadIndividualImage
+{
+    NSLog(@"Loading picture...");
+    NSURL *imageURL = [NSURL URLWithString:indv.pictureURL];
+    NSURLRequest *myRequest = [NSURLRequest requestWithURL:imageURL cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10.0f];
+    [[NSURLConnection alloc] initWithRequest:myRequest delegate:self];
 }
 
 - (void)viewDidUnload
@@ -58,12 +98,22 @@
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
+    [responseData release];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     tableView.backgroundColor = [UIColor clearColor];
+    
+    if (![indv.pictureURL isEqualToString:@""])
+    {
+        CGRect frameRect = indvImage.frame;
+        frameRect.size.width = 125.0f;
+        frameRect.size.height = 100.0f;
+        indvImage.frame = frameRect;
+        [self resetLayout];
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -188,6 +238,48 @@
      [self.navigationController pushViewController:detailViewController animated:YES];
      [detailViewController release];
      */
+}
+
+- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
+	[responseData setLength:0];
+    NSLog(@"received response");
+}
+
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
+	[responseData appendData:data];
+    NSLog(@"received data");
+}
+
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
+    NSLog(@"error");
+    
+    CGRect frameRect = indvImage.frame;
+    frameRect.size.width = 60.0f;
+    frameRect.size.height = 60.0f;
+    indvImage.frame = frameRect;
+    
+    [self resetLayout];
+    
+    indvImage.hidden = NO;  
+    [progress stopAnimating];
+	//label.text = [NSString stringWithFormat:@"Connection failed: %@", [error description]];
+}
+
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
+	[connection release];
+    indvImage.hidden = NO;
+    [progress stopAnimating];
+    NSLog(@"finished loading image");
+    UIImage *image = [UIImage imageWithData:[NSData dataWithData:responseData]];
+    
+    CGRect frameRect = indvImage.frame;
+    frameRect.size.width = 125.0f;
+    frameRect.size.height = 100.0f;
+    indvImage.frame = frameRect;
+    
+    [self resetLayout];
+    
+    [indvImage setImage:image];
 }
 
 @end

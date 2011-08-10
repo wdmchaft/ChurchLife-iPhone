@@ -45,6 +45,12 @@ NSMutableData *responseData;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.navigationItem.backBarButtonItem =
+    [[[UIBarButtonItem alloc] initWithTitle:@"Back"
+                                      style:UIBarButtonItemStyleBordered
+                                     target:nil
+                                     action:nil] autorelease];
 
     //Initialize the array.
     searchResults = [[NSMutableArray alloc] init];
@@ -324,9 +330,12 @@ NSMutableData *responseData;
 - (void)showIndividualProfile:(id)sender
 {
     AcsIndividual *indv = (AcsIndividual *)sender;
-    [AcsLink GetIndividual:indv.indvID];
+    indv = [AcsLink GetIndividual:indv.indvID];
     
     PeopleDetailViewController *peopleDetailViewController = [[PeopleDetailViewController alloc] initWithNibName:@"PeopleDetailViewController" bundle:nil];
+    
+    peopleDetailViewController.indv = indv;
+    
     [self.navigationController pushViewController:peopleDetailViewController animated:YES];
     [peopleDetailViewController release];
 }
