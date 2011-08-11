@@ -186,7 +186,7 @@
         
         //load addresses        
         NSArray *addresses = [data objectForKey:@"Addresses"];
-        indv.addresses = [[NSMutableArray alloc] initWithCapacity:[addresses count]];
+        indv.addresses = [[NSMutableArray alloc] init];
         for (int i = 0; i < [addresses count]; i++)
         {
             NSDictionary *address = (NSDictionary *)[addresses objectAtIndex:i];
@@ -204,6 +204,11 @@
             addr.sharedFlag = [address valueForKey:@"SharedFlag"];
             addr.state = [address valueForKey:@"State"];
             addr.zipCode = [address valueForKey:@"Zipcode"];
+            
+            //don't want to see empty addresses
+            if (([addr.addressLine1 isEqualToString:@""]) && ([addr.addressLine2 isEqualToString:@""]) &&
+                ([addr.city isEqualToString:@""]) && ([addr.state isEqualToString:@""]) && ([addr.zipCode isEqualToString:@""]))
+                continue;
             
             [indv.addresses addObject:addr];
         }

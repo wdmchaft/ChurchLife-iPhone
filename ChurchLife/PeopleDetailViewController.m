@@ -69,8 +69,6 @@ NSMutableData *responseData;
     }
     
     [self resetLayout];    
-    
-    tableView.frame = CGRectMake(tableView.frame.origin.x, tableView.frame.origin.y, tableView.contentSize.width, tableView.contentSize.height*2);
 }
 
 - (void)resetLayout
@@ -95,6 +93,7 @@ NSMutableData *responseData;
     //set frame for tableview
     frameRect = tableView.frame;
     frameRect.origin.y = tableAnchor;
+    frameRect.size.height = tableView.bounds.size.height*2;
     tableView.frame = frameRect;
     
     //reset scrollable area
