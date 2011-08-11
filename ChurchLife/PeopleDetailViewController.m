@@ -20,6 +20,7 @@
 @synthesize activeSections;
 
 NSMutableData *responseData;
+BOOL attemptedImageLoad;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -51,6 +52,7 @@ NSMutableData *responseData;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    attemptedImageLoad = NO;
     
     responseData = [[NSMutableData data] retain];
  
@@ -123,7 +125,7 @@ NSMutableData *responseData;
     [super viewWillAppear:animated];
     tableView.backgroundColor = [UIColor clearColor];
     
-    if (![indv.pictureURL isEqualToString:@""] && indvImage.frame.size.width == 60.0f)
+    if (![indv.pictureURL isEqualToString:@""] && (!attemptedImageLoad))
     {
         CGRect frameRect = indvImage.frame;
         frameRect.size.width = 155.0f;
@@ -387,7 +389,7 @@ NSMutableData *responseData;
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
     NSLog(@"error");
-    
+    attemptedImageLoad = YES;
     CGRect frameRect = indvImage.frame;
     frameRect.size.width = 60.0f;
     frameRect.size.height = 60.0f;
@@ -402,6 +404,7 @@ NSMutableData *responseData;
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
 	[connection release];
+    attemptedImageLoad = YES;
     indvImage.hidden = NO;
     [progress stopAnimating];
     
