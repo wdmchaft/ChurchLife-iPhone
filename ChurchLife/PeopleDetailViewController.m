@@ -112,11 +112,11 @@ NSMutableData *responseData;
     [super viewWillAppear:animated];
     tableView.backgroundColor = [UIColor clearColor];
     
-    if (![indv.pictureURL isEqualToString:@""])
+    if (![indv.pictureURL isEqualToString:@""] && indvImage.frame.size.width == 60.0f)
     {
         CGRect frameRect = indvImage.frame;
-        frameRect.size.width = 125.0f;
-        frameRect.size.height = 100.0f;
+        frameRect.size.width = 155.0f;
+        frameRect.size.height = 130.0f;
         indvImage.frame = frameRect;
         [self resetLayout];
     }
@@ -234,13 +234,30 @@ NSMutableData *responseData;
             cell.name.text = @"Family";
         else
             cell.name.text = @"";
-        cell.contents.text = [i.firstName stringByAppendingFormat:@" %@", i.lastName];
+        
+        NSString *name = i.firstName;
+        if (![i.goesByName isEqualToString:@""])
+            name = [name stringByAppendingFormat:@" (%@)", i.goesByName];
+        
+        if (![i.lastName isEqualToString:@""] && ![i.lastName isEqualToString:indv.lastName])
+            name = [name stringByAppendingFormat:@" %@", i.lastName];
+        
+        cell.contents.text = name;
     }
     else if ([object isKindOfClass:[AcsPhone class]])
     {
         AcsPhone *p = (AcsPhone *)object;
+        NSString *phoneNumber;
+        if (![p.areaCode isEqualToString:@""])
+            phoneNumber = [NSString stringWithFormat:@"(%@) %@", p.areaCode, p.phoneNumber];
+        else
+            phoneNumber = p.phoneNumber;
+        
+        if (![p.extension isEqualToString:@""])
+            phoneNumber = [phoneNumber stringByAppendingFormat:@" x%@", p.extension];
+        
         cell.name.text = p.phoneType;
-        cell.contents.text = p.phoneNumber;
+        cell.contents.text = phoneNumber;
     }
     
     cell.name.text = [cell.name.text lowercaseString];
