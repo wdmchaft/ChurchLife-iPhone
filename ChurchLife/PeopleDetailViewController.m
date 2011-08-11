@@ -68,24 +68,33 @@ NSMutableData *responseData;
         [self performSelectorOnMainThread:@selector(loadIndividualImage) withObject:nil waitUntilDone: NO];
     }
     
-    //reset scrollable area
-    [tableView layoutIfNeeded];
-    UIScrollView *scrollView = (UIScrollView *)self.view;
-    scrollView.contentSize = CGSizeMake(self.view.frame.size.width, [tableView contentSize].height + tableView.frame.origin.y);
+    [self resetLayout];    
     
     tableView.frame = CGRectMake(tableView.frame.origin.x, tableView.frame.origin.y, tableView.contentSize.width, tableView.contentSize.height*2);
 }
 
 - (void)resetLayout
 {
+    CGFloat tableAnchor = indvImage.frame.origin.y + indvImage.frame.size.height + 2.0f;
+    
     //set frame for name label
     CGRect frameRect = indvName.frame;
+    frameRect.origin.y = 27.0;
     frameRect.origin.x = indvImage.frame.origin.x + indvImage.frame.size.width + 10.0f;
     indvName.frame = frameRect;
     
+    CGSize expectedLabelSize = [indvName.text sizeWithFont:indvName.font];
+    if ((indvName.frame.origin.x + expectedLabelSize.width) > (self.view.frame.size.width))
+    {
+        frameRect.origin.x = indvImage.frame.origin.x;
+        frameRect.origin.y = indvImage.frame.origin.y + indvImage.frame.size.height + 5.0f;
+        indvName.frame = frameRect;
+        tableAnchor = indvName.frame.origin.y + indvName.frame.size.height + 2.0f;
+    }
+    
     //set frame for tableview
     frameRect = tableView.frame;
-    frameRect.origin.y = indvImage.frame.origin.y + indvImage.frame.size.height + 5.0f;
+    frameRect.origin.y = tableAnchor;
     tableView.frame = frameRect;
     
     //reset scrollable area
