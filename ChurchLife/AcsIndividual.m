@@ -27,4 +27,54 @@
 @synthesize phones;
 @synthesize familyMembers;
 
+- (NSString *)getFullName
+{
+    NSString *name = [[NSString alloc] init];
+    
+    if (![title isEqualToString:@""])
+        name = title;
+    
+    if (![firstName isEqualToString:@""])
+    {
+        if (![name isEqualToString:@""])
+            name = [name stringByAppendingFormat:@" %@", firstName];
+        else
+            name = firstName;
+    }
+        
+    if (![goesByName isEqualToString:@""])
+    {
+        if (![name isEqualToString:@""])
+            name = [name stringByAppendingFormat:@" (%@)", goesByName];
+        else
+            name = goesByName;
+    }
+    
+    if (![middleName isEqualToString:@""])
+    {
+        if (![name isEqualToString:@""])
+            name = [name stringByAppendingFormat:@" %@", middleName];
+        else
+            name = middleName;
+    }
+    
+    if (![lastName isEqualToString:@""])
+    {
+        if (![name isEqualToString:@""])
+            name = [name stringByAppendingFormat:@" %@", lastName];
+        else
+            name = lastName;
+    }
+    
+    if (![suffix isEqualToString:@""])
+    {
+        if (![name isEqualToString:@""])
+            name = [name stringByAppendingFormat:@", %@", suffix];
+        else
+            name = suffix;
+    }
+    
+    return name;
+}
+
 @end

@@ -55,7 +55,10 @@ NSMutableData *responseData;
     responseData = [[NSMutableData data] retain];
  
     self.title = @"People";
-    indvName.text = [indv.firstName stringByAppendingFormat:@" %@", indv.lastName]; 
+    
+    indvName.text = [indv getFullName];
+    NSLog(@"full name: %@", indvName.text);
+    
     NSLog(@"picture url: %@", indv.pictureURL);
     
     if (![indv.pictureURL isEqualToString:@""])
@@ -278,7 +281,7 @@ NSMutableData *responseData;
     else if ([object isKindOfClass:[AcsAddress class]])
     {
         //AcsAddress *a = (AcsAddress *)object;
-        return 50.0f;
+        return 45.0f;
     }
     else if ([object isKindOfClass:[AcsIndividual class]])
     {
@@ -350,6 +353,23 @@ NSMutableData *responseData;
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
 	[responseData setLength:0];
     NSLog(@"received response");
+    if ([response respondsToSelector:@selector(statusCode)])
+    {
+        int statusCode = [((NSHTTPURLResponse *)response) statusCode];
+        if (statusCode >= 400)
+        {
+            [connection cancel];  // stop connecting; no more delegate messages
+            NSDictionary *errorInfo
+            = [NSDictionary dictionaryWithObject:[NSString stringWithFormat:
+                                                  NSLocalizedString(@"Server returned status code %d",@""),
+                                                  statusCode]
+                                          forKey:NSLocalizedDescriptionKey];
+            NSError *statusError = [NSError errorWithDomain:@"Error"
+                                 code:statusCode
+                                 userInfo:errorInfo];
+            [self connection:connection didFailWithError:statusError];
+        }
+    }
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {

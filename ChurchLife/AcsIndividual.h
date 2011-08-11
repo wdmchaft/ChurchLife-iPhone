@@ -43,4 +43,6 @@
 @property (nonatomic, retain) NSMutableArray *phones;
 @property (nonatomic, retain) NSMutableArray *familyMembers;
 
+- (NSString *)getFullName;
+
 @end
