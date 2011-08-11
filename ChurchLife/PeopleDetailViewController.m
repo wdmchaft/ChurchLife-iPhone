@@ -82,7 +82,7 @@ NSMutableData *responseData;
     
     //set frame for tableview
     frameRect = tableView.frame;
-    frameRect.origin.y = indvImage.frame.origin.y + indvImage.frame.size.height + 10.0f;
+    frameRect.origin.y = indvImage.frame.origin.y + indvImage.frame.size.height + 5.0f;
     tableView.frame = frameRect;
     
     //reset scrollable area
@@ -359,13 +359,34 @@ NSMutableData *responseData;
 	[connection release];
     indvImage.hidden = NO;
     [progress stopAnimating];
-    NSLog(@"finished loading image");
+    
     UIImage *image = [UIImage imageWithData:[NSData dataWithData:responseData]];
     
     CGRect frameRect = indvImage.frame;
-    frameRect.size.width = 125.0f;
-    frameRect.size.height = 100.0f;
+    frameRect.size.width = 155.0f;
+    frameRect.size.height = 130.0f;
     indvImage.frame = frameRect;
+    
+    //set imageview to fit scaled image so corners can be rounded
+    CGFloat w = image.size.width;
+    CGFloat h = image.size.height;
+    BOOL wideImage = (w >= h);
+    if (wideImage)
+    {
+        CGFloat ratio = frameRect.size.width / w;
+        frameRect.size.height = ratio * h;
+        indvImage.frame = frameRect;
+    }
+    else
+    {
+        CGFloat ratio = frameRect.size.height / h;
+        frameRect.size.width = ratio * w;
+        indvImage.frame = frameRect;
+    }
+    
+    //round image corners
+    indvImage.layer.cornerRadius = 9.0;
+    indvImage.layer.masksToBounds = YES;
     
     [self resetLayout];
     
