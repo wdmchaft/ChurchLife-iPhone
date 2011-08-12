@@ -55,8 +55,6 @@ BOOL attemptedImageLoad;
     attemptedImageLoad = NO;
     
     responseData = [[NSMutableData data] retain];
- 
-    self.title = @"People";
     
     indvName.text = [indv getFullName];
     NSLog(@"full name: %@", indvName.text);
@@ -123,6 +121,7 @@ BOOL attemptedImageLoad;
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    self.title = @"People";
     tableView.backgroundColor = [UIColor clearColor];
     
     if (![indv.pictureURL isEqualToString:@""] && (!attemptedImageLoad))
@@ -358,6 +357,73 @@ BOOL attemptedImageLoad;
      [self.navigationController pushViewController:detailViewController animated:YES];
      [detailViewController release];
      */
+    NSMutableArray *data = [activeSections objectAtIndex:indexPath.section];
+    NSObject *object = [data objectAtIndex:indexPath.row];
+    
+    if ([object isKindOfClass:[AcsEmail class]])
+    {
+        //AcsEmail *e = (AcsEmail *)object;
+    }
+    else if ([object isKindOfClass:[AcsAddress class]])
+    {
+        //AcsAddress *a = (AcsAddress *)object;
+    }
+    else if ([object isKindOfClass:[AcsIndividual class]])
+    {
+        //Show HUD
+        HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
+        HUD.labelText = @"Loading...";
+        [self.navigationController.view addSubview:HUD];
+        HUD.delegate = self;
+        AcsIndividual *i = (AcsIndividual *)object;
+        [HUD showWhileExecuting:@selector(showIndividualProfile:) onTarget:self withObject:i animated:YES];
+    }
+    else if ([object isKindOfClass:[AcsPhone class]])
+    {
+        //AcsPhone *p = (AcsPhone *)object;
+    };
+}
+
+- (void)showIndividualProfile:(id)sender
+{
+    AcsIndividual *individual = (AcsIndividual *)sender;
+    individual = [AcsLink GetIndividual:individual.indvID];
+    
+    UINavigationController *navController = self.navigationController;
+    [navController popViewControllerAnimated:NO];
+    
+    PeopleDetailViewController *peopleDetailViewController = [[PeopleDetailViewController alloc] initWithNibName:@"PeopleDetailViewController" bundle:nil];
+    
+    peopleDetailViewController.indv = individual;
+    
+    [UIView beginAnimations:@"View Flip" context:nil]; 
+    [UIView setAnimationDuration:0.70]; 
+    [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut]; 
+    [UIView setAnimationTransition: UIViewAnimationTransitionCurlUp forView:navController.view cache:NO]; 
+    [navController pushViewController:peopleDetailViewController animated:YES]; 
+    [UIView commitAnimations];
+    
+    //[navController pushViewController:peopleDetailViewController animated:YES];
+    [peopleDetailViewController release];
+}
+
+- (void)hudWasHidden:(MBProgressHUD *)hud 
+{
+    [HUD removeFromSuperview];
+    [HUD release];
+	HUD = nil;
+}
+
+-(NSIndexPath*)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    SplitCell* cell = (SplitCell *)[tableView cellForRowAtIndexPath:indexPath];
+    cell.contents.textColor = [UIColor whiteColor];
+    return indexPath;
+}
+
+-(NSIndexPath*)tableView:(UITableView *)tableView willDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
+    SplitCell* cell = (SplitCell *)[tableView cellForRowAtIndexPath:indexPath];
+    cell.contents.textColor = [UIColor blackColor];
+    return indexPath;
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {

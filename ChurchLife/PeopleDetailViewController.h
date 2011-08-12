@@ -10,8 +10,9 @@
 #import <QuartzCore/QuartzCore.h>
 #import "SplitCell.h"
 #import "AcsIndividual.h"
+#import "MBProgressHUD.h"
 
-@interface PeopleDetailViewController : UIViewController {
+@interface PeopleDetailViewController : UIViewController <MBProgressHUDDelegate> {
     AcsIndividual *indv;
     SplitCell *splitCell;
     IBOutlet UITableView *tableView;
@@ -19,6 +20,7 @@
     IBOutlet UILabel *indvName;
     IBOutlet UIActivityIndicatorView *progress;
     NSMutableArray *activeSections;
+    MBProgressHUD *HUD;
 }
 
 @property (nonatomic, retain) AcsIndividual *indv;
@@ -31,5 +33,6 @@
 
 - (void)loadIndividualImage;
 - (void)resetLayout;
+- (void)showIndividualProfile:(id)sender;
 
 @end

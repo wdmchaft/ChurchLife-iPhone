@@ -74,7 +74,7 @@
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<string key="IBUIText">Name</string>
-								<object class="NSFont" key="IBUIFont" id="438248469">
+								<object class="NSFont" key="IBUIFont" id="996326373">
 									<string key="NSName">Helvetica-Bold</string>
 									<double key="NSSize">11</double>
 									<int key="NSfFlags">16</int>
@@ -102,7 +102,7 @@
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<string key="IBUIText">Contents</string>
-								<reference key="IBUIFont" ref="438248469"/>
+								<reference key="IBUIFont" ref="996326373"/>
 								<object class="NSColor" key="IBUITextColor">
 									<int key="NSColorSpace">1</int>
 									<bytes key="NSRGB">MCAwIDAAA</bytes>
@@ -138,7 +138,6 @@
 				</object>
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 				<int key="IBUISeparatorStyle">1</int>
-				<int key="IBUISelectionStyle">0</int>
 				<reference key="IBUIContentView" ref="708702154"/>
 				<string key="IBUIReuseIdentifier">SplitCell</string>
 			</object>
