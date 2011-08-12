@@ -182,21 +182,52 @@
         invalidLogin1.hidden = NO;
         invalidLogin2.hidden = YES;
     }
-    else //display possible logins
+    else 
     {                        
-        UINavigationController *parent = (UINavigationController *)self.parentViewController;
-        UserViewController *users = [[UserViewController alloc] initWithNibName:@"UserViewController" bundle:nil];
-        AcsLogin *credentials = [AcsLogin alloc];
-        credentials.emailAddress = email.text;
-        credentials.password = password1.text;
-        
-        users.users = logins;
-        users.credentials = credentials;
-        users.saveSelection = rememberMe1.on;
-        users.filePath = [self dataFilePath];
-        
-        [parent pushViewController: users animated:YES];
-        [users release];
+        if ([logins count] > 1) //display possible logins
+        {
+            UINavigationController *parent = (UINavigationController *)self.parentViewController;
+            UserViewController *users = [[UserViewController alloc] initWithNibName:@"UserViewController" bundle:nil];
+            AcsLogin *credentials = [AcsLogin alloc];
+            credentials.emailAddress = email.text;
+            credentials.password = password1.text;
+            
+            users.users = logins;
+            users.credentials = credentials;
+            users.saveSelection = rememberMe1.on;
+            users.filePath = [self dataFilePath];
+            
+            [parent pushViewController: users animated:YES];
+            [users release];
+        }
+        else
+        {
+            CurrentIdentity *identity = [CurrentIdentity sharedIdentity];
+            AcsLogin *login = (AcsLogin *)[logins objectAtIndex:0];
+            identity.emailAddress = login.emailAddress;
+            identity.siteName = login.siteName;
+            identity.siteNumber = login.siteNumber;
+            identity.userName = login.userName;
+            identity.password = password1.text;
+            
+            if (rememberMe1.on)
+            {
+                NSMutableArray *array = [[NSMutableArray alloc] init];
+                [array addObject:identity.userName];
+                [array addObject:identity.siteNumber];
+                [array addObject:identity.password];
+                [array writeToFile:[self dataFilePath] atomically:YES];
+                [array release];
+            }
+            else //delete preferences file
+            {
+                ChurchLifeAppDelegate *appDelegate = (ChurchLifeAppDelegate *)[[UIApplication sharedApplication] delegate];
+                [appDelegate deletePreferences];
+            }
+            
+            //dismiss modal login views
+            [self.navigationController dismissModalViewControllerAnimated:YES];
+        }
     }
 }
 
