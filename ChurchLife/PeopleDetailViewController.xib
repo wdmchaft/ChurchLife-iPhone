@@ -51,7 +51,7 @@
 						<string key="NSFrame">{{13, 15}, {60, 60}}</string>
 						<reference key="NSSuperview" ref="455899823"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="387027924"/>
+						<reference key="NSNextKeyView" ref="551809868"/>
 						<int key="IBUIContentMode">1</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -111,7 +111,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 						<float key="IBUISectionHeaderHeight">10</float>
 						<float key="IBUISectionFooterHeight">10</float>
 					</object>
-					<object class="IBUILabel" id="638540245">
+					<object class="IBUILabel" id="141384051">
 						<reference key="NSNextResponder" ref="455899823"/>
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{81, 33}, {263, 21}}</string>
@@ -137,13 +137,13 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 						<int key="IBUIBaselineAdjustment">1</int>
 						<float key="IBUIMinimumFontSize">10</float>
 					</object>
-					<object class="IBUIActivityIndicatorView" id="387027924">
+					<object class="IBUIActivityIndicatorView" id="551809868">
 						<reference key="NSNextResponder" ref="455899823"/>
 						<int key="NSvFlags">-2147483355</int>
 						<string key="NSFrame">{{66, 34}, {20, 20}}</string>
 						<reference key="NSSuperview" ref="455899823"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="638540245"/>
+						<reference key="NSNextKeyView" ref="141384051"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<int key="IBUIStyle">2</int>
@@ -186,14 +186,6 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">tableView</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="503296325"/>
-					</object>
-					<int key="connectionID">17</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">indvImage</string>
 						<reference key="source" ref="372490531"/>
 						<reference key="destination" ref="960102078"/>
@@ -204,7 +196,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">indvName</string>
 						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="638540245"/>
+						<reference key="destination" ref="141384051"/>
 					</object>
 					<int key="connectionID">20</int>
 				</object>
@@ -212,9 +204,17 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">progress</string>
 						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="387027924"/>
+						<reference key="destination" ref="551809868"/>
 					</object>
 					<int key="connectionID">22</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">tv</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="503296325"/>
+					</object>
+					<int key="connectionID">23</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -243,8 +243,8 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="960102078"/>
-							<reference ref="638540245"/>
-							<reference ref="387027924"/>
+							<reference ref="141384051"/>
+							<reference ref="551809868"/>
 							<reference ref="503296325"/>
 						</object>
 						<reference key="parent" ref="0"/>
@@ -261,12 +261,12 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">18</int>
-						<reference key="object" ref="638540245"/>
+						<reference key="object" ref="141384051"/>
 						<reference key="parent" ref="455899823"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">21</int>
-						<reference key="object" ref="387027924"/>
+						<reference key="object" ref="551809868"/>
 						<reference key="parent" ref="455899823"/>
 					</object>
 				</object>
@@ -308,7 +308,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">22</int>
+			<int key="maxID">23</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -324,7 +324,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 							<string>indvName</string>
 							<string>progress</string>
 							<string>splitCell</string>
-							<string>tableView</string>
+							<string>tv</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -343,7 +343,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 							<string>indvName</string>
 							<string>progress</string>
 							<string>splitCell</string>
-							<string>tableView</string>
+							<string>tv</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -364,7 +364,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 								<string key="candidateClassName">SplitCell</string>
 							</object>
 							<object class="IBToOneOutletInfo">
-								<string key="name">tableView</string>
+								<string key="name">tv</string>
 								<string key="candidateClassName">UITableView</string>
 							</object>
 						</object>

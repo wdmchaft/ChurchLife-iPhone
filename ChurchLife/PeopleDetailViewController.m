@@ -13,7 +13,7 @@
 
 @synthesize indv;
 @synthesize splitCell;
-@synthesize tableView;
+@synthesize tv;
 @synthesize indvImage;
 @synthesize indvName;
 @synthesize progress;
@@ -91,15 +91,15 @@ BOOL attemptedImageLoad;
     }
     
     //set frame for tableview
-    frameRect = tableView.frame;
+    frameRect = tv.frame;
     frameRect.origin.y = tableAnchor;
-    frameRect.size.height = tableView.bounds.size.height*2;
-    tableView.frame = frameRect;
+    frameRect.size.height = tv.bounds.size.height*2;
+    tv.frame = frameRect;
     
     //reset scrollable area
-    [tableView layoutIfNeeded];
+    [tv layoutIfNeeded];
     UIScrollView *scrollView = (UIScrollView *)self.view;
-    scrollView.contentSize = CGSizeMake(self.view.frame.size.width, [tableView contentSize].height + tableView.frame.origin.y);
+    scrollView.contentSize = CGSizeMake(self.view.frame.size.width, [tv contentSize].height + tv.frame.origin.y);
 }
 
 - (void)loadIndividualImage
@@ -122,7 +122,7 @@ BOOL attemptedImageLoad;
 {
     [super viewWillAppear:animated];
     self.title = @"People";
-    tableView.backgroundColor = [UIColor clearColor];
+    tv.backgroundColor = [UIColor clearColor];
     
     if (![indv.pictureURL isEqualToString:@""] && (!attemptedImageLoad))
     {
@@ -380,7 +380,31 @@ BOOL attemptedImageLoad;
     }
     else if ([object isKindOfClass:[AcsPhone class]])
     {
-        //AcsPhone *p = (AcsPhone *)object;
+        AcsPhone *p = (AcsPhone *)object;
+        
+        NSString *number;
+        if (![p.areaCode isEqualToString:@""])
+            number = [NSString stringWithFormat:@"%@-%@", p.areaCode, p.phoneNumber];
+        else
+            number = p.phoneNumber;
+        
+        number = [NSString stringWithFormat:@"tel:%@", number];
+        NSLog(@"number: %@", number);
+        
+        UIDevice *device = [UIDevice currentDevice];
+        if ([[device model] isEqualToString:@"iPhone"]) 
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:number]];
+        else 
+        {
+            UIAlertView *Notpermitted=[[UIAlertView alloc] initWithTitle:@"Alert" message:@"Your device doesn't support this feature." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            [Notpermitted show];
+            [Notpermitted release];
+            
+            [tableView deselectRowAtIndexPath:indexPath animated:NO];
+            //delegate event to change color not getting called, so doing it here
+            SplitCell* cell = (SplitCell *)[tableView cellForRowAtIndexPath:indexPath];
+            cell.contents.textColor = [UIColor blackColor];
+        }
     };
 }
 
@@ -403,7 +427,6 @@ BOOL attemptedImageLoad;
     [navController pushViewController:peopleDetailViewController animated:YES]; 
     [UIView commitAnimations];
     
-    //[navController pushViewController:peopleDetailViewController animated:YES];
     [peopleDetailViewController release];
 }
 
