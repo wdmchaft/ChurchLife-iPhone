@@ -23,11 +23,25 @@
     return self;
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated
-{
-    [super setSelected:selected animated:animated];
+- (void)updateCellDisplay {
+    if (self.selected || self.highlighted) {
+        self.contents.textColor = [UIColor whiteColor];
+        //self.colorLabel.textColor = [UIColor lightGrayColor];
+    }
+    else {
+        self.contents.textColor = [UIColor blackColor];
+        //self.colorLabel.textColor = [UIColor blackColor];
+    }
+}
 
-    // Configure the view for the selected state
+- (void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated {
+    [super setHighlighted:highlighted animated:animated];
+    [self updateCellDisplay];
+}
+
+- (void) setSelected:(BOOL)selected animated:(BOOL)animated {
+    [super setSelected:selected animated:animated];
+    [self updateCellDisplay];
 }
 
 - (void)dealloc

@@ -349,20 +349,16 @@ BOOL attemptedImageLoad;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     [detailViewController release];
-     */
     NSMutableArray *data = [activeSections objectAtIndex:indexPath.section];
     NSObject *object = [data objectAtIndex:indexPath.row];
     
     if ([object isKindOfClass:[AcsEmail class]])
     {
-        //AcsEmail *e = (AcsEmail *)object;
+        AcsEmail *e = (AcsEmail *)object;
+        NSString *url = [NSString stringWithFormat:@"mailto:%@", e.email];
+        [[UIApplication sharedApplication] openURL: [NSURL URLWithString: url]];
+        
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];
     }
     else if ([object isKindOfClass:[AcsAddress class]])
     {
@@ -399,12 +395,9 @@ BOOL attemptedImageLoad;
             UIAlertView *Notpermitted=[[UIAlertView alloc] initWithTitle:@"Alert" message:@"Your device doesn't support this feature." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
             [Notpermitted show];
             [Notpermitted release];
-            
-            [tableView deselectRowAtIndexPath:indexPath animated:NO];
-            //delegate event to change color not getting called, so doing it here
-            SplitCell* cell = (SplitCell *)[tableView cellForRowAtIndexPath:indexPath];
-            cell.contents.textColor = [UIColor blackColor];
         }
+        
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];
     };
 }
 
@@ -435,18 +428,6 @@ BOOL attemptedImageLoad;
     [HUD removeFromSuperview];
     [HUD release];
 	HUD = nil;
-}
-
--(NSIndexPath*)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    SplitCell* cell = (SplitCell *)[tableView cellForRowAtIndexPath:indexPath];
-    cell.contents.textColor = [UIColor whiteColor];
-    return indexPath;
-}
-
--(NSIndexPath*)tableView:(UITableView *)tableView willDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
-    SplitCell* cell = (SplitCell *)[tableView cellForRowAtIndexPath:indexPath];
-    cell.contents.textColor = [UIColor blackColor];
-    return indexPath;
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
