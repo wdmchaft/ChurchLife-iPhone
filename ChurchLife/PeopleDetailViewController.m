@@ -28,7 +28,6 @@ BOOL attemptedImageLoad;
     if (self) {
         // Custom initialization
         activeSections = [[NSMutableArray alloc] init];
-        [activeSections retain];
     }
     return self;
 }
@@ -37,6 +36,7 @@ BOOL attemptedImageLoad;
 {
     [super dealloc];
     [activeSections release];
+    [indv release];
 }
 
 - (void)didReceiveMemoryWarning
@@ -55,12 +55,7 @@ BOOL attemptedImageLoad;
     attemptedImageLoad = NO;
     
     responseData = [[NSMutableData data] retain];
-    
-    indvName.text = [indv getFullName];
-    NSLog(@"full name: %@", indvName.text);
-    
-    NSLog(@"picture url: %@", indv.pictureURL);
-    
+    indvName.text = [indv getFullName];    
     if (![indv.pictureURL isEqualToString:@""])
     {
         [progress startAnimating];
@@ -104,10 +99,10 @@ BOOL attemptedImageLoad;
 
 - (void)loadIndividualImage
 {
-    NSLog(@"Loading picture...");
     NSURL *imageURL = [NSURL URLWithString:indv.pictureURL];
     NSURLRequest *myRequest = [NSURLRequest requestWithURL:imageURL cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10.0f];
-    [[NSURLConnection alloc] initWithRequest:myRequest delegate:self];
+    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:myRequest delegate:self];
+    [connection release];
 }
 
 - (void)viewDidUnload
@@ -172,7 +167,6 @@ BOOL attemptedImageLoad;
     if (indv.phones.count > 0)
         [activeSections addObject:indv.phones];
     
-    NSLog(@"Active sections: %d", [activeSections count]);
     return [activeSections count];
 }
 
@@ -432,7 +426,6 @@ BOOL attemptedImageLoad;
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
 	[responseData setLength:0];
-    NSLog(@"received response");
     if ([response respondsToSelector:@selector(statusCode)])
     {
         int statusCode = [((NSHTTPURLResponse *)response) statusCode];
@@ -454,7 +447,6 @@ BOOL attemptedImageLoad;
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
 	[responseData appendData:data];
-    NSLog(@"received data");
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
@@ -473,7 +465,6 @@ BOOL attemptedImageLoad;
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
-	[connection release];
     attemptedImageLoad = YES;
     indvImage.hidden = NO;
     [progress stopAnimating];

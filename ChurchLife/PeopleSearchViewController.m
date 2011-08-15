@@ -234,12 +234,10 @@ NSMutableData *responseData;
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
 	[responseData setLength:0];
-    NSLog(@"received response");
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
 	[responseData appendData:data];
-    NSLog(@"received data");
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
@@ -248,7 +246,6 @@ NSMutableData *responseData;
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
-	[connection release];
     JSONDecoder *decoder = [JSONDecoder decoder];   
     NSDictionary *decodedResponse = [decoder objectWithData:responseData];
     
@@ -257,16 +254,13 @@ NSMutableData *responseData;
         if ([status isEqualToString:@"Success"])
         {
             NSDictionary *results = [decodedResponse objectForKey:@"Data"];
-            NSLog (@"results: %@", [results description]);
             BOOL hasMore = [[results valueForKey:@"HasMore"] boolValue];
             int firstResult = [[results valueForKey:@"FirstResult"] intValue];
-            
             NSArray *individuals = [results valueForKey:@"Data"];
-            //NSLog(@"individuals: %@", [individuals description]);
             
             if (searchResults != nil)
             {
-                if (firstResult == 0) //loading more
+                if (firstResult == 0) //new search
                 {
                     [searchResults release];
                     searchResults = [[NSMutableArray alloc] initWithCapacity:[individuals count]];
@@ -277,9 +271,7 @@ NSMutableData *responseData;
             
             for (int i = 0; i < [individuals count]; i++)
             {
-                NSDictionary *indvData = [individuals objectAtIndex:i];
-                //NSLog(@"Indv Data: %@", [indvData description]);
-                
+                NSDictionary *indvData = [individuals objectAtIndex:i];                
                 AcsIndividual *indv = [AcsIndividual alloc];  
                 indv.indvID = [[indvData valueForKey:@"IndvId"] intValue];
                 indv.familyID = [indvData valueForKey:@"PrimFamily"];
@@ -292,6 +284,7 @@ NSMutableData *responseData;
                 indv.unlisted = [[indvData valueForKey:@"Unlisted"] boolValue];
                 
                 [searchResults addObject:indv];
+                [indv release];
             }
             
             //add row to show more if required
@@ -302,6 +295,7 @@ NSMutableData *responseData;
                 indv.firstName = @"View";
                 indv.lastName = @"More...";
                 [searchResults addObject:indv];
+                [indv release];
             }
             
             [searchBar resignFirstResponder];

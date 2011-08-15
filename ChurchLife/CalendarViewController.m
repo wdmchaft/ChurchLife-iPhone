@@ -76,6 +76,7 @@ NSMutableData *responseData;
     [components setDay:90];    
     NSCalendar *calendar = [NSCalendar currentCalendar];
     NSDate *stopDate = [calendar dateByAddingComponents:components toDate:startDate options:0];
+    [components release];
     
     if (!searchCompleted)
     {
@@ -165,7 +166,6 @@ NSMutableData *responseData;
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
-	[connection release];
     JSONDecoder *decoder = [JSONDecoder decoder];   
     NSDictionary *decodedResponse = [decoder objectWithData:responseData];
     
@@ -205,6 +205,7 @@ NSMutableData *responseData;
             event.isPublished = [[eventData valueForKey:@"IsPublished"] boolValue];
             
             [searchResults addObject:event];
+            [event release];
         }
         
         [self.tableView reloadData];

@@ -27,9 +27,18 @@
 @synthesize phones;
 @synthesize familyMembers;
 
+- (void)dealloc
+{
+    [addresses release];
+    [emails release];
+    [phones release];
+    [familyMembers release];
+    [super dealloc];
+}
+
 - (NSString *)getFullName
 {
-    NSString *name = [[NSString alloc] init];
+    NSString *name = [[[NSString alloc] init] autorelease];
     
     if (![title isEqualToString:@""])
         name = title;

@@ -39,6 +39,8 @@
                 siteNumber = [array objectAtIndex:1];
             else if ([object isKindOfClass:[NSNumber class]])
                 siteNumber = [[array objectAtIndex:1] stringValue];
+            else
+                siteNumber = @"";
             NSString *password = [array objectAtIndex:2];
             
             loggedIn = [AcsLink LoginBySite:[siteNumber integerValue] userName:userName password:password];
@@ -47,6 +49,8 @@
         {
             [self deletePreferences];
         }
+        
+        [array release];
     };
     
     if (!loggedIn)

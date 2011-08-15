@@ -98,9 +98,10 @@
                 login.siteName = [loginData valueForKey:@"SiteName"];
                 
                 [results addObject:login];
+                [login release];
             }
             
-            return results;
+            return [results autorelease];
         }
         else
             return nil;
@@ -131,7 +132,8 @@
     
     [request addValue:authenticationString forHTTPHeaderField:@"Authorization"];
     
-	[[NSURLConnection alloc] initWithRequest:request delegate:delegate];
+	NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:delegate];
+    [connection release];
 }
 
 +(AcsIndividual *)GetIndividual:(int)indvID{
@@ -169,7 +171,7 @@
     NSString * status = [dict valueForKey:@"Message"];
     if ([status isEqualToString:@"Success"])
     {
-        AcsIndividual *indv = [AcsIndividual alloc];
+        AcsIndividual *indv = [[AcsIndividual alloc] init];
         NSDictionary *data = [dict objectForKey:@"Data"];
         
         indv.indvID = [[data valueForKey:@"IndvID"] intValue];
@@ -208,10 +210,15 @@
             //don't want to see empty addresses
             if (([addr.addressLine1 isEqualToString:@""]) && ([addr.addressLine2 isEqualToString:@""]) &&
                 ([addr.city isEqualToString:@""]) && ([addr.state isEqualToString:@""]) && ([addr.zipCode isEqualToString:@""]))
+            {
+                [addr release];
                 continue;
+            }
             
             [indv.addresses addObject:addr];
+            [addr release];
         }
+        [indv.addresses release];
         
         //load emails     
         NSArray *emails = [data objectForKey:@"Emails"];
@@ -227,7 +234,9 @@
             e.preferred = [[email valueForKey:@"Preferred"] boolValue];
             
             [indv.emails addObject:e];
+            [e release];
         }
+        [indv.emails release];
         
         //load phones
         NSArray *phones = [data objectForKey:@"Phones"];
@@ -248,7 +257,9 @@
             p.phoneType = [phone valueForKey:@"PhoneType"];
             
             [indv.phones addObject:p];
+            [p release];
         }
+        [indv.phones release];
         
         //load family members
         NSArray *familyMembers = [data objectForKey:@"FamilyMembers"];
@@ -269,9 +280,11 @@
             f.unlisted = [[familyMember valueForKey:@"Unlisted"] boolValue];
             
             [indv.familyMembers addObject:f];
+            [f release];
         }
+        [indv.familyMembers release];
         
-        return indv;        
+        return [indv autorelease];        
     }
     else
         return nil;
@@ -302,7 +315,8 @@
     
     [request addValue:authenticationString forHTTPHeaderField:@"Authorization"];
     
-	[[NSURLConnection alloc] initWithRequest:request delegate:delegate];
+	NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:delegate];
+    [connection release];
 }
 
 +(AcsEvent *)GetEvent:(NSString *)eventID{
@@ -366,7 +380,7 @@
         event.allowRegistration = [[data valueForKey:@"AllowRegistration"] boolValue];
         event.isBooked = [[data valueForKey:@"IsBooked"] boolValue];
         
-        return event;        
+        return [event autorelease];        
     }
     else
         return nil;
