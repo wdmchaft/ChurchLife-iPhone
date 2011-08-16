@@ -61,6 +61,7 @@
 		CE888FBD13E1A46A005966C3 /* UserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE888FBB13E1A469005966C3 /* UserViewController.m */; };
 		CE888FBE13E1A46A005966C3 /* UserViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE888FBC13E1A46A005966C3 /* UserViewController.xib */; };
 		CE9E11C713DA0F4300C08319 /* CurrentIdentity.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9E11C613DA0F4300C08319 /* CurrentIdentity.m */; };
+		CEA99F4B1474540C00DD0D2D /* sectionheaderbackground.png in Resources */ = {isa = PBXBuildFile; fileRef = CEA99F4A1474540C00DD0D2D /* sectionheaderbackground.png */; };
 		CEDB83BB13B5110B00FEC747 /* churchlife.logo.login.png in Resources */ = {isa = PBXBuildFile; fileRef = CEDB83BA13B5110A00FEC747 /* churchlife.logo.login.png */; };
 		CEDB83BD13B5112A00FEC747 /* no-person-photo.png in Resources */ = {isa = PBXBuildFile; fileRef = CEDB83BC13B5112A00FEC747 /* no-person-photo.png */; };
 /* End PBXBuildFile section */
@@ -144,6 +145,7 @@
 		CE888FBC13E1A46A005966C3 /* UserViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserViewController.xib; sourceTree = "<group>"; };
 		CE9E11C513DA0F4300C08319 /* CurrentIdentity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurrentIdentity.h; sourceTree = "<group>"; };
 		CE9E11C613DA0F4300C08319 /* CurrentIdentity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurrentIdentity.m; sourceTree = "<group>"; };
+		CEA99F4A1474540C00DD0D2D /* sectionheaderbackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sectionheaderbackground.png; sourceTree = "<group>"; };
 		CEDB83BA13B5110A00FEC747 /* churchlife.logo.login.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = churchlife.logo.login.png; sourceTree = "<group>"; };
 		CEDB83BC13B5112A00FEC747 /* no-person-photo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "no-person-photo.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -286,6 +288,7 @@
 		CE19BEA313AFBCD900A62939 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				CEA99F4A1474540C00DD0D2D /* sectionheaderbackground.png */,
 				CEDB83BC13B5112A00FEC747 /* no-person-photo.png */,
 				CEDB83BA13B5110A00FEC747 /* churchlife.logo.login.png */,
 				CE19BEBE13AFBD7A00A62939 /* disclosure-arrow.png */,
@@ -418,6 +421,7 @@
 				CEDB83BD13B5112A00FEC747 /* no-person-photo.png in Resources */,
 				CE7C201513DF4B4400156654 /* LoginView2.xib in Resources */,
 				CE888FBE13E1A46A005966C3 /* UserViewController.xib in Resources */,
+				CEA99F4B1474540C00DD0D2D /* sectionheaderbackground.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

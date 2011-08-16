@@ -16,12 +16,16 @@
 @synthesize calendarCell;
 
 NSMutableData *responseData;
+NSDate *stopDate;
+int rowCount[12];
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
     if (self) {
         // Custom initialization
+        for (int i=0; i<12; i++)
+            rowCount[i] = 0;
     }
     return self;
 }
@@ -73,9 +77,12 @@ NSMutableData *responseData;
     
     NSDate *startDate = [NSDate date];
     NSDateComponents *components= [[NSDateComponents alloc] init];
-    [components setDay:90];    
+    [components setMonth:12];    
     NSCalendar *calendar = [NSCalendar currentCalendar];
-    NSDate *stopDate = [calendar dateByAddingComponents:components toDate:startDate options:0];
+    stopDate = [calendar dateByAddingComponents:components toDate:startDate options:0];
+    [components setMonth:0];
+    [components setDay:-1];
+    stopDate = [calendar dateByAddingComponents:components toDate:stopDate options:0];
     [components release];
     
     if (!searchCompleted)
@@ -86,7 +93,7 @@ NSMutableData *responseData;
         HUD.delegate = self;
         [HUD show:YES];
         
-        [AcsLink EventSearch:startDate stopDate:stopDate firstResult:0 maxResults:25 delegate:self];
+        [AcsLink EventSearch:startDate stopDate:stopDate firstResult:0 maxResults:50 delegate:self];
     }
 }
 
@@ -115,14 +122,36 @@ NSMutableData *responseData;
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    // Return the number of sections.
-    return 1;
+    if ([searchResults count] == 0)
+        return 0;
+    
+    NSDate *now = [NSDate date];
+    
+    //get start month
+    NSDateComponents *dateComponents = [[NSCalendar currentCalendar] components:NSMonthCalendarUnit fromDate:now];
+    NSInteger startMonth = [dateComponents month];
+    
+    //get stop month from last event
+    AcsEvent *e = (AcsEvent *)[searchResults objectAtIndex:[searchResults count]-1];
+    
+    dateComponents = [[NSCalendar currentCalendar] components:NSMonthCalendarUnit fromDate:e.startDate];
+    NSInteger stopMonth = [dateComponents month];
+    
+    NSInteger sectionCount = stopMonth - startMonth;
+    if (sectionCount < 0)
+        sectionCount += 12;
+    
+    sectionCount += 1;
+    
+    return sectionCount;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    // Return the number of rows in the section.
-    return [searchResults count];
+{   
+    if ([searchResults count] == 0)
+        return 0;
+
+    return rowCount[section];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -137,7 +166,11 @@ NSMutableData *responseData;
         self.calendarCell = nil;
     }
     
-    AcsEvent *e = (AcsEvent *)[searchResults objectAtIndex:indexPath.row];
+    int offset = 0;
+    for (int i = 0; i < indexPath.section; i++)
+        offset += rowCount[i];
+    
+    AcsEvent *e = (AcsEvent *)[searchResults objectAtIndex:indexPath.row + offset];
     cell.eventLabel.text = e.eventName;
     
     NSDateFormatter* formatter = [[[NSDateFormatter alloc] init] autorelease];
@@ -152,12 +185,10 @@ NSMutableData *responseData;
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
 	[responseData setLength:0];
-    NSLog(@"received response");
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
 	[responseData appendData:data];
-    NSLog(@"received data");
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
@@ -173,12 +204,10 @@ NSMutableData *responseData;
     if ([status isEqualToString:@"Success"])
     {
         NSDictionary *results = [decodedResponse objectForKey:@"Data"];
-        NSLog (@"results: %@", [results description]);
         //BOOL hasMore = [[results valueForKey:@"HasMore"] boolValue];
         //int firstResult = [[results valueForKey:@"FirstResult"] intValue];
         
         NSArray *events = [results valueForKey:@"Data"];
-        NSLog(@"events: %@", [events description]);
         
         [searchResults release];
         searchResults = [[NSMutableArray alloc] initWithCapacity:[events count]];
@@ -206,6 +235,18 @@ NSMutableData *responseData;
             
             [searchResults addObject:event];
             [event release];
+            
+            //update rowCount
+            unsigned int unitFlags = NSMonthCalendarUnit | NSYearCalendarUnit;
+            NSDateComponents *dateComponents = [[NSCalendar currentCalendar] components:unitFlags fromDate:[NSDate date]];
+            [dateComponents setDay:1];
+            
+            dateComponents = [[NSCalendar currentCalendar] components:NSMonthCalendarUnit fromDate:[[NSCalendar currentCalendar] dateFromComponents:
+                                                                                                    dateComponents] toDate:event.startDate options:0];
+            NSInteger section = [dateComponents month];
+            //NSLog(@"updating rowcount for section: %d", section); 
+            rowCount[section] = rowCount[section] + 1;
+            //NSLog(@"new rowcount: %d", rowCount[section]);
         }
         
         [self.tableView reloadData];
@@ -272,8 +313,67 @@ NSMutableData *responseData;
     [HUD showWhileExecuting:@selector(showEventDetails:) onTarget:self withObject:event animated:YES];
 }
 
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{    
+    int index = 0;
+    for (int i=0; i < section; i++)
+        index += rowCount[i];
+    
+    //look at first event in section to determine month name
+    AcsEvent *e = (AcsEvent *)[searchResults objectAtIndex:index];
+    NSDateFormatter* formatter = [[[NSDateFormatter alloc] init] autorelease];
+    [formatter setDateFormat:@"LLLL"]; 
+    NSString *month = [NSString stringWithFormat:@"%@", [formatter stringFromDate:e.startDate]];
+    [formatter setDateFormat:@"yyyy"];
+    NSString *year = [NSString stringWithFormat:@"%@", [formatter stringFromDate:e.startDate]];
+    
+    // Create a stretchable image that emulates the default gradient
+    UIImage *buttonImageNormal = [UIImage imageNamed:@"sectionheaderbackground.png"];
+    UIImage *stretchableButtonImageNormal = [buttonImageNormal stretchableImageWithLeftCapWidth:12 topCapHeight:0];
+    
+    // Create the view for the header
+    CGRect sectionFrame = CGRectMake(0.0, 0.0, 320.0, 22.0);
+    UIView *sectionView = [[UIView alloc] initWithFrame:sectionFrame];
+    sectionView.alpha = 0.9;
+    sectionView.backgroundColor = [UIColor colorWithPatternImage:stretchableButtonImageNormal];
+    
+    // Create the label
+    CGRect labelFrame = CGRectMake(10.0, 0.0, 270.0, 22.0);
+    UILabel *sectionLabel = [[UILabel alloc] initWithFrame:labelFrame];
+    sectionLabel.text = month;
+    sectionLabel.font = [UIFont boldSystemFontOfSize:18.0];
+    sectionLabel.textColor = [UIColor whiteColor];
+    sectionLabel.shadowColor = [UIColor darkGrayColor];
+    sectionLabel.shadowOffset = CGSizeMake(0, 1);
+    sectionLabel.backgroundColor = [UIColor clearColor];
+    
+    UILabel *yearLabel = [[UILabel alloc] initWithFrame:CGRectMake(270.0, 0.0, 80.0, 22.0)];
+    yearLabel.text = year;
+    yearLabel.font = [UIFont boldSystemFontOfSize:18.0];
+    yearLabel.textColor = [UIColor whiteColor];
+    yearLabel.shadowColor = [UIColor darkGrayColor];
+    yearLabel.shadowOffset = CGSizeMake(0, 1);
+    yearLabel.backgroundColor = [UIColor clearColor];
+    
+    [sectionView addSubview:sectionLabel];
+    [sectionView addSubview:yearLabel];
+    [sectionLabel release];
+    [yearLabel release];
+    
+    // Return the header section view
+    return [sectionView autorelease];
+}
+
+- (CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section 
+{
+	return 22.0;
+}
+
 - (void)clearData
 {
+    for (int i=0; i<12; i++)
+        rowCount[i] = 0;
+    
     searchCompleted = NO;
     [searchResults removeAllObjects];
     [self.tableView reloadData];
@@ -296,6 +396,5 @@ NSMutableData *responseData;
     [calendarDetailViewController release];
     
 }
-
 
 @end
