@@ -332,14 +332,12 @@ int rowCount[12];
     UIImage *stretchableButtonImageNormal = [buttonImageNormal stretchableImageWithLeftCapWidth:12 topCapHeight:0];
     
     // Create the view for the header
-    CGRect sectionFrame = CGRectMake(0.0, 0.0, 320.0, 22.0);
-    UIView *sectionView = [[UIView alloc] initWithFrame:sectionFrame];
+    UIView *sectionView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 22.0)];
     sectionView.alpha = 0.9;
     sectionView.backgroundColor = [UIColor colorWithPatternImage:stretchableButtonImageNormal];
     
-    // Create the label
-    CGRect labelFrame = CGRectMake(10.0, 0.0, 270.0, 22.0);
-    UILabel *sectionLabel = [[UILabel alloc] initWithFrame:labelFrame];
+    // Create labels
+    UILabel *sectionLabel = [[UILabel alloc] initWithFrame:CGRectMake(10.0, 0.0, 270.0, 22.0)];
     sectionLabel.text = month;
     sectionLabel.font = [UIFont boldSystemFontOfSize:18.0];
     sectionLabel.textColor = [UIColor whiteColor];
