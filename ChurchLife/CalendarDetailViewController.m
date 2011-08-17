@@ -14,7 +14,12 @@
 @synthesize redRect;
 @synthesize whiteRect;
 @synthesize splitCell;
-@synthesize tableView;
+@synthesize tv;
+@synthesize event;
+@synthesize eventMonth;
+@synthesize eventDay;
+@synthesize eventName;
+@synthesize eventTime;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -43,14 +48,53 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    
+    NSDateFormatter* formatter = [[[NSDateFormatter alloc] init] autorelease];
+    [formatter setDateFormat:@"MMM"];
+    eventMonth.text = [formatter stringFromDate:event.startDate];
+    [formatter setDateFormat:@"d"];
+    eventDay.text = [formatter stringFromDate:event.startDate];
+    [formatter setDateFormat:@"h:mm a"];
+    NSString *startTime = [formatter stringFromDate:event.startDate];
+    NSString *stopTime = [formatter stringFromDate:event.stopDate];
+    eventTime.text = [NSString stringWithFormat:@"%@ - %@", startTime, stopTime];
+    eventName.text = event.eventName;
+    
+    [self resetLayout];
+}
+
+- (void)resetLayout
+{    
+    //set frame for name label
+    /*CGRect frameRect = indvName.frame;
+    frameRect.origin.y = 27.0;
+    frameRect.origin.x = indvImage.frame.origin.x + indvImage.frame.size.width + 10.0f;
+    indvName.frame = frameRect;
+    
+    CGSize expectedLabelSize = [indvName.text sizeWithFont:indvName.font];
+    if ((indvName.frame.origin.x + expectedLabelSize.width) > (self.view.frame.size.width))
+    {
+        frameRect.origin.x = indvImage.frame.origin.x;
+        frameRect.origin.y = indvImage.frame.origin.y + indvImage.frame.size.height + 5.0f;
+        indvName.frame = frameRect;
+    }*/
+    
+    //set frame for tableview
+    CGRect frameRect = tv.frame;
+    frameRect.size.height = tv.bounds.size.height*2;
+    tv.frame = frameRect;
+    
+    //reset scrollable area
+    [tv layoutIfNeeded];
+    UIScrollView *scrollView = (UIScrollView *)self.view;
+    scrollView.contentSize = CGSizeMake(self.view.frame.size.width, [tv contentSize].height + tv.frame.origin.y);
 }
 
 - (void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     
-    tableView.backgroundColor = [UIColor clearColor];
+    tv.backgroundColor = [UIColor clearColor];
     
     //round corners and add borders
     [[redRect layer] setBorderColor:[[UIColor lightGrayColor] CGColor]];

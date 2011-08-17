@@ -47,7 +47,7 @@
 					<object class="IBUIButton" id="849993918">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{20, 20}, {115, 50}}</string>
+						<string key="NSFrame">{{20, 20}, {75, 50}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="949706538"/>
@@ -80,7 +80,7 @@
 					<object class="IBUIButton" id="949706538">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{20, 52}, {115, 69}}</string>
+						<string key="NSFrame">{{20, 45}, {75, 49}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="835467615"/>
@@ -100,7 +100,7 @@
 					<object class="IBUILabel" id="939371400">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{20, 11}, {115, 50}}</string>
+						<string key="NSFrame">{{20, 11}, {75, 42}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="849993918"/>
@@ -112,7 +112,7 @@
 						<string key="IBUIText">JUN</string>
 						<object class="NSFont" key="IBUIFont">
 							<string key="NSName">Helvetica-Bold</string>
-							<double key="NSSize">28</double>
+							<double key="NSSize">20</double>
 							<int key="NSfFlags">16</int>
 						</object>
 						<reference key="IBUITextColor" ref="939878849"/>
@@ -124,10 +124,10 @@
 					<object class="IBUILabel" id="835467615">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{20, 52}, {115, 69}}</string>
+						<string key="NSFrame">{{20, 45}, {75, 49}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="944620984"/>
+						<reference key="NSNextKeyView" ref="812042989"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<int key="IBUIContentMode">7</int>
@@ -136,7 +136,7 @@
 						<string key="IBUIText">22</string>
 						<object class="NSFont" key="IBUIFont">
 							<string key="NSName">Helvetica-Bold</string>
-							<double key="NSSize">72</double>
+							<double key="NSSize">48</double>
 							<int key="NSfFlags">16</int>
 						</object>
 						<object class="NSColor" key="IBUITextColor">
@@ -156,7 +156,7 @@
 							<object class="IBUILabel" id="908414272">
 								<reference key="NSNextResponder" ref="944620984"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrameSize">{149, 36}</string>
+								<string key="NSFrameSize">{209, 36}</string>
 								<reference key="NSSuperview" ref="944620984"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="1045923807"/>
@@ -182,10 +182,10 @@
 							<object class="IBUILabel" id="1045923807">
 								<reference key="NSNextResponder" ref="944620984"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{0, 25}, {109, 30}}</string>
+								<string key="NSFrame">{{0, 25}, {209, 30}}</string>
 								<reference key="NSSuperview" ref="944620984"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="812042989"/>
+								<reference key="NSNextKeyView"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
 								<int key="IBUIContentMode">7</int>
@@ -206,7 +206,7 @@
 								<float key="IBUIMinimumFontSize">10</float>
 							</object>
 						</object>
-						<string key="NSFrame">{{143, 20}, {169, 101}}</string>
+						<string key="NSFrame">{{103, 20}, {209, 101}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="908414272"/>
@@ -219,9 +219,10 @@
 					<object class="IBUITableView" id="812042989">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">274</int>
-						<string key="NSFrame">{{10, 129}, {304, 311}}</string>
+						<string key="NSFrame">{{8, 105}, {304, 311}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="944620984"/>
 						<object class="NSColor" key="IBUIBackgroundColor" id="524638064">
 							<int key="NSColorSpace">10</int>
 							<object class="NSImage" key="NSImage">
@@ -318,11 +319,43 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">tableView</string>
+						<string key="label">tv</string>
 						<reference key="source" ref="372490531"/>
 						<reference key="destination" ref="812042989"/>
 					</object>
-					<int key="connectionID">46</int>
+					<int key="connectionID">47</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">eventMonth</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="939371400"/>
+					</object>
+					<int key="connectionID">48</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">eventDay</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="835467615"/>
+					</object>
+					<int key="connectionID">49</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">eventName</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="908414272"/>
+					</object>
+					<int key="connectionID">50</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">eventTime</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="1045923807"/>
+					</object>
+					<int key="connectionID">51</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -343,8 +376,8 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 							<reference ref="949706538"/>
 							<reference ref="939371400"/>
 							<reference ref="835467615"/>
-							<reference ref="944620984"/>
 							<reference ref="812042989"/>
+							<reference ref="944620984"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -384,8 +417,8 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 						<reference key="object" ref="944620984"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="908414272"/>
 							<reference ref="1045923807"/>
+							<reference ref="908414272"/>
 						</object>
 						<reference key="parent" ref="191373211"/>
 					</object>
@@ -412,6 +445,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<string>-1.CustomClassName</string>
 					<string>-2.CustomClassName</string>
+					<string>1.CustomClassName</string>
 					<string>1.IBEditorWindowLastContentRect</string>
 					<string>1.IBPluginDependency</string>
 					<string>10.IBPluginDependency</string>
@@ -428,6 +462,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<string>CalendarDetailViewController</string>
 					<string>UIResponder</string>
+					<string>UIScrollView</string>
 					<string>{{556, 412}, {320, 480}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -453,7 +488,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">46</int>
+			<int key="maxID">51</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -465,13 +500,21 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>eventDay</string>
+							<string>eventMonth</string>
+							<string>eventName</string>
+							<string>eventTime</string>
 							<string>redRect</string>
 							<string>splitCell</string>
-							<string>tableView</string>
+							<string>tv</string>
 							<string>whiteRect</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>UILabel</string>
+							<string>UILabel</string>
+							<string>UILabel</string>
+							<string>UILabel</string>
 							<string>UIButton</string>
 							<string>SplitCell</string>
 							<string>UITableView</string>
@@ -482,13 +525,33 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>eventDay</string>
+							<string>eventMonth</string>
+							<string>eventName</string>
+							<string>eventTime</string>
 							<string>redRect</string>
 							<string>splitCell</string>
-							<string>tableView</string>
+							<string>tv</string>
 							<string>whiteRect</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<object class="IBToOneOutletInfo">
+								<string key="name">eventDay</string>
+								<string key="candidateClassName">UILabel</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">eventMonth</string>
+								<string key="candidateClassName">UILabel</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">eventName</string>
+								<string key="candidateClassName">UILabel</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">eventTime</string>
+								<string key="candidateClassName">UILabel</string>
+							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">redRect</string>
 								<string key="candidateClassName">UIButton</string>
@@ -498,7 +561,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 								<string key="candidateClassName">SplitCell</string>
 							</object>
 							<object class="IBToOneOutletInfo">
-								<string key="name">tableView</string>
+								<string key="name">tv</string>
 								<string key="candidateClassName">UITableView</string>
 							</object>
 							<object class="IBToOneOutletInfo">

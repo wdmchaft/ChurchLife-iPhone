@@ -99,7 +99,7 @@ int rowCount[12];
         HUD.delegate = self;
         [HUD show:YES];
         
-        [AcsLink EventSearch:startDate stopDate:stopDate firstResult:0 maxResults:25 delegate:self];
+        [AcsLink EventSearch:startDate stopDate:stopDate firstResult:0 maxResults:50 delegate:self];
     }
 }
 
@@ -185,7 +185,7 @@ int rowCount[12];
         cell.textLabel.text = @"";
         cell.eventLabel.text = e.eventName;
         NSDateFormatter* formatter = [[[NSDateFormatter alloc] init] autorelease];
-        [formatter setDateFormat:@"hh:mm a"];
+        [formatter setDateFormat:@"h:mm a"];
         cell.timeLabel.text = [[formatter stringFromDate:e.startDate] lowercaseString];
 
         [formatter setDateFormat:@"EEE MMM dd"];
@@ -215,7 +215,7 @@ int rowCount[12];
     if ([status isEqualToString:@"Success"])
     {
         NSDictionary *results = [decodedResponse objectForKey:@"Data"];
-        //NSLog(@"results: %@", [results description]);
+        NSLog(@"results: %@", [results description]);
         BOOL hasMore = [[results valueForKey:@"HasMore"] boolValue];
         int firstResult = [[results valueForKey:@"FirstResult"] intValue];
         NSArray *events = [results valueForKey:@"Data"];
@@ -258,7 +258,7 @@ int rowCount[12];
             
             //parse dates
             NSDateFormatter *df = [[[NSDateFormatter alloc] init] autorelease];
-            [df setDateFormat:@"MM/dd/yyyy HH:mm:ss a"];
+            [df setDateFormat:@"MM/dd/yyyy h:mm:ss a"];
             event.startDate = [df dateFromString:[eventData valueForKey:@"StartDate"]];
             event.stopDate = [df dateFromString:[eventData valueForKey:@"StopDate"]];
             
@@ -314,7 +314,7 @@ int rowCount[12];
     if ([event.eventName isEqualToString:@"View More..."])
     {
         [HUD show:YES];
-        [AcsLink EventSearch:startDate stopDate:stopDate firstResult:[searchResults count]-1 maxResults:25 delegate:self];
+        [AcsLink EventSearch:startDate stopDate:stopDate firstResult:[searchResults count]-1 maxResults:50 delegate:self];
     }
     else
         [HUD showWhileExecuting:@selector(showEventDetails:) onTarget:self withObject:event animated:YES];
@@ -394,9 +394,12 @@ int rowCount[12];
 - (void)showEventDetails:(id)sender
 {
     AcsEvent *event = (AcsEvent *)sender;
-    [AcsLink GetEvent:event.eventID];
+    //event = [AcsLink GetEvent:event.eventID];
     
     CalendarDetailViewController *calendarDetailViewController = [[CalendarDetailViewController alloc] initWithNibName:@"CalendarDetailViewController" bundle:nil];
+    
+    calendarDetailViewController.event = event;
+    
     [self.navigationController pushViewController:calendarDetailViewController animated:YES];
     [calendarDetailViewController release];
     

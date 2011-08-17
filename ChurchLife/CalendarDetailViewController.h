@@ -9,17 +9,30 @@
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
 #import "SplitCell.h"
+#import "AcsEvent.h"
 
 @interface CalendarDetailViewController : UIViewController {
     IBOutlet UIButton *redRect;
     IBOutlet UIButton *whiteRect;
     SplitCell *splitCell;
-    IBOutlet UITableView *tableView;
+    IBOutlet UITableView *tv;
+    AcsEvent *event;
+    IBOutlet UILabel *eventMonth;
+    IBOutlet UILabel *eventDay;
+    IBOutlet UILabel *eventName;
+    IBOutlet UILabel *eventTime;
 }
 
 @property (nonatomic, retain) IBOutlet UIButton *redRect;
 @property (nonatomic, retain) IBOutlet UIButton *whiteRect;
 @property (nonatomic, assign) IBOutlet SplitCell *splitCell;
-@property (nonatomic, retain) IBOutlet UITableView *tableView;
+@property (nonatomic, retain) IBOutlet UITableView *tv;
+@property (nonatomic, retain) AcsEvent *event;
+@property (nonatomic, retain) IBOutlet UILabel *eventMonth;
+@property (nonatomic, retain) IBOutlet UILabel *eventDay;
+@property (nonatomic, retain) IBOutlet UILabel *eventName;
+@property (nonatomic, retain) IBOutlet UILabel *eventTime;
+
+- (void)resetLayout;
 
 @end
