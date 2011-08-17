@@ -16,6 +16,7 @@
 @synthesize calendarCell;
 
 NSMutableData *responseData;
+NSDate *startDate;
 NSDate *stopDate;
 int rowCount[12];
 
@@ -33,6 +34,8 @@ int rowCount[12];
 - (void)dealloc
 {
     [super dealloc];
+    [startDate release];
+    [stopDate release];
 }
 
 - (void)didReceiveMemoryWarning
@@ -75,25 +78,28 @@ int rowCount[12];
     //stop drawing separators for blank rows
     self.tableView.tableFooterView = [[[UIView alloc] init] autorelease];
     
-    NSDate *startDate = [NSDate date];
-    NSDateComponents *components= [[NSDateComponents alloc] init];
-    [components setMonth:12];    
-    NSCalendar *calendar = [NSCalendar currentCalendar];
-    stopDate = [calendar dateByAddingComponents:components toDate:startDate options:0];
-    [components setMonth:0];
-    [components setDay:-1];
-    stopDate = [calendar dateByAddingComponents:components toDate:stopDate options:0];
-    [components release];
-    
     if (!searchCompleted)
     {
+        startDate = [NSDate date];
+        NSDateComponents *components= [[NSDateComponents alloc] init];
+        [components setMonth:12];    
+        NSCalendar *calendar = [NSCalendar currentCalendar];
+        stopDate = [calendar dateByAddingComponents:components toDate:startDate options:0];
+        [components setMonth:0];
+        [components setDay:-1];
+        stopDate = [calendar dateByAddingComponents:components toDate:stopDate options:0];
+        [components release];
+        
+        [startDate retain];
+        [stopDate retain];
+        
         HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
         HUD.labelText = @"Loading...";
         [self.navigationController.view addSubview:HUD];
         HUD.delegate = self;
         [HUD show:YES];
         
-        [AcsLink EventSearch:startDate stopDate:stopDate firstResult:0 maxResults:50 delegate:self];
+        [AcsLink EventSearch:startDate stopDate:stopDate firstResult:0 maxResults:25 delegate:self];
     }
 }
 
@@ -125,23 +131,14 @@ int rowCount[12];
     if ([searchResults count] == 0)
         return 0;
     
-    NSDate *now = [NSDate date];
-    
-    //get start month
-    NSDateComponents *dateComponents = [[NSCalendar currentCalendar] components:NSMonthCalendarUnit fromDate:now];
-    NSInteger startMonth = [dateComponents month];
-    
-    //get stop month from last event
-    AcsEvent *e = (AcsEvent *)[searchResults objectAtIndex:[searchResults count]-1];
-    
-    dateComponents = [[NSCalendar currentCalendar] components:NSMonthCalendarUnit fromDate:e.startDate];
-    NSInteger stopMonth = [dateComponents month];
-    
-    NSInteger sectionCount = stopMonth - startMonth;
-    if (sectionCount < 0)
-        sectionCount += 12;
-    
-    sectionCount += 1;
+    NSInteger sectionCount = 0;
+    for (int i = 0; i < (sizeof(rowCount)/sizeof(int)); i++)
+    {
+        if (rowCount[i] != 0)
+            sectionCount++;
+        else
+            break;
+    }
     
     return sectionCount;
 }
@@ -171,14 +168,29 @@ int rowCount[12];
         offset += rowCount[i];
     
     AcsEvent *e = (AcsEvent *)[searchResults objectAtIndex:indexPath.row + offset];
-    cell.eventLabel.text = e.eventName;
     
-    NSDateFormatter* formatter = [[[NSDateFormatter alloc] init] autorelease];
-    [formatter setDateFormat:@"hh:mm a"];
-    cell.timeLabel.text = [[formatter stringFromDate:e.startDate] lowercaseString];
     
-    [formatter setDateFormat:@"EEE MMM dd"];
-    cell.dateLabel.text = [formatter stringFromDate:e.startDate];
+    if ([e.eventName isEqualToString:@"View More..."])
+    {
+        cell.accessoryType = UITableViewCellAccessoryNone;
+        cell.textLabel.font = [UIFont boldSystemFontOfSize:20];
+        cell.textLabel.text = e.eventName;
+        cell.eventLabel.text = @"";
+        cell.timeLabel.text = @"";
+        cell.dateLabel.text = @"";
+    }
+    else
+    {
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        cell.textLabel.text = @"";
+        cell.eventLabel.text = e.eventName;
+        NSDateFormatter* formatter = [[[NSDateFormatter alloc] init] autorelease];
+        [formatter setDateFormat:@"hh:mm a"];
+        cell.timeLabel.text = [[formatter stringFromDate:e.startDate] lowercaseString];
+
+        [formatter setDateFormat:@"EEE MMM dd"];
+        cell.dateLabel.text = [formatter stringFromDate:e.startDate];
+    }
     
     return cell;
 }
@@ -199,19 +211,38 @@ int rowCount[12];
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
     JSONDecoder *decoder = [JSONDecoder decoder];   
     NSDictionary *decodedResponse = [decoder objectWithData:responseData];
-    
     NSString * status =  [decodedResponse valueForKey:@"Message"];
     if ([status isEqualToString:@"Success"])
     {
         NSDictionary *results = [decodedResponse objectForKey:@"Data"];
-        //BOOL hasMore = [[results valueForKey:@"HasMore"] boolValue];
-        //int firstResult = [[results valueForKey:@"FirstResult"] intValue];
-        
+        //NSLog(@"results: %@", [results description]);
+        BOOL hasMore = [[results valueForKey:@"HasMore"] boolValue];
+        int firstResult = [[results valueForKey:@"FirstResult"] intValue];
         NSArray *events = [results valueForKey:@"Data"];
         
-        [searchResults release];
-        searchResults = [[NSMutableArray alloc] initWithCapacity:[events count]];
+        if (searchResults != nil)
+        {
+            if (firstResult == 0) //new search
+            {
+                [searchResults release];
+                searchResults = [[NSMutableArray alloc] initWithCapacity:[events count]];
+            }
+            else //remove "View more..." cell and decrement rowCount for last visible section
+            {
+                [searchResults removeObjectAtIndex:[searchResults count]-1];
+                NSInteger sectionCount = 0;
+                for (int i = 0; i < (sizeof(rowCount)/sizeof(int)); i++)
+                {
+                    if (rowCount[i] != 0)
+                        sectionCount++;
+                    else
+                        break;
+                }
+                rowCount[sectionCount-1] = rowCount[sectionCount-1] - 1;
+            }
+        }
         
+        NSInteger section = 0;
         for (int i = 0; i < [events count]; i++)
         {
             NSDictionary *eventData = [events objectAtIndex:i];            
@@ -243,10 +274,19 @@ int rowCount[12];
             
             dateComponents = [[NSCalendar currentCalendar] components:NSMonthCalendarUnit fromDate:[[NSCalendar currentCalendar] dateFromComponents:
                                                                                                     dateComponents] toDate:event.startDate options:0];
-            NSInteger section = [dateComponents month];
-            //NSLog(@"updating rowcount for section: %d", section); 
+            section = [dateComponents month];
             rowCount[section] = rowCount[section] + 1;
-            //NSLog(@"new rowcount: %d", rowCount[section]);
+        }
+        
+        //add row to show more if required
+        if (hasMore)
+        {
+            AcsEvent *event = [AcsEvent alloc];
+            event.eventID = @"-1";
+            event.eventName = @"View More...";
+            [searchResults addObject:event];
+            rowCount[section] = rowCount[section] + 1;
+            [event release];
         }
         
         [self.tableView reloadData];
@@ -255,62 +295,29 @@ int rowCount[12];
     [HUD hide:YES];
 }
 
-- (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
-{
-    //show detail
-}
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    AcsEvent *event = (AcsEvent *)[searchResults objectAtIndex:indexPath.row];
+    int offset = 0;
+    for (int i = 0; i < indexPath.section; i++)
+        offset += rowCount[i];
+    
+    AcsEvent *event = (AcsEvent *)[searchResults objectAtIndex:indexPath.row + offset];
     
     //Show HUD
     HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
     HUD.labelText = @"Loading...";
     [self.navigationController.view addSubview:HUD];
     HUD.delegate = self;
-    [HUD showWhileExecuting:@selector(showEventDetails:) onTarget:self withObject:event animated:YES];
+    
+    if ([event.eventName isEqualToString:@"View More..."])
+    {
+        [HUD show:YES];
+        [AcsLink EventSearch:startDate stopDate:stopDate firstResult:[searchResults count]-1 maxResults:25 delegate:self];
+    }
+    else
+        [HUD showWhileExecuting:@selector(showEventDetails:) onTarget:self withObject:event animated:YES];
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
