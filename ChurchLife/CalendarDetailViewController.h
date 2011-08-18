@@ -27,7 +27,7 @@
 @property (nonatomic, retain) IBOutlet UIButton *whiteRect;
 @property (nonatomic, assign) IBOutlet SplitCell *splitCell;
 @property (nonatomic, retain) IBOutlet UITableView *tv;
-@property (nonatomic, retain) AcsEvent *event;
+@property (nonatomic, assign) AcsEvent *event;
 @property (nonatomic, retain) IBOutlet UILabel *eventMonth;
 @property (nonatomic, retain) IBOutlet UILabel *eventDay;
 @property (nonatomic, retain) IBOutlet UILabel *eventName;

@@ -23,23 +23,22 @@
     return self;
 }
 
-- (void)updateCellDisplay {
-    if (self.selected || self.highlighted) {
+- (void)updateCellDisplay 
+{
+    if (self.selected || self.highlighted) 
         self.contents.textColor = [UIColor whiteColor];
-        //self.colorLabel.textColor = [UIColor lightGrayColor];
-    }
-    else {
+    else 
         self.contents.textColor = [UIColor blackColor];
-        //self.colorLabel.textColor = [UIColor blackColor];
-    }
 }
 
-- (void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated {
+- (void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated 
+{
     [super setHighlighted:highlighted animated:animated];
     [self updateCellDisplay];
 }
 
-- (void) setSelected:(BOOL)selected animated:(BOOL)animated {
+- (void) setSelected:(BOOL)selected animated:(BOOL)animated 
+{
     [super setSelected:selected animated:animated];
     [self updateCellDisplay];
 }

@@ -42,12 +42,6 @@
             identity.userName = [d valueForKey:@"UserName"];
             identity.password = password;
             
-            NSLog(@"email: %@", identity.emailAddress);
-            NSLog(@"siteName: %@", identity.siteName);
-            NSLog(@"siteNumber: %@", identity.siteNumber);
-            NSLog(@"username: %@", identity.userName);
-            NSLog(@"password: %@", identity.password);
-            
             return YES;
         }
         else
@@ -75,15 +69,11 @@
     JSONDecoder *decoder = [JSONDecoder decoder];   
     NSDictionary *decodedResponse = [decoder objectWithData:dataReply];
     
-    //NSLog(@"response: %@", [decodedResponse description]);
-    
     if ([decodedResponse count] > 1) {
         NSString * status = [decodedResponse valueForKey:@"Message"];
         if ([status isEqualToString:@"Success"])
         {
             NSArray *allData = [decodedResponse objectForKey:@"Data"];
-            
-            //NSLog(@"alldata: %@", [allData description]);
     
             NSMutableArray *results = [[NSMutableArray alloc] initWithCapacity:[allData count]];
             
@@ -115,8 +105,6 @@
     NSString *search = [searchText stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
     NSString *urlString = [NSString stringWithFormat:@"https://api.accessacs.com/%@/individuals?searchText=%@&firstResult=%d&maxResults=%d",
                            identity.siteNumber, search, first, max];
-    
-    NSLog(@"url: %@", urlString);
     
 	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlString]];
     NSMutableString *dataStr = [NSMutableString stringWithFormat:@"%@:%@", identity.userName, identity.password];
@@ -166,7 +154,6 @@
     
     JSONDecoder *decoder = [JSONDecoder decoder];   
     NSDictionary *dict = [decoder objectWithData:dataReply];
-    //NSLog(@"response: %@", [dict description]);
     
     NSString * status = [dict valueForKey:@"Message"];
     if ([status isEqualToString:@"Success"])
@@ -299,8 +286,6 @@
     NSString *urlString = [NSString stringWithFormat:@"https://api.accessacs.com/%@/events?startDate=%@&stopDate=%@&firstResult=%d&maxResults=%d",
                            identity.siteNumber, [formatter stringFromDate:startDate], [formatter stringFromDate:stopDate], first, max];
     
-    NSLog(@"url: %@", urlString);
-    
 	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlString]];
     NSMutableString *dataStr = [NSMutableString stringWithFormat:@"%@:%@", identity.userName, identity.password];
     NSData *encodeData = [dataStr dataUsingEncoding:NSUTF8StringEncoding];
@@ -349,7 +334,6 @@
     
     JSONDecoder *decoder = [JSONDecoder decoder];   
     NSDictionary *dict = [decoder objectWithData:dataReply];
-    NSLog(@"response: %@", [dict description]);
     
     NSString * status = [dict valueForKey:@"Message"];
     if ([status isEqualToString:@"Success"])

@@ -15,8 +15,8 @@
     IBOutlet UILabel *dateLabel;
 }
 
-@property (nonatomic, retain) IBOutlet UILabel *eventLabel;
-@property (nonatomic, retain) IBOutlet UILabel *timeLabel;
-@property (nonatomic, retain) IBOutlet UILabel *dateLabel;
+@property (nonatomic, assign) IBOutlet UILabel *eventLabel;
+@property (nonatomic, assign) IBOutlet UILabel *timeLabel;
+@property (nonatomic, assign) IBOutlet UILabel *dateLabel;
 
 @end

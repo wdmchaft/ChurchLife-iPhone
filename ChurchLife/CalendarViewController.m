@@ -51,6 +51,10 @@ int rowCount[12];
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.navigationItem.backBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:@"Back"
+                                            style:UIBarButtonItemStyleBordered
+                                            target:nil
+                                            action:nil] autorelease];
 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -204,7 +208,6 @@ int rowCount[12];
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
-    NSLog(@"error");
 	//label.text = [NSString stringWithFormat:@"Connection failed: %@", [error description]];
 }
 
@@ -215,7 +218,6 @@ int rowCount[12];
     if ([status isEqualToString:@"Success"])
     {
         NSDictionary *results = [decodedResponse objectForKey:@"Data"];
-        NSLog(@"results: %@", [results description]);
         BOOL hasMore = [[results valueForKey:@"HasMore"] boolValue];
         int firstResult = [[results valueForKey:@"FirstResult"] intValue];
         NSArray *events = [results valueForKey:@"Data"];
@@ -305,19 +307,20 @@ int rowCount[12];
     
     AcsEvent *event = (AcsEvent *)[searchResults objectAtIndex:indexPath.row + offset];
     
-    //Show HUD
-    HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
-    HUD.labelText = @"Loading...";
-    [self.navigationController.view addSubview:HUD];
-    HUD.delegate = self;
-    
     if ([event.eventName isEqualToString:@"View More..."])
     {
+        //Show HUD
+        HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
+        HUD.labelText = @"Loading...";
+        [self.navigationController.view addSubview:HUD];
+        HUD.delegate = self;
+        
         [HUD show:YES];
         [AcsLink EventSearch:startDate stopDate:stopDate firstResult:[searchResults count]-1 maxResults:50 delegate:self];
     }
     else
-        [HUD showWhileExecuting:@selector(showEventDetails:) onTarget:self withObject:event animated:YES];
+        [self showEventDetails:event];
+        //[HUD showWhileExecuting:@selector(showEventDetails:) onTarget:self withObject:event animated:YES];
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
