@@ -102,6 +102,7 @@ int rowCount[12];
         [self.navigationController.view addSubview:HUD];
         HUD.delegate = self;
         [HUD show:YES];
+        searchCompleted = YES;
         
         [AcsLink EventSearch:startDate stopDate:stopDate firstResult:0 maxResults:50 delegate:self];
     }
@@ -209,6 +210,8 @@ int rowCount[12];
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
 	//label.text = [NSString stringWithFormat:@"Connection failed: %@", [error description]];
+    [HUD hide:YES];
+    searchCompleted = NO;
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
@@ -292,7 +295,6 @@ int rowCount[12];
         }
         
         [self.tableView reloadData];
-        searchCompleted = YES;
     }
     [HUD hide:YES];
 }
