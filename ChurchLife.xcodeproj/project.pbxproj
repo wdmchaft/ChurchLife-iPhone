@@ -529,13 +529,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer: Jamey McElveen (ZXRC9J9FED)";
+				"CODE_SIGN_IDENTITY[sdk=iphonesimulator4.3]" = "iPhone Developer: Jamey McElveen (ZXRC9J9FED)";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ChurchLife/ChurchLife-Prefix.pch";
 				INFOPLIST_FILE = "ChurchLife/ChurchLife-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				"PROVISIONING_PROFILE[sdk=*]" = "A0A8E53D-0F25-48E5-BCB1-C72E71F3887D";
+				"PROVISIONING_PROFILE[sdk=iphonesimulator4.3]" = "A0A8E53D-0F25-48E5-BCB1-C72E71F3887D";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
