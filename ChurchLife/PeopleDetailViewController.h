@@ -34,5 +34,6 @@
 - (void)loadIndividualImage;
 - (void)resetLayout;
 - (void)showIndividualProfile:(id)sender;
+- (void)deselectRow:(NSIndexPath *)indexPath;
 
 @end

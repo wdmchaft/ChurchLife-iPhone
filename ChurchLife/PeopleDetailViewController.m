@@ -341,6 +341,11 @@ BOOL attemptedImageLoad;
 
 #pragma mark - Table view delegate
 
+- (void)deselectRow:(NSIndexPath *)indexPath
+{
+    [tv deselectRowAtIndexPath:indexPath animated:YES];
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSMutableArray *data = [activeSections objectAtIndex:indexPath.section];
@@ -352,11 +357,45 @@ BOOL attemptedImageLoad;
         NSString *url = [NSString stringWithFormat:@"mailto:%@", e.email];
         [[UIApplication sharedApplication] openURL: [NSURL URLWithString: url]];
         
-        [tableView deselectRowAtIndexPath:indexPath animated:YES];
+        [self performSelector:@selector(deselectRow:) withObject:indexPath afterDelay:0.5];
     }
     else if ([object isKindOfClass:[AcsAddress class]])
     {
-        //AcsAddress *a = (AcsAddress *)object;
+        AcsAddress *a = (AcsAddress *)object;
+        NSString *addressText = [NSString stringWithString:a.addressLine1];
+        
+        //add address line 2
+        if (![addressText isEqualToString:@""])
+        {
+            if (![a.addressLine2 isEqualToString:@""])
+                addressText = [addressText stringByAppendingFormat:@", %@", a.addressLine2];
+        }
+        else
+            addressText = a.addressLine2;
+        
+        //add city, state, zip
+        NSString *csz = a.city;
+        if (![csz isEqualToString:@""])
+            csz = [csz stringByAppendingFormat:@", %@", a.state];
+        else
+            csz = a.state;
+        
+        if (![csz isEqualToString:@""])
+            csz = [csz stringByAppendingFormat:@" %@", a.zipCode];
+        else
+            csz = a.zipCode;
+        
+        if (![addressText isEqualToString:@""])
+            addressText = [addressText stringByAppendingFormat:@", %@", csz];
+        else
+            addressText = csz;   
+
+        // URL encode the spaces
+        addressText =  [addressText stringByAddingPercentEscapesUsingEncoding: NSASCIIStringEncoding];	
+        NSString *urlText = [NSString stringWithFormat:@"http://maps.google.com/maps?q=%@", addressText];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlText]];
+        
+        [self performSelector:@selector(deselectRow:) withObject:indexPath afterDelay:0.5];
     }
     else if ([object isKindOfClass:[AcsIndividual class]])
     {
@@ -391,7 +430,7 @@ BOOL attemptedImageLoad;
             [Notpermitted release];
         }
         
-        [tableView deselectRowAtIndexPath:indexPath animated:YES];
+        [self performSelector:@selector(deselectRow:) withObject:indexPath afterDelay:0.5];
     };
 }
 
