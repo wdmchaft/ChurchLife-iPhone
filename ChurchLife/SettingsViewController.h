@@ -7,13 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <QuartzCore/QuartzCore.h>
 
 @interface SettingsViewController : UIViewController {
     IBOutlet UILabel *siteName;
+    IBOutlet UILabel *versionNumber;
 }
 
 @property (nonatomic, retain) UILabel *siteName;
+@property (nonatomic, retain) UILabel *versionNumber;
 
 - (IBAction)logoutClicked:(id)sender;
 

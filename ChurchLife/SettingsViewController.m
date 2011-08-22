@@ -8,11 +8,12 @@
 
 #import "SettingsViewController.h"
 #import "ChurchLifeAppDelegate.h"
-#import "CurrentIdentity.h";
+#import "CurrentIdentity.h"
 
 @implementation SettingsViewController
 
 @synthesize siteName;
+@synthesize versionNumber;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -49,6 +50,9 @@
     [super viewWillAppear:animated];
     CurrentIdentity *identity = [CurrentIdentity sharedIdentity];
     siteName.text = identity.siteName;
+    versionNumber.text = @"version ";
+    versionNumber.text = [versionNumber.text stringByAppendingFormat:@"%@", 
+                         [[[NSBundle mainBundle] infoDictionary] objectForKey:(NSString*)kCFBundleVersionKey]];
 }
 
 - (void)viewDidUnload
