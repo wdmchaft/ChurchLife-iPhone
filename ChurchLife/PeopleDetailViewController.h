@@ -12,7 +12,7 @@
 #import "AcsIndividual.h"
 #import "MBProgressHUD.h"
 
-@interface PeopleDetailViewController : UIViewController <MBProgressHUDDelegate> {
+@interface PeopleDetailViewController : UIViewController <MBProgressHUDDelegate, UIActionSheetDelegate> {
     AcsIndividual *indv;
     SplitCell *splitCell;
     IBOutlet UITableView *tv;

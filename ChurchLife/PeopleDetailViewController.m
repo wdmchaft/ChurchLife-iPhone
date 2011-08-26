@@ -19,6 +19,7 @@
 @synthesize progress;
 @synthesize activeSections;
 
+NSString *selectedNumber;
 NSMutableData *responseData;
 BOOL attemptedImageLoad;
 
@@ -28,6 +29,7 @@ BOOL attemptedImageLoad;
     if (self) {
         // Custom initialization
         activeSections = [[NSMutableArray alloc] init];
+        selectedNumber = [[NSString alloc] init];
     }
     return self;
 }
@@ -36,6 +38,7 @@ BOOL attemptedImageLoad;
 {
     [super dealloc];
     [activeSections release];
+    [selectedNumber release];
     [indv release];
 }
 
@@ -189,6 +192,8 @@ BOOL attemptedImageLoad;
         self.splitCell = nil;
     }
     
+    cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
+    
     // Configure the cell...
     NSMutableArray *data = [activeSections objectAtIndex:indexPath.section];
     NSObject *object = [data objectAtIndex:indexPath.row];
@@ -249,6 +254,7 @@ BOOL attemptedImageLoad;
             name = [name stringByAppendingFormat:@" %@", i.lastName];
         
         cell.contents.text = name;
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     else if ([object isKindOfClass:[AcsPhone class]])
     {
@@ -267,7 +273,7 @@ BOOL attemptedImageLoad;
     }
     
     cell.name.text = [cell.name.text lowercaseString];
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    
     return cell;
 }
 
@@ -410,15 +416,31 @@ BOOL attemptedImageLoad;
     else if ([object isKindOfClass:[AcsPhone class]])
     {
         AcsPhone *p = (AcsPhone *)object;
-        
         NSString *number;
-        if (![p.areaCode isEqualToString:@""])
-            number = [NSString stringWithFormat:@"%@-%@", p.areaCode, p.phoneNumber];
-        else
-            number = p.phoneNumber;
+        NSString *displayNumber;
         
-        number = [NSString stringWithFormat:@"tel:%@", number];
-        NSLog(@"number: %@", number);
+        if (![p.areaCode isEqualToString:@""])
+        {
+            number = [NSString stringWithFormat:@"%@-%@", p.areaCode, p.phoneNumber];
+            displayNumber = [NSString stringWithFormat:@"(%@) %@", p.areaCode, p.phoneNumber];
+        }
+        else
+        {
+            number = p.phoneNumber;
+            displayNumber = p.phoneNumber;
+        }
+        
+        
+        selectedNumber = [number copy];
+        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:displayNumber
+                                                                 delegate:self 
+                                                        cancelButtonTitle:@"Cancel" 
+                                                   destructiveButtonTitle:nil 
+                                                        otherButtonTitles:@"Call This Number", @"Send Text Message", nil];
+        
+        [actionSheet showFromTabBar:self.tabBarController.tabBar];
+        [actionSheet release];
+        /*number = [NSString stringWithFormat:@"tel:%@", number];
         
         UIDevice *device = [UIDevice currentDevice];
         if ([[device model] isEqualToString:@"iPhone"]) 
@@ -428,10 +450,36 @@ BOOL attemptedImageLoad;
             UIAlertView *Notpermitted=[[UIAlertView alloc] initWithTitle:@"Alert" message:@"Your device doesn't support this feature." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
             [Notpermitted show];
             [Notpermitted release];
-        }
+        }*/
         
         [self performSelector:@selector(deselectRow:) withObject:indexPath afterDelay:0.5];
     };
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    if (!(buttonIndex == [actionSheet cancelButtonIndex]))
+    {
+        UIDevice *device = [UIDevice currentDevice];
+        if (![[device model] isEqualToString:@"iPhone"])
+        {
+            UIAlertView *Notpermitted=[[UIAlertView alloc] initWithTitle:@"Alert" message:@"Your device doesn't support this feature." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            [Notpermitted show];
+            [Notpermitted release];
+            return;
+        }
+        
+        if (buttonIndex == [actionSheet firstOtherButtonIndex]) //dial phone
+        {
+            NSString *number = [NSString stringWithFormat:@"tel:%@", selectedNumber];
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:number]];
+        }
+        else if (buttonIndex == [actionSheet firstOtherButtonIndex]+1) //send text
+        {
+            NSString *number = [NSString stringWithFormat:@"sms:%@", selectedNumber];
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:number]];
+        }        
+    }
 }
 
 - (void)showIndividualProfile:(id)sender
