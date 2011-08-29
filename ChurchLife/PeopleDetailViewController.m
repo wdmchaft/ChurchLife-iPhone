@@ -431,6 +431,7 @@ BOOL attemptedImageLoad;
         }
         
         
+        [selectedNumber release];
         selectedNumber = [number copy];
         UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:displayNumber
                                                                  delegate:self 
