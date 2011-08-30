@@ -396,7 +396,7 @@ BOOL attemptedImageLoad;
         else
             addressText = csz;   
 
-        // URL encode the spaces
+        // URL encode the spaces]
         addressText =  [addressText stringByAddingPercentEscapesUsingEncoding: NSASCIIStringEncoding];	
         NSString *urlText = [NSString stringWithFormat:@"http://maps.google.com/maps?q=%@", addressText];
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlText]];
@@ -441,17 +441,6 @@ BOOL attemptedImageLoad;
         
         [actionSheet showFromTabBar:self.tabBarController.tabBar];
         [actionSheet release];
-        /*number = [NSString stringWithFormat:@"tel:%@", number];
-        
-        UIDevice *device = [UIDevice currentDevice];
-        if ([[device model] isEqualToString:@"iPhone"]) 
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:number]];
-        else 
-        {
-            UIAlertView *Notpermitted=[[UIAlertView alloc] initWithTitle:@"Alert" message:@"Your device doesn't support this feature." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-            [Notpermitted show];
-            [Notpermitted release];
-        }*/
         
         [self performSelector:@selector(deselectRow:) withObject:indexPath afterDelay:0.5];
     };
