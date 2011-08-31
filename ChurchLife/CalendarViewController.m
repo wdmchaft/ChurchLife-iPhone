@@ -10,6 +10,7 @@
 #import "CalendarDetailViewController.h"
 #import "AcsLink.h"
 #import "AcsEvent.h"
+#import "GTMNSString+HTML.h"
 
 @implementation CalendarViewController
 
@@ -256,9 +257,9 @@ int rowCount[12];
             event.eventID = [eventData valueForKey:@"EventId"];
             event.eventTypeID = [eventData valueForKey:@"EventTypeId"];
             event.locationID = [eventData valueForKey:@"LocationId"];
-            event.description = [eventData valueForKey:@"Description"];
-            event.eventName = [eventData valueForKey:@"EventName"];
-            event.location = [eventData valueForKey:@"Location"];
+            event.description = [[eventData valueForKey:@"Description"] gtm_stringByUnescapingFromHTML];
+            event.eventName = [[eventData valueForKey:@"EventName"] gtm_stringByUnescapingFromHTML];
+            event.location = [[eventData valueForKey:@"Location"] gtm_stringByUnescapingFromHTML];
             event.note = [eventData valueForKey:@"Note"];
             
             //parse dates

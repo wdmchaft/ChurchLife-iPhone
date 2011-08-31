@@ -65,6 +65,7 @@
 		CEDB83BB13B5110B00FEC747 /* churchlife.logo.login.png in Resources */ = {isa = PBXBuildFile; fileRef = CEDB83BA13B5110A00FEC747 /* churchlife.logo.login.png */; };
 		CEDB83BD13B5112A00FEC747 /* no-person-photo.png in Resources */ = {isa = PBXBuildFile; fileRef = CEDB83BC13B5112A00FEC747 /* no-person-photo.png */; };
 		CEF5392C140E7C1C00EF40CC /* iToast.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF5392B140E7C1C00EF40CC /* iToast.m */; };
+		CEF53931140ED28700EF40CC /* GTMNSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF53930140ED28700EF40CC /* GTMNSString+HTML.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -151,6 +152,8 @@
 		CEDB83BC13B5112A00FEC747 /* no-person-photo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "no-person-photo.png"; sourceTree = "<group>"; };
 		CEF5392A140E7C1C00EF40CC /* iToast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iToast.h; sourceTree = "<group>"; };
 		CEF5392B140E7C1C00EF40CC /* iToast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iToast.m; sourceTree = "<group>"; };
+		CEF5392F140ED28700EF40CC /* GTMNSString+HTML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GTMNSString+HTML.h"; sourceTree = "<group>"; };
+		CEF53930140ED28700EF40CC /* GTMNSString+HTML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GTMNSString+HTML.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -207,19 +210,11 @@
 		BA1951F813A1986E00AA6F59 /* ChurchLife */ = {
 			isa = PBXGroup;
 			children = (
+				CEF5392D140ED1FA00EF40CC /* Custom Cells */,
 				BAB3262B13ABBB1700F8B2AD /* Acs */,
 				CE82F02213E84EB20073EBD8 /* Helpers */,
-				BAB3262613ABAD4300F8B2AD /* json */,
-				CE7E6B6B13EC317000EE747A /* MBProgressHUD */,
-				CEF53928140E7BF600EF40CC /* iToast */,
 				CE19BEA113AFBCCF00A62939 /* Resources */,
 				BA1951F913A1986E00AA6F59 /* Supporting Files */,
-				CE19BEC013AFBD9500A62939 /* CalendarCell.h */,
-				CE19BEC113AFBD9500A62939 /* CalendarCell.m */,
-				CE19BEC213AFBD9500A62939 /* CalendarCell.xib */,
-				CE19BEE213B1226700A62939 /* SplitCell.h */,
-				CE19BEE313B1226700A62939 /* SplitCell.m */,
-				CE19BEE513B1228F00A62939 /* SplitCell.xib */,
 				BA19520113A1986E00AA6F59 /* ChurchLifeAppDelegate.h */,
 				BA19520213A1986E00AA6F59 /* ChurchLifeAppDelegate.m */,
 				BA19520413A1986E00AA6F59 /* MainWindow.xib */,
@@ -260,13 +255,13 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		BAB3262613ABAD4300F8B2AD /* json */ = {
+		BAB3262613ABAD4300F8B2AD /* JSONKit */ = {
 			isa = PBXGroup;
 			children = (
 				BAB3262713ABAD8400F8B2AD /* JSONKit.h */,
 				BAB3262813ABAD8400F8B2AD /* JSONKit.m */,
 			);
-			name = json;
+			name = JSONKit;
 			sourceTree = "<group>";
 		};
 		BAB3262B13ABBB1700F8B2AD /* Acs */ = {
@@ -343,6 +338,10 @@
 		CE82F02213E84EB20073EBD8 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				CEF5392E140ED27400EF40CC /* GoogleToolbox */,
+				CEF53928140E7BF600EF40CC /* iToast */,
+				BAB3262613ABAD4300F8B2AD /* JSONKit */,
+				CE7E6B6B13EC317000EE747A /* MBProgressHUD */,
 				CE82F02413E84EFE0073EBD8 /* Base64.h */,
 			);
 			name = Helpers;
@@ -355,6 +354,28 @@
 				CEF5392B140E7C1C00EF40CC /* iToast.m */,
 			);
 			name = iToast;
+			sourceTree = "<group>";
+		};
+		CEF5392D140ED1FA00EF40CC /* Custom Cells */ = {
+			isa = PBXGroup;
+			children = (
+				CE19BEC013AFBD9500A62939 /* CalendarCell.h */,
+				CE19BEC113AFBD9500A62939 /* CalendarCell.m */,
+				CE19BEC213AFBD9500A62939 /* CalendarCell.xib */,
+				CE19BEE213B1226700A62939 /* SplitCell.h */,
+				CE19BEE313B1226700A62939 /* SplitCell.m */,
+				CE19BEE513B1228F00A62939 /* SplitCell.xib */,
+			);
+			name = "Custom Cells";
+			sourceTree = "<group>";
+		};
+		CEF5392E140ED27400EF40CC /* GoogleToolbox */ = {
+			isa = PBXGroup;
+			children = (
+				CEF5392F140ED28700EF40CC /* GTMNSString+HTML.h */,
+				CEF53930140ED28700EF40CC /* GTMNSString+HTML.m */,
+			);
+			name = GoogleToolbox;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -467,6 +488,7 @@
 				CE82F03213EB12480073EBD8 /* AcsEvent.m in Sources */,
 				CE7E6B6F13EC319100EE747A /* MBProgressHUD.m in Sources */,
 				CEF5392C140E7C1C00EF40CC /* iToast.m in Sources */,
+				CEF53931140ED28700EF40CC /* GTMNSString+HTML.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
