@@ -161,14 +161,14 @@ BOOL attemptedImageLoad;
     //set active sections
     [activeSections removeAllObjects];
     
+    if (indv.phones.count > 0)
+        [activeSections addObject:indv.phones];
     if (indv.emails.count > 0)
         [activeSections addObject:indv.emails];
     if (indv.addresses.count > 0)
         [activeSections addObject:indv.addresses];
     if (indv.familyMembers.count > 0)
         [activeSections addObject:indv.familyMembers];
-    if (indv.phones.count > 0)
-        [activeSections addObject:indv.phones];
     
     return [activeSections count];
 }
@@ -198,7 +198,22 @@ BOOL attemptedImageLoad;
     NSMutableArray *data = [activeSections objectAtIndex:indexPath.section];
     NSObject *object = [data objectAtIndex:indexPath.row];
     
-    if ([object isKindOfClass:[AcsEmail class]])
+    if ([object isKindOfClass:[AcsPhone class]])
+    {
+        AcsPhone *p = (AcsPhone *)object;
+        NSString *phoneNumber;
+        if (![p.areaCode isEqualToString:@""])
+            phoneNumber = [NSString stringWithFormat:@"(%@) %@", p.areaCode, p.phoneNumber];
+        else
+            phoneNumber = p.phoneNumber;
+        
+        if (![p.extension isEqualToString:@""])
+            phoneNumber = [phoneNumber stringByAppendingFormat:@" x%@", p.extension];
+        
+        cell.name.text = p.phoneType;
+        cell.contents.text = phoneNumber;
+    }
+    else if ([object isKindOfClass:[AcsEmail class]])
     {
         AcsEmail *e = (AcsEmail *)object;
         cell.name.text = e.emailType;
@@ -256,21 +271,6 @@ BOOL attemptedImageLoad;
         cell.contents.text = name;
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
-    else if ([object isKindOfClass:[AcsPhone class]])
-    {
-        AcsPhone *p = (AcsPhone *)object;
-        NSString *phoneNumber;
-        if (![p.areaCode isEqualToString:@""])
-            phoneNumber = [NSString stringWithFormat:@"(%@) %@", p.areaCode, p.phoneNumber];
-        else
-            phoneNumber = p.phoneNumber;
-        
-        if (![p.extension isEqualToString:@""])
-            phoneNumber = [phoneNumber stringByAppendingFormat:@" x%@", p.extension];
-        
-        cell.name.text = p.phoneType;
-        cell.contents.text = phoneNumber;
-    }
     
     cell.name.text = [cell.name.text lowercaseString];
     
@@ -282,7 +282,12 @@ BOOL attemptedImageLoad;
     NSMutableArray *data = [activeSections objectAtIndex:indexPath.section];
     NSObject *object = [data objectAtIndex:indexPath.row];
     
-    if ([object isKindOfClass:[AcsEmail class]])
+    if ([object isKindOfClass:[AcsPhone class]])
+    {
+        //AcsPhone *p = (AcsPhone *)object;
+        return 36.0f;
+    }
+    else if ([object isKindOfClass:[AcsEmail class]])
     {
         //AcsEmail *e = (AcsEmail *)object;
         return 36.0f;
@@ -295,11 +300,6 @@ BOOL attemptedImageLoad;
     else if ([object isKindOfClass:[AcsIndividual class]])
     {
         //AcsIndividual *i = (AcsIndividual *)object;
-        return 36.0f;
-    }
-    else if ([object isKindOfClass:[AcsPhone class]])
-    {
-        //AcsPhone *p = (AcsPhone *)object;
         return 36.0f;
     }
     else
@@ -357,7 +357,38 @@ BOOL attemptedImageLoad;
     NSMutableArray *data = [activeSections objectAtIndex:indexPath.section];
     NSObject *object = [data objectAtIndex:indexPath.row];
     
-    if ([object isKindOfClass:[AcsEmail class]])
+    if ([object isKindOfClass:[AcsPhone class]])
+    {
+        AcsPhone *p = (AcsPhone *)object;
+        NSString *number;
+        NSString *displayNumber;
+        
+        if (![p.areaCode isEqualToString:@""])
+        {
+            number = [NSString stringWithFormat:@"%@-%@", p.areaCode, p.phoneNumber];
+            displayNumber = [NSString stringWithFormat:@"(%@) %@", p.areaCode, p.phoneNumber];
+        }
+        else
+        {
+            number = p.phoneNumber;
+            displayNumber = p.phoneNumber;
+        }
+        
+        
+        [selectedNumber release];
+        selectedNumber = [number copy];
+        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:displayNumber
+                                                                 delegate:self 
+                                                        cancelButtonTitle:@"Cancel" 
+                                                   destructiveButtonTitle:nil 
+                                                        otherButtonTitles:@"Call This Number", @"Send Text Message", nil];
+        
+        [actionSheet showFromTabBar:self.tabBarController.tabBar];
+        [actionSheet release];
+        
+        [self performSelector:@selector(deselectRow:) withObject:indexPath afterDelay:0.5];
+    }
+    else if ([object isKindOfClass:[AcsEmail class]])
     {
         AcsEmail *e = (AcsEmail *)object;
         NSString *url = [NSString stringWithFormat:@"mailto:%@", e.email];
@@ -413,37 +444,6 @@ BOOL attemptedImageLoad;
         AcsIndividual *i = (AcsIndividual *)object;
         [HUD showWhileExecuting:@selector(showIndividualProfile:) onTarget:self withObject:i animated:YES];
     }
-    else if ([object isKindOfClass:[AcsPhone class]])
-    {
-        AcsPhone *p = (AcsPhone *)object;
-        NSString *number;
-        NSString *displayNumber;
-        
-        if (![p.areaCode isEqualToString:@""])
-        {
-            number = [NSString stringWithFormat:@"%@-%@", p.areaCode, p.phoneNumber];
-            displayNumber = [NSString stringWithFormat:@"(%@) %@", p.areaCode, p.phoneNumber];
-        }
-        else
-        {
-            number = p.phoneNumber;
-            displayNumber = p.phoneNumber;
-        }
-        
-        
-        [selectedNumber release];
-        selectedNumber = [number copy];
-        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:displayNumber
-                                                                 delegate:self 
-                                                        cancelButtonTitle:@"Cancel" 
-                                                   destructiveButtonTitle:nil 
-                                                        otherButtonTitles:@"Call This Number", @"Send Text Message", nil];
-        
-        [actionSheet showFromTabBar:self.tabBarController.tabBar];
-        [actionSheet release];
-        
-        [self performSelector:@selector(deselectRow:) withObject:indexPath afterDelay:0.5];
-    };
 }
 
 - (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
