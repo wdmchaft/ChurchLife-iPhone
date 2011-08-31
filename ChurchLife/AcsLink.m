@@ -12,7 +12,7 @@
 @implementation AcsLink
 
 +(BOOL)LoginBySite: (int)siteNumber userName:(NSString *)userName password:(NSString *)password {   
-    NSURL *url = [NSURL URLWithString:@"https://api.accessacs.com/account/validate"];
+    NSURL *url = [NSURL URLWithString:@"https://api.accessacs.com/accounts/validate"];
     NSError *error;
     NSURLResponse *response;
     NSData *dataReply;
@@ -52,7 +52,7 @@
  }
 
 +(NSMutableArray *)LoginWithEmail: (NSString *)email password:(NSString *)password{
-    NSURL *url = [NSURL URLWithString:@"https://api.accessacs.com/account/findbyemail"];
+    NSURL *url = [NSURL URLWithString:@"https://api.accessacs.com/accounts/findbyemail"];
     NSError *error;
     NSURLResponse *response;
     NSData *dataReply;
@@ -126,7 +126,7 @@
 
 +(AcsIndividual *)GetIndividual:(int)indvID{
     CurrentIdentity *identity = [CurrentIdentity sharedIdentity];
-    NSString *urlString = [NSString stringWithFormat:@"https://api.accessacs.com/%@/individual/%d", identity.siteNumber, indvID];    
+    NSString *urlString = [NSString stringWithFormat:@"https://api.accessacs.com/%@/individuals/%d", identity.siteNumber, indvID];    
     NSURL *url = [NSURL URLWithString:urlString];    
     NSError *error;
     NSURLResponse *response;
@@ -306,7 +306,7 @@
 
 +(AcsEvent *)GetEvent:(NSString *)eventID{
     CurrentIdentity *identity = [CurrentIdentity sharedIdentity];
-    NSString *urlString = [NSString stringWithFormat:@"https://api.accessacs.com/%@/event/%@", identity.siteNumber, eventID];    
+    NSString *urlString = [NSString stringWithFormat:@"https://api.accessacs.com/%@/events/%@", identity.siteNumber, eventID];    
     NSURL *url = [NSURL URLWithString:urlString];    
     NSError *error;
     NSURLResponse *response;

@@ -223,7 +223,7 @@ int rowCount[12];
         NSDictionary *results = [decodedResponse objectForKey:@"Data"];
         BOOL hasMore = [[results valueForKey:@"HasMore"] boolValue];
         int firstResult = [[results valueForKey:@"FirstResult"] intValue];
-        NSArray *events = [results valueForKey:@"Data"];
+        NSArray *events = [results valueForKey:@"List"];
         
         if (searchResults != nil)
         {

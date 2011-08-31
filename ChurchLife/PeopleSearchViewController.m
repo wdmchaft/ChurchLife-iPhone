@@ -256,7 +256,7 @@ NSMutableData *responseData;
             NSDictionary *results = [decodedResponse objectForKey:@"Data"];
             BOOL hasMore = [[results valueForKey:@"HasMore"] boolValue];
             int firstResult = [[results valueForKey:@"FirstResult"] intValue];
-            NSArray *individuals = [results valueForKey:@"Data"];
+            NSArray *individuals = [results valueForKey:@"List"];
             
             if (searchResults != nil)
             {
