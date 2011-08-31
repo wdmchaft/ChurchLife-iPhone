@@ -116,6 +116,8 @@ NSMutableArray *values;
     [[redRect layer] setCornerRadius:8.0f];
     [[redRect layer] setMasksToBounds:YES];
     [[redRect layer] setBorderWidth:1.0f];
+    [[whiteRect layer] setCornerRadius:8.0f];
+    [[whiteRect layer] setMasksToBounds:YES];
     [[whiteRect layer] setBorderWidth:1.0f];
 }
 
