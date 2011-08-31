@@ -64,6 +64,7 @@
 		CEA99F4B1474540C00DD0D2D /* sectionheaderbackground.png in Resources */ = {isa = PBXBuildFile; fileRef = CEA99F4A1474540C00DD0D2D /* sectionheaderbackground.png */; };
 		CEDB83BB13B5110B00FEC747 /* churchlife.logo.login.png in Resources */ = {isa = PBXBuildFile; fileRef = CEDB83BA13B5110A00FEC747 /* churchlife.logo.login.png */; };
 		CEDB83BD13B5112A00FEC747 /* no-person-photo.png in Resources */ = {isa = PBXBuildFile; fileRef = CEDB83BC13B5112A00FEC747 /* no-person-photo.png */; };
+		CEF5392C140E7C1C00EF40CC /* iToast.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF5392B140E7C1C00EF40CC /* iToast.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -148,6 +149,8 @@
 		CEA99F4A1474540C00DD0D2D /* sectionheaderbackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sectionheaderbackground.png; sourceTree = "<group>"; };
 		CEDB83BA13B5110A00FEC747 /* churchlife.logo.login.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = churchlife.logo.login.png; sourceTree = "<group>"; };
 		CEDB83BC13B5112A00FEC747 /* no-person-photo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "no-person-photo.png"; sourceTree = "<group>"; };
+		CEF5392A140E7C1C00EF40CC /* iToast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iToast.h; sourceTree = "<group>"; };
+		CEF5392B140E7C1C00EF40CC /* iToast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iToast.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -208,6 +211,7 @@
 				CE82F02213E84EB20073EBD8 /* Helpers */,
 				BAB3262613ABAD4300F8B2AD /* json */,
 				CE7E6B6B13EC317000EE747A /* MBProgressHUD */,
+				CEF53928140E7BF600EF40CC /* iToast */,
 				CE19BEA113AFBCCF00A62939 /* Resources */,
 				BA1951F913A1986E00AA6F59 /* Supporting Files */,
 				CE19BEC013AFBD9500A62939 /* CalendarCell.h */,
@@ -344,6 +348,15 @@
 			name = Helpers;
 			sourceTree = "<group>";
 		};
+		CEF53928140E7BF600EF40CC /* iToast */ = {
+			isa = PBXGroup;
+			children = (
+				CEF5392A140E7C1C00EF40CC /* iToast.h */,
+				CEF5392B140E7C1C00EF40CC /* iToast.m */,
+			);
+			name = iToast;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -453,6 +466,7 @@
 				CE82F02F13E9C2970073EBD8 /* AcsPhone.m in Sources */,
 				CE82F03213EB12480073EBD8 /* AcsEvent.m in Sources */,
 				CE7E6B6F13EC319100EE747A /* MBProgressHUD.m in Sources */,
+				CEF5392C140E7C1C00EF40CC /* iToast.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -11,18 +11,20 @@
 #import "JSONKit.h"
 #import "AcsLink.h"
 #import "AcsIndividual.h"
+#import "iToast.h"
 
 @implementation PeopleSearchViewController
 
 @synthesize searchBar;
 
 NSMutableData *responseData;
+iToast *toast;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
     if (self) {
-        // Custom initialization
+        toast = [[iToast init] alloc];
     }
     return self;
 }
@@ -30,6 +32,7 @@ NSMutableData *responseData;
 - (void)dealloc
 {
     [super dealloc];
+    [toast release];
 }
 
 - (void)didReceiveMemoryWarning
@@ -87,6 +90,7 @@ NSMutableData *responseData;
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
+    [toast hideToast:nil];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -181,6 +185,8 @@ NSMutableData *responseData;
 }
 
 - (void) searchTableView {
+    [toast hideToast:nil];
+    
     // The hud will disable all input on the view (use the highest view possible in the view hierarchy)
     HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
     HUD.labelText = @"Loading...";
@@ -301,6 +307,12 @@ NSMutableData *responseData;
             [searchBar resignFirstResponder];
             self.navigationItem.rightBarButtonItem = nil;
             [self.tableView reloadData];
+            
+            if ([individuals count] == 0)
+            {
+                toast = [iToast makeText:NSLocalizedString(@"Sorry, no people found with that name.", @"")];
+                [[[toast setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
+            }
         }
     }   
     [HUD hide:YES];
