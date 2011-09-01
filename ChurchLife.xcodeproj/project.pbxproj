@@ -66,6 +66,8 @@
 		CEDB83BD13B5112A00FEC747 /* no-person-photo.png in Resources */ = {isa = PBXBuildFile; fileRef = CEDB83BC13B5112A00FEC747 /* no-person-photo.png */; };
 		CEF5392C140E7C1C00EF40CC /* iToast.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF5392B140E7C1C00EF40CC /* iToast.m */; };
 		CEF53931140ED28700EF40CC /* GTMNSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF53930140ED28700EF40CC /* GTMNSString+HTML.m */; };
+		CEF53941140FF8E800EF40CC /* button-highlight.png in Resources */ = {isa = PBXBuildFile; fileRef = CEF5393F140FF8E800EF40CC /* button-highlight.png */; };
+		CEF53942140FF8E800EF40CC /* button.png in Resources */ = {isa = PBXBuildFile; fileRef = CEF53940140FF8E800EF40CC /* button.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -154,6 +156,8 @@
 		CEF5392B140E7C1C00EF40CC /* iToast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iToast.m; sourceTree = "<group>"; };
 		CEF5392F140ED28700EF40CC /* GTMNSString+HTML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GTMNSString+HTML.h"; sourceTree = "<group>"; };
 		CEF53930140ED28700EF40CC /* GTMNSString+HTML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GTMNSString+HTML.m"; sourceTree = "<group>"; };
+		CEF5393F140FF8E800EF40CC /* button-highlight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button-highlight.png"; sourceTree = "<group>"; };
+		CEF53940140FF8E800EF40CC /* button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -287,6 +291,8 @@
 		CE19BEA313AFBCD900A62939 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				CEF5393F140FF8E800EF40CC /* button-highlight.png */,
+				CEF53940140FF8E800EF40CC /* button.png */,
 				CEA99F4A1474540C00DD0D2D /* sectionheaderbackground.png */,
 				CEDB83BC13B5112A00FEC747 /* no-person-photo.png */,
 				CEDB83BA13B5110A00FEC747 /* churchlife.logo.login.png */,
@@ -456,6 +462,8 @@
 				CE7C201513DF4B4400156654 /* LoginView2.xib in Resources */,
 				CE888FBE13E1A46A005966C3 /* UserViewController.xib in Resources */,
 				CEA99F4B1474540C00DD0D2D /* sectionheaderbackground.png in Resources */,
+				CEF53941140FF8E800EF40CC /* button-highlight.png in Resources */,
+				CEF53942140FF8E800EF40CC /* button.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
