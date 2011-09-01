@@ -49,7 +49,7 @@
 						<string key="NSFrame">{{17, 158}, {287, 40}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="76607089"/>
+						<reference key="NSNextKeyView" ref="243168319"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
@@ -103,7 +103,7 @@
 						<int key="IBUITextAlignment">1</int>
 						<int key="IBUILineBreakMode">0</int>
 					</object>
-					<object class="IBUILabel" id="76607089">
+					<object class="IBUILabel" id="243168319">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{140, 337}, {167, 21}}</string>
@@ -176,7 +176,7 @@
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">versionNumber</string>
 						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="76607089"/>
+						<reference key="destination" ref="243168319"/>
 					</object>
 					<int key="connectionID">10</int>
 				</object>
@@ -196,7 +196,7 @@
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="252232657"/>
-							<reference ref="76607089"/>
+							<reference ref="243168319"/>
 							<reference ref="739626043"/>
 						</object>
 						<reference key="parent" ref="0"/>
@@ -224,7 +224,7 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">9</int>
-						<reference key="object" ref="76607089"/>
+						<reference key="object" ref="243168319"/>
 						<reference key="parent" ref="191373211"/>
 					</object>
 				</object>

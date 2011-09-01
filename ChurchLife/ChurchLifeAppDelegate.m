@@ -11,13 +11,14 @@
 
 @implementation ChurchLifeAppDelegate
 
-
 @synthesize window=_window;
-
 @synthesize tabBarController=_tabBarController;
+
+NSString *cachedServicePrefix;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    cachedServicePrefix = [[NSString alloc] initWithString:@""];
     // Override point for customization after application launch.
     // Add the tab bar controller's current view as a subview of the window
     self.window.rootViewController = self.tabBarController;
@@ -122,6 +123,7 @@
 
 - (void)dealloc
 {
+    [cachedServicePrefix release];
     [_window release];
     [_tabBarController release];
     [super dealloc];
@@ -142,18 +144,27 @@
         NSLog(@"Unable to delete file: %@", [error localizedDescription]);  
 }
 
-/*
-// Optional UITabBarControllerDelegate method.
-- (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController
+- (NSString *)getServicePrefix
 {
+    if (![cachedServicePrefix isEqualToString:@""])
+        return cachedServicePrefix;
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *result;
+    BOOL useDefaultService = [defaults boolForKey:@"enabled_preference"];
+    if (useDefaultService)
+        result = [NSString stringWithString:@"https://api.accessacs.com"];
+    else
+    {
+        NSString *servicePrefix = [defaults stringForKey:@"url_preference"];
+        if (![servicePrefix isEqualToString:@""])
+            result = servicePrefix;
+        else
+            result = [NSString stringWithString:@"https://api.accessacs.com"];
+    }
+    
+    cachedServicePrefix = [result copy];
+    return result;
 }
-*/
-
-/*
-// Optional UITabBarControllerDelegate method.
-- (void)tabBarController:(UITabBarController *)tabBarController didEndCustomizingViewControllers:(NSArray *)viewControllers changed:(BOOL)changed
-{
-}
-*/
 
 @end

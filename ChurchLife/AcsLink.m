@@ -8,11 +8,14 @@
 
 #import "AcsLink.h"
 #import "Base64.h"
+#import "ChurchLifeAppDelegate.h"
 
 @implementation AcsLink
 
-+(BOOL)LoginBySite: (int)siteNumber userName:(NSString *)userName password:(NSString *)password {   
-    NSURL *url = [NSURL URLWithString:@"https://api.accessacs.com/accounts/validate"];
++(BOOL)LoginBySite: (int)siteNumber userName:(NSString *)userName password:(NSString *)password { 
+    ChurchLifeAppDelegate *appDelegate = (ChurchLifeAppDelegate *)[[UIApplication sharedApplication] delegate];
+    NSString *servicePrefix = [appDelegate getServicePrefix];
+    NSURL *url = [NSURL URLWithString:[servicePrefix stringByAppendingPathComponent:@"accounts/validate"]];
     NSError *error;
     NSURLResponse *response;
     NSData *dataReply;
@@ -52,7 +55,9 @@
  }
 
 +(NSMutableArray *)LoginWithEmail: (NSString *)email password:(NSString *)password{
-    NSURL *url = [NSURL URLWithString:@"https://api.accessacs.com/accounts/findbyemail"];
+    ChurchLifeAppDelegate *appDelegate = (ChurchLifeAppDelegate *)[[UIApplication sharedApplication] delegate];
+    NSString *servicePrefix = [appDelegate getServicePrefix];
+    NSURL *url = [NSURL URLWithString:[servicePrefix stringByAppendingPathComponent:@"accounts/findbyemail"]];
     NSError *error;
     NSURLResponse *response;
     NSData *dataReply;
@@ -103,8 +108,11 @@
 +(void)IndividualSearch: (NSString *)searchText firstResult:(int)first maxResults:(int)max delegate:(NSObject *)delegate{
     CurrentIdentity *identity = [CurrentIdentity sharedIdentity];
     NSString *search = [searchText stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
-    NSString *urlString = [NSString stringWithFormat:@"https://api.accessacs.com/%@/individuals?searchText=%@&firstResult=%d&maxResults=%d",
-                           identity.siteNumber, search, first, max];
+    ChurchLifeAppDelegate *appDelegate = (ChurchLifeAppDelegate *)[[UIApplication sharedApplication] delegate];
+    NSString *servicePrefix = [appDelegate getServicePrefix];
+    NSString *urlString = [servicePrefix stringByAppendingPathComponent:
+                           [NSString stringWithFormat:@"%@/individuals?searchText=%@&firstResult=%d&maxResults=%d",
+                           identity.siteNumber, search, first, max]];
     
 	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlString]];
     NSMutableString *dataStr = [NSMutableString stringWithFormat:@"%@:%@", identity.userName, identity.password];
@@ -126,7 +134,11 @@
 
 +(AcsIndividual *)GetIndividual:(int)indvID{
     CurrentIdentity *identity = [CurrentIdentity sharedIdentity];
-    NSString *urlString = [NSString stringWithFormat:@"https://api.accessacs.com/%@/individuals/%d", identity.siteNumber, indvID];    
+    ChurchLifeAppDelegate *appDelegate = (ChurchLifeAppDelegate *)[[UIApplication sharedApplication] delegate];
+    NSString *servicePrefix = [appDelegate getServicePrefix];
+    NSString *urlString = [servicePrefix stringByAppendingPathComponent:
+                           [NSString stringWithFormat:@"%@/individuals/%d", identity.siteNumber, indvID]];    
+    
     NSURL *url = [NSURL URLWithString:urlString];    
     NSError *error;
     NSURLResponse *response;
@@ -282,9 +294,11 @@
     NSDateFormatter* formatter = [[[NSDateFormatter alloc] init] autorelease];
     [formatter setDateFormat:@"MM/dd/yyyy"];
     
-    
-    NSString *urlString = [NSString stringWithFormat:@"https://api.accessacs.com/%@/events?startDate=%@&stopDate=%@&firstResult=%d&maxResults=%d",
-                           identity.siteNumber, [formatter stringFromDate:startDate], [formatter stringFromDate:stopDate], first, max];
+    ChurchLifeAppDelegate *appDelegate = (ChurchLifeAppDelegate *)[[UIApplication sharedApplication] delegate];
+    NSString *servicePrefix = [appDelegate getServicePrefix];
+    NSString *urlString = [servicePrefix stringByAppendingPathComponent:
+                          [NSString stringWithFormat:@"%@/events?startDate=%@&stopDate=%@&firstResult=%d&maxResults=%d",
+                          identity.siteNumber, [formatter stringFromDate:startDate], [formatter stringFromDate:stopDate], first, max]];
     
 	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlString]];
     NSMutableString *dataStr = [NSMutableString stringWithFormat:@"%@:%@", identity.userName, identity.password];
@@ -306,7 +320,11 @@
 
 +(AcsEvent *)GetEvent:(NSString *)eventID{
     CurrentIdentity *identity = [CurrentIdentity sharedIdentity];
-    NSString *urlString = [NSString stringWithFormat:@"https://api.accessacs.com/%@/events/%@", identity.siteNumber, eventID];    
+    ChurchLifeAppDelegate *appDelegate = (ChurchLifeAppDelegate *)[[UIApplication sharedApplication] delegate];
+    NSString *servicePrefix = [appDelegate getServicePrefix];
+    NSString *urlString = [servicePrefix stringByAppendingPathComponent:
+                          [NSString stringWithFormat:@"%@/events/%@", identity.siteNumber, eventID]];
+    
     NSURL *url = [NSURL URLWithString:urlString];    
     NSError *error;
     NSURLResponse *response;

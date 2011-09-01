@@ -9,13 +9,13 @@
 #import <UIKit/UIKit.h>
 
 @interface ChurchLifeAppDelegate : NSObject <UIApplicationDelegate, UITabBarControllerDelegate> {
-
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 
 @property (nonatomic, retain) IBOutlet UITabBarController *tabBarController;
 - (NSString *)dataFilePath;
+- (NSString *)getServicePrefix;
 - (void)deletePreferences;
 - (void)showLoginForm;
 

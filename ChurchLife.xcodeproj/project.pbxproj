@@ -68,6 +68,7 @@
 		CEF53931140ED28700EF40CC /* GTMNSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF53930140ED28700EF40CC /* GTMNSString+HTML.m */; };
 		CEF53941140FF8E800EF40CC /* button-highlight.png in Resources */ = {isa = PBXBuildFile; fileRef = CEF5393F140FF8E800EF40CC /* button-highlight.png */; };
 		CEF53942140FF8E800EF40CC /* button.png in Resources */ = {isa = PBXBuildFile; fileRef = CEF53940140FF8E800EF40CC /* button.png */; };
+		CEF539441410068A00EF40CC /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CEF539431410068900EF40CC /* Settings.bundle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -158,6 +159,7 @@
 		CEF53930140ED28700EF40CC /* GTMNSString+HTML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GTMNSString+HTML.m"; sourceTree = "<group>"; };
 		CEF5393F140FF8E800EF40CC /* button-highlight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button-highlight.png"; sourceTree = "<group>"; };
 		CEF53940140FF8E800EF40CC /* button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button.png; sourceTree = "<group>"; };
+		CEF539431410068900EF40CC /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -255,6 +257,7 @@
 				BA1951FB13A1986E00AA6F59 /* InfoPlist.strings */,
 				BA1951FE13A1986E00AA6F59 /* ChurchLife-Prefix.pch */,
 				BA1951FF13A1986E00AA6F59 /* main.m */,
+				CEF539431410068900EF40CC /* Settings.bundle */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -464,6 +467,7 @@
 				CEA99F4B1474540C00DD0D2D /* sectionheaderbackground.png in Resources */,
 				CEF53941140FF8E800EF40CC /* button-highlight.png in Resources */,
 				CEF53942140FF8E800EF40CC /* button.png in Resources */,
+				CEF539441410068A00EF40CC /* Settings.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
