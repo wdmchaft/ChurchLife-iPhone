@@ -21,6 +21,8 @@
 			<string>Service URL</string>
 			<key>Key</key>
 			<string>url_preference</string>
+			<key>DefaultValue</key>
+			<string></string>
 		</dict>
 	</array>
 	<key>StringsTable</key>

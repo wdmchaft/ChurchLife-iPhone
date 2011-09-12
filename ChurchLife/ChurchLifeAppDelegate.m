@@ -28,6 +28,12 @@ NSString *cachedServicePrefix;
     NSString *filePath = [self dataFilePath];
     BOOL loggedIn = NO;
     
+    //register default preferences
+    NSObject *defaultServiceURL = [[NSUserDefaults standardUserDefaults] objectForKey:@"enabled_preference"];
+    
+    if(!defaultServiceURL) 
+        [self registerDefaultsFromSettingsBundle];
+    
     if ([[NSFileManager defaultManager] fileExistsAtPath:filePath])
     {
         NSArray *array = [[NSArray alloc] initWithContentsOfFile:filePath];
@@ -165,6 +171,28 @@ NSString *cachedServicePrefix;
     
     cachedServicePrefix = [result copy];
     return result;
+}
+
+- (void)registerDefaultsFromSettingsBundle {
+    NSString *settingsBundle = [[NSBundle mainBundle] pathForResource:@"Settings" ofType:@"bundle"];
+    if(!settingsBundle) {
+        NSLog(@"Could not find Settings.bundle");
+        return;
+    }
+    
+    NSDictionary *settings = [NSDictionary dictionaryWithContentsOfFile:[settingsBundle stringByAppendingPathComponent:@"Root.plist"]];
+    NSArray *preferences = [settings objectForKey:@"PreferenceSpecifiers"];
+    
+    NSMutableDictionary *defaultsToRegister = [[NSMutableDictionary alloc] initWithCapacity:[preferences count]];
+    for(NSDictionary *prefSpecification in preferences) {
+        NSString *key = [prefSpecification objectForKey:@"Key"];
+        if(key) {
+            [defaultsToRegister setObject:[prefSpecification objectForKey:@"DefaultValue"] forKey:key];
+        }
+    }
+    
+    [[NSUserDefaults standardUserDefaults] registerDefaults:defaultsToRegister];
+    [defaultsToRegister release];
 }
 
 @end

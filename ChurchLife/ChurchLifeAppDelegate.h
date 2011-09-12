@@ -18,5 +18,6 @@
 - (NSString *)getServicePrefix;
 - (void)deletePreferences;
 - (void)showLoginForm;
+- (void)registerDefaultsFromSettingsBundle;
 
 @end
