@@ -18,6 +18,7 @@
     BOOL letUserSelectRow;
     NSMutableString *lastSearch;
     MBProgressHUD *HUD;
+    NSMutableData *responseData;
 }
 
 @property (nonatomic, retain) UISearchBar *searchBar;

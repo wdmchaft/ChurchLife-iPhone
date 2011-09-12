@@ -16,8 +16,6 @@
 @implementation PeopleSearchViewController
 
 @synthesize searchBar;
-
-NSMutableData *responseData;
 iToast *toast;
 
 - (id)initWithStyle:(UITableViewStyle)style
@@ -25,6 +23,7 @@ iToast *toast;
     self = [super initWithStyle:style];
     if (self) {
         toast = [[iToast init] alloc];
+        lastSearch = [[NSMutableString alloc] init];
     }
     return self;
 }
@@ -33,6 +32,8 @@ iToast *toast;
 {
     [super dealloc];
     [toast release];
+    [lastSearch release];
+    [responseData release];
 }
 
 - (void)didReceiveMemoryWarning
@@ -71,7 +72,6 @@ iToast *toast;
 - (void)viewDidUnload
 {
     [super viewDidUnload];
-    [responseData release];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -200,7 +200,7 @@ iToast *toast;
     
     [AcsLink IndividualSearch:searchBar.text firstResult:0 maxResults:25 delegate:self];
     lastSearch = [NSMutableString stringWithString:searchBar.text];
-    [lastSearch retain];
+    //[lastSearch retain];
 }
 
 - (void) doneSearching_Clicked:(id)sender {
