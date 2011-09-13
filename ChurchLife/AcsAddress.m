@@ -25,4 +25,20 @@
 @synthesize state;
 @synthesize zipCode;
 
+- (void)dealloc
+{
+    [addressType release];
+    [addressLine1 release];
+    [addressLine2 release];
+    [city release];
+    [company release];
+    [country release];
+    [latitude release];
+    [longitude release];
+    [sharedFlag release];
+    [state release];
+    [zipCode release];
+    [super dealloc];
+}
+
 @end

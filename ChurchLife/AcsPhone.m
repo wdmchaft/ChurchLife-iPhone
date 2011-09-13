@@ -22,4 +22,13 @@
 @synthesize phoneNumber;
 @synthesize phoneType;
 
+- (void)dealloc
+{
+    [areaCode release];
+    [extension release];
+    [phoneNumber release];
+    [phoneType release];
+    [super dealloc];
+}
+
 @end

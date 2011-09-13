@@ -278,7 +278,7 @@ iToast *toast;
             for (int i = 0; i < [individuals count]; i++)
             {
                 NSDictionary *indvData = [individuals objectAtIndex:i];                
-                AcsIndividual *indv = [AcsIndividual alloc];  
+                AcsIndividual *indv = [[AcsIndividual alloc] init];  
                 indv.indvID = [[indvData valueForKey:@"IndvId"] intValue];
                 indv.familyID = [indvData valueForKey:@"PrimFamily"];
                 indv.firstName = [indvData valueForKey:@"FirstName"];

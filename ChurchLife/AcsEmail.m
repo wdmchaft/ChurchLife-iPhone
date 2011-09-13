@@ -17,4 +17,11 @@
 @synthesize listed;
 @synthesize preferred;
 
+- (void)dealloc
+{
+    [email release];
+    [emailType release];
+    [super dealloc];
+}
+
 @end

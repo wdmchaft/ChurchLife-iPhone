@@ -66,7 +66,7 @@ BOOL attemptedImageLoad;
         [self performSelectorOnMainThread:@selector(loadIndividualImage) withObject:nil waitUntilDone: NO];
     }
     
-    [self resetLayout];    
+    [self resetLayout]; 
 }
 
 - (void)resetLayout

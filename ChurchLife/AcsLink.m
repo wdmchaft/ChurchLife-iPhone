@@ -191,7 +191,7 @@
         for (int i = 0; i < [addresses count]; i++)
         {
             NSDictionary *address = (NSDictionary *)[addresses objectAtIndex:i];
-            AcsAddress *addr = [AcsAddress alloc];
+            AcsAddress *addr = [[AcsAddress alloc] init];
             addr.addressID = [[address valueForKey:@"AddrId"] intValue];
             addr.addressTypeID = [[address valueForKey:@"AddrTypeId"] intValue];
             addr.addressType = [address valueForKey:@"AddrType"];
