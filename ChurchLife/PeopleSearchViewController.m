@@ -199,7 +199,7 @@ iToast *toast;
     [HUD show:YES];
     
     [AcsLink IndividualSearch:searchBar.text firstResult:0 maxResults:25 delegate:self];
-    lastSearch = [NSMutableString stringWithString:searchBar.text];
+    lastSearch = [[NSMutableString stringWithString:searchBar.text] copy];
     //[lastSearch retain];
 }
 
@@ -253,7 +253,7 @@ iToast *toast;
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
     JSONDecoder *decoder = [JSONDecoder decoder];   
-    NSDictionary *decodedResponse = [decoder objectWithData:responseData];
+    NSDictionary *decodedResponse = [decoder objectWithData:responseData];    
     
     if ([decodedResponse count] > 1) {
         NSString * status =  [decodedResponse valueForKey:@"Message"];

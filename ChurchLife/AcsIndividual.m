@@ -29,6 +29,16 @@
 
 - (void)dealloc
 {
+    [familyID release];
+    [firstName release];
+    [middleName release];
+    [lastName release];
+    [goesByName release];
+    [title release];
+    [suffix release];
+    [pictureURL release];
+    [familyPictureURL release];
+    
     [addresses release];
     [emails release];
     [phones release];
