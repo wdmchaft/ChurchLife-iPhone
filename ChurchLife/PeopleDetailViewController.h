@@ -21,6 +21,7 @@
     IBOutlet UIActivityIndicatorView *progress;
     NSMutableArray *activeSections;
     MBProgressHUD *HUD;
+    NSMutableData *responseData;
 }
 
 @property (nonatomic, retain) AcsIndividual *indv;

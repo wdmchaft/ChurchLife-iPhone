@@ -20,7 +20,6 @@
 @synthesize activeSections;
 
 NSString *selectedNumber;
-NSMutableData *responseData;
 BOOL attemptedImageLoad;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -39,7 +38,13 @@ BOOL attemptedImageLoad;
     [super dealloc];
     [activeSections release];
     [selectedNumber release];
+    [indvImage release];
+    [indvName release];
+    [progress release];
+    [splitCell release];
+    [tv release];
     [indv release];
+    [responseData release];
 }
 
 - (void)didReceiveMemoryWarning
@@ -113,7 +118,6 @@ BOOL attemptedImageLoad;
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
-    [responseData release];
 }
 
 - (void)viewWillAppear:(BOOL)animated
