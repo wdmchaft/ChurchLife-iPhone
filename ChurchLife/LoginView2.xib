@@ -101,7 +101,7 @@
 					<object class="IBUITextField" id="572955326">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{107, 133}, {193, 31}}</string>
+						<string key="NSFrame">{{107, 172}, {193, 31}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="534565045"/>
@@ -129,7 +129,7 @@
 					<object class="IBUILabel" id="596154378">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{20, 138}, {79, 21}}</string>
+						<string key="NSFrame">{{20, 177}, {79, 21}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="572955326"/>
@@ -248,7 +248,7 @@
 					<object class="IBUITextField" id="123507251">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{107, 172}, {193, 31}}</string>
+						<string key="NSFrame">{{107, 133}, {193, 31}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="208471010"/>
@@ -275,7 +275,7 @@
 					<object class="IBUILabel" id="534565045">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{20, 177}, {62, 21}}</string>
+						<string key="NSFrame">{{20, 138}, {62, 21}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="123507251"/>
@@ -297,7 +297,6 @@
 						<string key="NSFrame">{{23, 349}, {274, 50}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<int key="IBUIContentMode">7</int>
@@ -450,12 +449,12 @@
 							<reference ref="620794120"/>
 							<reference ref="935004132"/>
 							<reference ref="485439532"/>
-							<reference ref="123507251"/>
-							<reference ref="534565045"/>
-							<reference ref="572955326"/>
-							<reference ref="596154378"/>
 							<reference ref="992453395"/>
 							<reference ref="636582221"/>
+							<reference ref="572955326"/>
+							<reference ref="596154378"/>
+							<reference ref="123507251"/>
+							<reference ref="534565045"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>
