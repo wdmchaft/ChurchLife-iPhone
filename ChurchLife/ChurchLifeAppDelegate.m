@@ -96,6 +96,12 @@ BOOL errorShowing;
 
 - (void)showErrorForm
 {    
+    NSArray *viewControllers = [[self tabBarController] viewControllers];
+    UINavigationController *nav = [viewControllers lastObject];
+    
+    if ([nav.visibleViewController isKindOfClass:[LoginViewController class]])
+        [nav dismissModalViewControllerAnimated:NO];
+    
     NoConnectionViewController *errorController = [[NoConnectionViewController alloc] initWithNibName:@"NoConnectionViewController" bundle:nil];
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:errorController];
     [errorController release];

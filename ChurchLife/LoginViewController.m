@@ -35,7 +35,7 @@
 }
 
 - (void)dealloc
-{
+{   
     [super dealloc];
 }
 
@@ -58,6 +58,8 @@
 - (void) viewWillDisappear:(BOOL)animated
 {
     [self.navigationController setNavigationBarHidden:NO animated:animated];
+    scrollView.delegate = nil;
+    HUD.delegate = nil;
     [super viewWillDisappear:animated];
 }
 
@@ -91,6 +93,7 @@
 - (void)viewDidUnload
 {
     [super viewDidUnload];
+    
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
 }
@@ -134,6 +137,7 @@
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)sender {
+    
     // Update the page when more than 50% of the previous/next page is visible
     if (!pageControlBeingUsed)
     {
