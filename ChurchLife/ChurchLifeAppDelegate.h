@@ -12,12 +12,15 @@
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
-
 @property (nonatomic, retain) IBOutlet UITabBarController *tabBarController;
+
 - (NSString *)dataFilePath;
 - (NSString *)getServicePrefix;
 - (void)deletePreferences;
 - (void)showLoginForm;
+- (void)showErrorForm;
 - (void)registerDefaultsFromSettingsBundle;
+- (void)doAutoLogin;
+- (void)completeLogin;
 
 @end

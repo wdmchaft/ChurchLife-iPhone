@@ -7,6 +7,7 @@
 
 #import "ChurchLifeAppDelegate.h"
 #import "LoginViewController.h"
+#import "NoConnectionViewController.h"
 #import "AcsLink.h"
 
 @implementation ChurchLifeAppDelegate
@@ -15,9 +16,13 @@
 @synthesize tabBarController=_tabBarController;
 
 NSString *cachedServicePrefix;
+BOOL loggedIn;
+BOOL errorShowing;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    errorShowing = NO;
+    
     cachedServicePrefix = [[NSString alloc] initWithString:@""];
     // Override point for customization after application launch.
     // Add the tab bar controller's current view as a subview of the window
@@ -25,8 +30,7 @@ NSString *cachedServicePrefix;
     [self.window makeKeyAndVisible];
     
     //load from preferences
-    NSString *filePath = [self dataFilePath];
-    BOOL loggedIn = NO;
+    loggedIn = NO;
     
     //register default preferences
     NSObject *defaultServiceURL = [[NSUserDefaults standardUserDefaults] objectForKey:@"enabled_preference"];
@@ -34,42 +38,44 @@ NSString *cachedServicePrefix;
     if(!defaultServiceURL) 
         [self registerDefaultsFromSettingsBundle];
     
-    if ([[NSFileManager defaultManager] fileExistsAtPath:filePath])
-    {
-        NSArray *array = [[NSArray alloc] initWithContentsOfFile:filePath];
-        if ([array count] == 3)
-        {
-            NSString *userName = [array objectAtIndex:0];
-            NSString *siteNumber;
-            NSObject *object = [array objectAtIndex:1];
-            if ([object isKindOfClass:[NSString class]])          
-                siteNumber = [array objectAtIndex:1];
-            else if ([object isKindOfClass:[NSNumber class]])
-                siteNumber = [[array objectAtIndex:1] stringValue];
-            else
-                siteNumber = @"";
-            NSString *password = [array objectAtIndex:2];
-            
-            loggedIn = [AcsLink LoginBySite:[siteNumber integerValue] userName:userName password:password];
-        }
-        else //file not in correct format. delete it.
-        {
-            [self deletePreferences];
-        }
-        
-        [array release];
-    };
+    if ([[NSFileManager defaultManager] fileExistsAtPath:[self dataFilePath]])
+        [self doAutoLogin];
     
     if (!loggedIn)
-    {
         [self showLoginForm];
-    }
     
     return YES;
 }
 
+- (void)doAutoLogin
+{
+    NSArray *array = [[NSArray alloc] initWithContentsOfFile:[self dataFilePath]];
+    if ([array count] == 3)
+    {
+        NSString *userName = [array objectAtIndex:0];
+        NSString *siteNumber;
+        NSObject *object = [array objectAtIndex:1];
+        if ([object isKindOfClass:[NSString class]])          
+            siteNumber = [array objectAtIndex:1];
+        else if ([object isKindOfClass:[NSNumber class]])
+            siteNumber = [[array objectAtIndex:1] stringValue];
+        else
+            siteNumber = @"";
+        NSString *password = [array objectAtIndex:2];
+        
+        loggedIn = [AcsLink LoginBySite:[siteNumber integerValue] userName:userName password:password];
+    }
+    else //file not in correct format. delete it.
+    {
+        [self deletePreferences];
+    }
+    
+    [array release];
+}
+
 - (void)showLoginForm
 {
+    loggedIn = NO;
     //reset navigation controllers
     for (int i = 0; i < [self.tabBarController.viewControllers count]; i++)
     {
@@ -88,6 +94,16 @@ NSString *cachedServicePrefix;
     [navigationController release];
 }
 
+- (void)showErrorForm
+{    
+    NoConnectionViewController *errorController = [[NoConnectionViewController alloc] initWithNibName:@"NoConnectionViewController" bundle:nil];
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:errorController];
+    [errorController release];
+    [self.tabBarController presentModalViewController:navigationController animated:false]; 
+    [navigationController release];
+    errorShowing = YES;
+}
+
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     /*
@@ -102,6 +118,11 @@ NSString *cachedServicePrefix;
      Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
      If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
      */
+    if (errorShowing)
+    {
+        [self.tabBarController dismissModalViewControllerAnimated:NO];
+        errorShowing = NO;
+    }
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
@@ -109,6 +130,14 @@ NSString *cachedServicePrefix;
     /*
      Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
      */
+    if (!loggedIn)
+    {
+        if ([[NSFileManager defaultManager] fileExistsAtPath:[self dataFilePath]])
+            [self doAutoLogin];
+        
+        if (!loggedIn)
+            [self showLoginForm];
+    }
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application

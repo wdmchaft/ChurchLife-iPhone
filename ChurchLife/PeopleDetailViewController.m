@@ -487,6 +487,9 @@ BOOL attemptedImageLoad;
     AcsIndividual *individual = (AcsIndividual *)sender;
     individual = [AcsLink GetIndividual:individual.indvID];
     
+    if (individual == nil)
+        return;
+    
     UINavigationController *navController = self.navigationController;
     [navController popViewControllerAnimated:NO];
     

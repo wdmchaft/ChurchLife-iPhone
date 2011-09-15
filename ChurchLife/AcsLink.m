@@ -16,7 +16,7 @@
     ChurchLifeAppDelegate *appDelegate = (ChurchLifeAppDelegate *)[[UIApplication sharedApplication] delegate];
     NSString *servicePrefix = [appDelegate getServicePrefix];
     NSURL *url = [NSURL URLWithString:[servicePrefix stringByAppendingPathComponent:@"accounts/validate"]];
-    NSError *error;
+    NSError *error = nil;
     NSURLResponse *response;
     NSData *dataReply;
     NSString *content = [NSString stringWithFormat:@"sitenumber=%d&username=%@&password=%@", siteNumber, userName, password];
@@ -26,7 +26,8 @@
     dataReply = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
     
     if (error != nil) {
-        //[self handleError:err];
+        [appDelegate showErrorForm];
+        return NO;
     }
     
     JSONDecoder *decoder = [JSONDecoder decoder];   
@@ -58,7 +59,7 @@
     ChurchLifeAppDelegate *appDelegate = (ChurchLifeAppDelegate *)[[UIApplication sharedApplication] delegate];
     NSString *servicePrefix = [appDelegate getServicePrefix];
     NSURL *url = [NSURL URLWithString:[servicePrefix stringByAppendingPathComponent:@"accounts/findbyemail"]];
-    NSError *error;
+    NSError *error = nil;
     NSURLResponse *response;
     NSData *dataReply;
     NSString *content = [NSString stringWithFormat:@"email=%@&password=%@", email, password];
@@ -68,7 +69,8 @@
     dataReply = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
     
     if (error != nil) {
-        //[self handleError:err];
+        [appDelegate showErrorForm];
+        return nil;
     }
     
     JSONDecoder *decoder = [JSONDecoder decoder];   
@@ -140,7 +142,7 @@
                            [NSString stringWithFormat:@"%@/individuals/%d", identity.siteNumber, indvID]];    
     
     NSURL *url = [NSURL URLWithString:urlString];    
-    NSError *error;
+    NSError *error = nil;
     NSURLResponse *response;
     NSData *dataReply;
     
@@ -161,7 +163,8 @@
     dataReply = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
     
     if (error != nil) {
-        //[self handleError:err];
+        [appDelegate showErrorForm];
+        return nil;
     }
     
     JSONDecoder *decoder = [JSONDecoder decoder];   
@@ -326,7 +329,7 @@
                           [NSString stringWithFormat:@"%@/events/%@", identity.siteNumber, eventID]];
     
     NSURL *url = [NSURL URLWithString:urlString];    
-    NSError *error;
+    NSError *error = nil;
     NSURLResponse *response;
     NSData *dataReply;
     
@@ -347,7 +350,8 @@
     dataReply = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
     
     if (error != nil) {
-        //[self handleError:err];
+        [appDelegate showErrorForm];
+        return nil;
     }
     
     JSONDecoder *decoder = [JSONDecoder decoder];   

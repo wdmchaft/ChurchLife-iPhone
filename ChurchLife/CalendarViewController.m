@@ -11,6 +11,7 @@
 #import "AcsLink.h"
 #import "AcsEvent.h"
 #import "GTMNSString+HTML.h"
+#import "ChurchLifeAppDelegate.h"
 
 @implementation CalendarViewController
 
@@ -210,9 +211,11 @@ int rowCount[12];
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
-	//label.text = [NSString stringWithFormat:@"Connection failed: %@", [error description]];
     [HUD hide:YES];
-    searchCompleted = NO;
+    if ([searchResults count] == 0)
+        searchCompleted = NO;
+    ChurchLifeAppDelegate *appDelegate = (ChurchLifeAppDelegate *)[[UIApplication sharedApplication] delegate];
+    [appDelegate showErrorForm];
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {

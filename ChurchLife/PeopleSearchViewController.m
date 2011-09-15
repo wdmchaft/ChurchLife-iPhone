@@ -12,6 +12,7 @@
 #import "AcsLink.h"
 #import "AcsIndividual.h"
 #import "iToast.h"
+#import "ChurchLifeAppDelegate.h"
 
 @implementation PeopleSearchViewController
 
@@ -247,8 +248,9 @@ iToast *toast;
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
-    NSLog(@"error");
-	//label.text = [NSString stringWithFormat:@"Connection failed: %@", [error description]];
+    [HUD hide:YES];
+    ChurchLifeAppDelegate *appDelegate = (ChurchLifeAppDelegate *)[[UIApplication sharedApplication] delegate];
+    [appDelegate showErrorForm];
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
@@ -337,6 +339,9 @@ iToast *toast;
 {
     AcsIndividual *indv = (AcsIndividual *)sender;
     indv = [AcsLink GetIndividual:indv.indvID];
+    
+    if (indv == nil)
+        return;
     
     PeopleDetailViewController *peopleDetailViewController = [[PeopleDetailViewController alloc] initWithNibName:@"PeopleDetailViewController" bundle:nil];
     
