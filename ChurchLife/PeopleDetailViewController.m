@@ -489,13 +489,18 @@ BOOL attemptedImageLoad;
     
     if (individual == nil)
         return;
-    
+
+    [self performSelectorOnMainThread:@selector(pushDetailView:) withObject:individual waitUntilDone:NO];   
+}
+
+- (void)pushDetailView:(id)sender
+{
     UINavigationController *navController = self.navigationController;
     [navController popViewControllerAnimated:NO];
     
     PeopleDetailViewController *peopleDetailViewController = [[PeopleDetailViewController alloc] initWithNibName:@"PeopleDetailViewController" bundle:nil];
     
-    peopleDetailViewController.indv = individual;
+    peopleDetailViewController.indv = (AcsIndividual *)sender;
     
     [UIView beginAnimations:@"View Flip" context:nil]; 
     [UIView setAnimationDuration:0.70]; 

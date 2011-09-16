@@ -343,9 +343,14 @@ iToast *toast;
     if (indv == nil)
         return;
     
+    [self performSelectorOnMainThread:@selector(pushDetailView:) withObject:indv waitUntilDone:NO];
+}
+
+- (void)pushDetailView:(id)sender
+{
     PeopleDetailViewController *peopleDetailViewController = [[PeopleDetailViewController alloc] initWithNibName:@"PeopleDetailViewController" bundle:nil];
     
-    peopleDetailViewController.indv = indv;
+    peopleDetailViewController.indv = (AcsIndividual *)sender;
     
     [self.navigationController pushViewController:peopleDetailViewController animated:YES];
     [peopleDetailViewController release];

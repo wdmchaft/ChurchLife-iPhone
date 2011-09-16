@@ -36,5 +36,6 @@
 - (void)resetLayout;
 - (void)showIndividualProfile:(id)sender;
 - (void)deselectRow:(NSIndexPath *)indexPath;
+- (void)pushDetailView:(id)sender;
 
 @end
