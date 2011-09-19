@@ -12,6 +12,8 @@
 
 @implementation AcsLink
 
+static NSString * const ApplicationID = @"E17686B7-C9B8-F34A-10E5-000D98A7CEE8";
+
 +(BOOL)LoginBySite: (int)siteNumber userName:(NSString *)userName password:(NSString *)password { 
     ChurchLifeAppDelegate *appDelegate = (ChurchLifeAppDelegate *)[[UIApplication sharedApplication] delegate];
     NSString *servicePrefix = [appDelegate getServicePrefix];
@@ -23,6 +25,7 @@
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL: url];
     [request setHTTPMethod: @"POST"];
     [request setHTTPBody:[content dataUsingEncoding: NSASCIIStringEncoding]];
+    [request addValue:ApplicationID forHTTPHeaderField:@"AcsApplicationID"];
     dataReply = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
     
     if (error != nil) {
@@ -66,6 +69,7 @@
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL: url];
     [request setHTTPMethod: @"POST"];
     [request setHTTPBody:[content dataUsingEncoding: NSASCIIStringEncoding]];
+    [request addValue:ApplicationID forHTTPHeaderField:@"AcsApplicationID"];
     dataReply = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
     
     if (error != nil) {
@@ -129,6 +133,7 @@
     NSString *authenticationString = [@"" stringByAppendingFormat:@"Basic %@", dataStr];
     
     [request addValue:authenticationString forHTTPHeaderField:@"Authorization"];
+    [request addValue:ApplicationID forHTTPHeaderField:@"AcsApplicationID"];
     
 	NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:delegate];
     [connection release];
@@ -160,6 +165,8 @@
     NSString *authenticationString = [@"" stringByAppendingFormat:@"Basic %@", dataStr];
     
     [request addValue:authenticationString forHTTPHeaderField:@"Authorization"];
+    [request addValue:ApplicationID forHTTPHeaderField:@"AcsApplicationID"];
+    
     dataReply = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
     
     if (error != nil) {
@@ -316,6 +323,7 @@
     NSString *authenticationString = [@"" stringByAppendingFormat:@"Basic %@", dataStr];
     
     [request addValue:authenticationString forHTTPHeaderField:@"Authorization"];
+    [request addValue:ApplicationID forHTTPHeaderField:@"AcsApplicationID"];
     
 	NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:delegate];
     [connection release];
@@ -348,6 +356,7 @@
     
     [request addValue:authenticationString forHTTPHeaderField:@"Authorization"];
     dataReply = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+    [request addValue:ApplicationID forHTTPHeaderField:@"AcsApplicationID"];
     
     if (error != nil) {
         [appDelegate showErrorForm];
