@@ -8,6 +8,8 @@
 
 #import "PeopleDetailViewController.h"
 #import "AcsLink.h"
+#import <AddressBook/AddressBook.h>
+#import <AddressBookUI/AddressBookUI.h>
 
 @implementation PeopleDetailViewController
 
@@ -21,6 +23,7 @@
 
 NSString *selectedNumber;
 BOOL attemptedImageLoad;
+BOOL imageLoaded;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -60,7 +63,17 @@ BOOL attemptedImageLoad;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    UIBarButtonItem *button = [[UIBarButtonItem alloc] 
+                               initWithImage:[UIImage imageNamed:@"icon_profile.png"] 
+                               style:UIBarButtonItemStylePlain
+                               target:self 
+                               action:@selector(promptAddContact:)];
+    self.navigationItem.rightBarButtonItem = button;
+    [button release];
+    
     attemptedImageLoad = NO;
+    imageLoaded = NO;
     
     responseData = [[NSMutableData data] retain];
     indvName.text = [indv getFullName];    
@@ -134,11 +147,6 @@ BOOL attemptedImageLoad;
         indvImage.frame = frameRect;
         [self resetLayout];
     }
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -386,7 +394,7 @@ BOOL attemptedImageLoad;
                                                         cancelButtonTitle:@"Cancel" 
                                                    destructiveButtonTitle:nil 
                                                         otherButtonTitles:@"Call This Number", @"Send Text Message", nil];
-        
+        actionSheet.tag = 1;
         [actionSheet showFromTabBar:self.tabBarController.tabBar];
         [actionSheet release];
         
@@ -460,25 +468,33 @@ BOOL attemptedImageLoad;
 {
     if (!(buttonIndex == [actionSheet cancelButtonIndex]))
     {
-        UIDevice *device = [UIDevice currentDevice];
-        if (![[device model] isEqualToString:@"iPhone"])
+        if (actionSheet.tag == 1)
         {
-            UIAlertView *Notpermitted=[[UIAlertView alloc] initWithTitle:@"Alert" message:@"Your device doesn't support this feature." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-            [Notpermitted show];
-            [Notpermitted release];
-            return;
+            UIDevice *device = [UIDevice currentDevice];
+            if (![[device model] isEqualToString:@"iPhone"])
+            {
+                UIAlertView *Notpermitted=[[UIAlertView alloc] initWithTitle:@"Alert" message:@"Your device doesn't support this feature." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                [Notpermitted show];
+                [Notpermitted release];
+                return;
+            }
+            
+            if (buttonIndex == [actionSheet firstOtherButtonIndex]) //dial phone
+            {
+                NSString *number = [NSString stringWithFormat:@"tel:%@", selectedNumber];
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:number]];
+            }
+            else if (buttonIndex == [actionSheet firstOtherButtonIndex]+1) //send text
+            {
+                NSString *number = [NSString stringWithFormat:@"sms:%@", selectedNumber];
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:number]];
+            }
         }
-        
-        if (buttonIndex == [actionSheet firstOtherButtonIndex]) //dial phone
+        else if (actionSheet.tag == 2)
         {
-            NSString *number = [NSString stringWithFormat:@"tel:%@", selectedNumber];
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:number]];
+            if (buttonIndex == [actionSheet destructiveButtonIndex])
+                [self addToContacts];
         }
-        else if (buttonIndex == [actionSheet firstOtherButtonIndex]+1) //send text
-        {
-            NSString *number = [NSString stringWithFormat:@"sms:%@", selectedNumber];
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:number]];
-        }        
     }
 }
 
@@ -595,6 +611,105 @@ BOOL attemptedImageLoad;
     [self resetLayout];
     
     [indvImage setImage:image];
+    imageLoaded = YES;
+}
+
+- (void)promptAddContact:(id)sender
+{
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil
+                                                             delegate:self 
+                                                    cancelButtonTitle:@"Cancel" 
+                                               destructiveButtonTitle:@"Add to Contacts"
+                                                    otherButtonTitles:nil];
+    actionSheet.tag = 2;
+    [actionSheet showFromTabBar:self.tabBarController.tabBar];
+    [actionSheet release];
+}
+
+- (void)addToContacts
+{        
+    ABAddressBookRef addressBook = ABAddressBookCreate();
+    ABRecordRef person = ABPersonCreate();
+    
+    ABRecordSetValue(person, kABPersonPrefixProperty, indv.title, nil);
+    ABRecordSetValue(person, kABPersonFirstNameProperty, indv.firstName, nil);
+    ABRecordSetValue(person, kABPersonMiddleNameProperty, indv.middleName, nil);
+    ABRecordSetValue(person, kABPersonLastNameProperty, indv.lastName, nil);
+    ABRecordSetValue(person, kABPersonSuffixProperty, indv.suffix, nil);
+    
+    //Add addresses
+    ABMutableMultiValueRef addresses = ABMultiValueCreateMutable(kABMultiDictionaryPropertyType);
+    for (int i = 0; i < [indv.addresses count]; i++)
+    {
+        AcsAddress *a = (AcsAddress *)[[indv addresses] objectAtIndex:i];
+        NSString *homeAddress = [a.addressLine1 stringByAppendingString:a.addressLine2];
+        
+        NSMutableDictionary *addressDictionary = [[NSMutableDictionary alloc] init];
+        [addressDictionary setObject:homeAddress forKey:(NSString *)kABPersonAddressStreetKey];
+        [addressDictionary setObject:a.city forKey:(NSString *)kABPersonAddressCityKey];
+        [addressDictionary setObject:a.state forKey:(NSString *)kABPersonAddressStateKey];
+        [addressDictionary setObject:a.zipCode forKey:(NSString *)kABPersonAddressZIPKey];
+        
+        BOOL didAddHome = ABMultiValueAddValueAndLabel(addresses, addressDictionary, (CFStringRef)a.addressType, NULL);
+        
+        if(didAddHome)
+            ABRecordSetValue(person, kABPersonAddressProperty, addresses, NULL);
+        
+        [addressDictionary release];
+    }
+    CFRelease(addresses);
+    
+    //Add phones
+    ABMutableMultiValueRef phones = ABMultiValueCreateMutable(kABMultiStringPropertyType);
+    for (int i = 0; i < [indv.phones count]; i++)
+    {
+        AcsPhone *p = (AcsPhone *)[[indv phones] objectAtIndex:i];
+        
+        NSString *number;
+        if (![p.areaCode isEqualToString:@""])
+            number = [NSString stringWithFormat:@"%@-%@", p.areaCode, p.phoneNumber];
+        else
+            number = p.phoneNumber;
+        
+        BOOL didAddPhone = ABMultiValueAddValueAndLabel(phones, number, (CFStringRef)p.phoneType, NULL);
+        
+        if(didAddPhone)
+            ABRecordSetValue(person, kABPersonPhoneProperty, phones, nil);
+    }
+    CFRelease(phones);
+    
+    //Add emails
+    ABMutableMultiValueRef emails = ABMultiValueCreateMutable(kABPersonEmailProperty);
+    for (int i = 0; i < [indv.emails count]; i++)
+    {
+        AcsEmail *e = (AcsEmail *)[[indv emails] objectAtIndex:i];
+        
+        BOOL didAddEmail = ABMultiValueAddValueAndLabel(emails, e.email, (CFStringRef)e.emailType, NULL);
+        
+        if(didAddEmail)
+            ABRecordSetValue(person, kABPersonEmailProperty, emails, nil); 
+    }
+    CFRelease(emails);
+    
+    //Add image
+    if (imageLoaded)
+    {    
+        NSData * dataRef = UIImagePNGRepresentation([indvImage image]);
+        ABPersonSetImageData(person, (CFDataRef)dataRef, nil);
+    }
+    
+    //Add to address book
+    ABAddressBookAddRecord(addressBook, person, nil);
+    CFRelease(person);
+    
+    //Save changes
+    ABAddressBookSave(addressBook, nil);
+    CFRelease(addressBook);
+    
+    NSString *alertText = [NSString stringWithFormat:@"The contact was added successfully."];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Success" message:alertText delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [alert show];
+    [alert release];
 }
 
 @end

@@ -37,5 +37,7 @@
 - (void)showIndividualProfile:(id)sender;
 - (void)deselectRow:(NSIndexPath *)indexPath;
 - (void)pushDetailView:(id)sender;
+- (void)addToContacts;
+- (void)promptAddContact:(id)sender;
 
 @end

@@ -66,6 +66,8 @@
 		CEDB6F551421274900D641F4 /* NoConnectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEDB6F531421274800D641F4 /* NoConnectionViewController.xib */; };
 		CEDB6F5914212DED00D641F4 /* wireless2.png in Resources */ = {isa = PBXBuildFile; fileRef = CEDB6F5814212DEC00D641F4 /* wireless2.png */; };
 		CEDB6F5C142243FD00D641F4 /* RadialGradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDB6F5B142243F900D641F4 /* RadialGradientView.m */; };
+		CEDB6F5E142916E700D641F4 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEDB6F5D142916E500D641F4 /* AddressBook.framework */; };
+		CEDB6F6A14293C6B00D641F4 /* icon_profile.png in Resources */ = {isa = PBXBuildFile; fileRef = CEDB6F6914293C6900D641F4 /* icon_profile.png */; };
 		CEDB83BB13B5110B00FEC747 /* churchlife.logo.login.png in Resources */ = {isa = PBXBuildFile; fileRef = CEDB83BA13B5110A00FEC747 /* churchlife.logo.login.png */; };
 		CEDB83BD13B5112A00FEC747 /* no-person-photo.png in Resources */ = {isa = PBXBuildFile; fileRef = CEDB83BC13B5112A00FEC747 /* no-person-photo.png */; };
 		CEF5392C140E7C1C00EF40CC /* iToast.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF5392B140E7C1C00EF40CC /* iToast.m */; };
@@ -161,6 +163,8 @@
 		CEDB6F5814212DEC00D641F4 /* wireless2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wireless2.png; sourceTree = "<group>"; };
 		CEDB6F5A142243F600D641F4 /* RadialGradientView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RadialGradientView.h; sourceTree = "<group>"; };
 		CEDB6F5B142243F900D641F4 /* RadialGradientView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RadialGradientView.m; sourceTree = "<group>"; };
+		CEDB6F5D142916E500D641F4 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
+		CEDB6F6914293C6900D641F4 /* icon_profile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_profile.png; sourceTree = "<group>"; };
 		CEDB83BA13B5110A00FEC747 /* churchlife.logo.login.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = churchlife.logo.login.png; sourceTree = "<group>"; };
 		CEDB83BC13B5112A00FEC747 /* no-person-photo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "no-person-photo.png"; sourceTree = "<group>"; };
 		CEF5392A140E7C1C00EF40CC /* iToast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iToast.h; sourceTree = "<group>"; };
@@ -177,6 +181,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEDB6F5E142916E700D641F4 /* AddressBook.framework in Frameworks */,
 				BA6E1A3113AFE73500C18960 /* libz.dylib in Frameworks */,
 				BA6E1A2F13AFE71100C18960 /* MobileCoreServices.framework in Frameworks */,
 				BA6E1A2D13AFE70600C18960 /* SystemConfiguration.framework in Frameworks */,
@@ -195,6 +200,7 @@
 			isa = PBXGroup;
 			children = (
 				BA6E1A3013AFE73500C18960 /* libz.dylib */,
+				CEDB6F5D142916E500D641F4 /* AddressBook.framework */,
 				BA6E1A2E13AFE71100C18960 /* MobileCoreServices.framework */,
 				BA6E1A2C13AFE70600C18960 /* SystemConfiguration.framework */,
 				BA6E1A2A13AFE6FC00C18960 /* CFNetwork.framework */,
@@ -313,6 +319,7 @@
 				CEA99F4A1474540C00DD0D2D /* sectionheaderbackground.png */,
 				CEDB83BC13B5112A00FEC747 /* no-person-photo.png */,
 				CEDB83BA13B5110A00FEC747 /* churchlife.logo.login.png */,
+				CEDB6F6914293C6900D641F4 /* icon_profile.png */,
 				CE19BEBE13AFBD7A00A62939 /* disclosure-arrow.png */,
 				CE19BEA413AFBD1700A62939 /* calendar.png */,
 				CE19BEA513AFBD1700A62939 /* calendar@2x.png */,
@@ -486,6 +493,7 @@
 				CEF539441410068A00EF40CC /* Settings.bundle in Resources */,
 				CEDB6F551421274900D641F4 /* NoConnectionViewController.xib in Resources */,
 				CEDB6F5914212DED00D641F4 /* wireless2.png in Resources */,
+				CEDB6F6A14293C6B00D641F4 /* icon_profile.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
