@@ -707,7 +707,7 @@ BOOL imageLoaded;
     CFRelease(addressBook);
     
     NSString *alertText = [NSString stringWithFormat:@"The contact was added successfully."];
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Success" message:alertText delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Contact Added" message:alertText delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
     [alert show];
     [alert release];
 }
