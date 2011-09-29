@@ -643,7 +643,9 @@ BOOL imageLoaded;
     for (int i = 0; i < [indv.addresses count]; i++)
     {
         AcsAddress *a = (AcsAddress *)[[indv addresses] objectAtIndex:i];
-        NSString *homeAddress = [a.addressLine1 stringByAppendingString:a.addressLine2];
+        NSString *homeAddress = a.addressLine1;
+        if (![a.addressLine2 isEqualToString:@""])
+            homeAddress = [homeAddress stringByAppendingFormat:@"\n%@", a.addressLine2];
         
         NSMutableDictionary *addressDictionary = [[NSMutableDictionary alloc] init];
         [addressDictionary setObject:homeAddress forKey:(NSString *)kABPersonAddressStreetKey];
