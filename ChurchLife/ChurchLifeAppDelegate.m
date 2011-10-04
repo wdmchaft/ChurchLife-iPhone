@@ -20,7 +20,7 @@ BOOL loggedIn;
 BOOL errorShowing;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{
+{   
     errorShowing = NO;
     
     cachedServicePrefix = [[NSString alloc] initWithString:@""];
@@ -33,10 +33,13 @@ BOOL errorShowing;
     loggedIn = NO;
     
     //register default preferences
+#ifdef DEBUG
+    NSLog(@"in debug mode");
     NSObject *defaultServiceURL = [[NSUserDefaults standardUserDefaults] objectForKey:@"enabled_preference"];
     
     if(!defaultServiceURL) 
         [self registerDefaultsFromSettingsBundle];
+#endif
     
     if ([[NSFileManager defaultManager] fileExistsAtPath:[self dataFilePath]])
         [self doAutoLogin];
@@ -190,8 +193,9 @@ BOOL errorShowing;
     if (![cachedServicePrefix isEqualToString:@""])
         return cachedServicePrefix;
     
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *result;
+#ifdef DEBUG
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     BOOL useDefaultService = [defaults boolForKey:@"enabled_preference"];
     if (useDefaultService)
         result = [NSString stringWithString:@"https://api.accessacs.com"];
@@ -203,6 +207,9 @@ BOOL errorShowing;
         else
             result = [NSString stringWithString:@"https://api.accessacs.com"];
     }
+#else
+    result = [NSString stringWithString:@"https://api.accessacs.com"];
+#endif
     
     cachedServicePrefix = [result copy];
     return result;

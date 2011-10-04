@@ -68,13 +68,13 @@
 		CEDB6F5C142243FD00D641F4 /* RadialGradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDB6F5B142243F900D641F4 /* RadialGradientView.m */; };
 		CEDB6F5E142916E700D641F4 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEDB6F5D142916E500D641F4 /* AddressBook.framework */; };
 		CEDB6F6A14293C6B00D641F4 /* icon_profile.png in Resources */ = {isa = PBXBuildFile; fileRef = CEDB6F6914293C6900D641F4 /* icon_profile.png */; };
+		CEDB6F6E143B4FB800D641F4 /* Settings_bak.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CEDB6F6D143B4FB800D641F4 /* Settings_bak.bundle */; };
 		CEDB83BB13B5110B00FEC747 /* churchlife.logo.login.png in Resources */ = {isa = PBXBuildFile; fileRef = CEDB83BA13B5110A00FEC747 /* churchlife.logo.login.png */; };
 		CEDB83BD13B5112A00FEC747 /* no-person-photo.png in Resources */ = {isa = PBXBuildFile; fileRef = CEDB83BC13B5112A00FEC747 /* no-person-photo.png */; };
 		CEF5392C140E7C1C00EF40CC /* iToast.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF5392B140E7C1C00EF40CC /* iToast.m */; };
 		CEF53931140ED28700EF40CC /* GTMNSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF53930140ED28700EF40CC /* GTMNSString+HTML.m */; };
 		CEF53941140FF8E800EF40CC /* button-highlight.png in Resources */ = {isa = PBXBuildFile; fileRef = CEF5393F140FF8E800EF40CC /* button-highlight.png */; };
 		CEF53942140FF8E800EF40CC /* button.png in Resources */ = {isa = PBXBuildFile; fileRef = CEF53940140FF8E800EF40CC /* button.png */; };
-		CEF539441410068A00EF40CC /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CEF539431410068900EF40CC /* Settings.bundle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -165,6 +165,7 @@
 		CEDB6F5B142243F900D641F4 /* RadialGradientView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RadialGradientView.m; sourceTree = "<group>"; };
 		CEDB6F5D142916E500D641F4 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		CEDB6F6914293C6900D641F4 /* icon_profile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_profile.png; sourceTree = "<group>"; };
+		CEDB6F6D143B4FB800D641F4 /* Settings_bak.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings_bak.bundle; sourceTree = "<group>"; };
 		CEDB83BA13B5110A00FEC747 /* churchlife.logo.login.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = churchlife.logo.login.png; sourceTree = "<group>"; };
 		CEDB83BC13B5112A00FEC747 /* no-person-photo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "no-person-photo.png"; sourceTree = "<group>"; };
 		CEF5392A140E7C1C00EF40CC /* iToast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iToast.h; sourceTree = "<group>"; };
@@ -173,7 +174,6 @@
 		CEF53930140ED28700EF40CC /* GTMNSString+HTML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GTMNSString+HTML.m"; sourceTree = "<group>"; };
 		CEF5393F140FF8E800EF40CC /* button-highlight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button-highlight.png"; sourceTree = "<group>"; };
 		CEF53940140FF8E800EF40CC /* button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button.png; sourceTree = "<group>"; };
-		CEF539431410068900EF40CC /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -276,7 +276,7 @@
 				BA1951FB13A1986E00AA6F59 /* InfoPlist.strings */,
 				BA1951FE13A1986E00AA6F59 /* ChurchLife-Prefix.pch */,
 				BA1951FF13A1986E00AA6F59 /* main.m */,
-				CEF539431410068900EF40CC /* Settings.bundle */,
+				CEDB6F6D143B4FB800D641F4 /* Settings_bak.bundle */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -490,10 +490,10 @@
 				CEA99F4B1474540C00DD0D2D /* sectionheaderbackground.png in Resources */,
 				CEF53941140FF8E800EF40CC /* button-highlight.png in Resources */,
 				CEF53942140FF8E800EF40CC /* button.png in Resources */,
-				CEF539441410068A00EF40CC /* Settings.bundle in Resources */,
 				CEDB6F551421274900D641F4 /* NoConnectionViewController.xib in Resources */,
 				CEDB6F5914212DED00D641F4 /* wireless2.png in Resources */,
 				CEDB6F6A14293C6B00D641F4 /* icon_profile.png in Resources */,
+				CEDB6F6E143B4FB800D641F4 /* Settings_bak.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -567,6 +567,8 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				New_Setting = GCC_PREPROCESSOR_DEFINITIONS;
+				"New_Setting[arch=*]" = "-DDEBUG=1";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -581,6 +583,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				New_Setting = GCC_PREPROCESSOR_DEFINITIONS;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
 			};
