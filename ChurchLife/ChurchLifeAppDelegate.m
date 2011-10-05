@@ -32,15 +32,6 @@ BOOL errorShowing;
     //load from preferences
     loggedIn = NO;
     
-    //register default preferences
-#ifdef DEBUG
-    NSLog(@"in debug mode");
-    NSObject *defaultServiceURL = [[NSUserDefaults standardUserDefaults] objectForKey:@"enabled_preference"];
-    
-    if(!defaultServiceURL) 
-        [self registerDefaultsFromSettingsBundle];
-#endif
-    
     if ([[NSFileManager defaultManager] fileExistsAtPath:[self dataFilePath]])
         [self doAutoLogin];
     
@@ -194,47 +185,10 @@ BOOL errorShowing;
         return cachedServicePrefix;
     
     NSString *result;
-#ifdef DEBUG
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    BOOL useDefaultService = [defaults boolForKey:@"enabled_preference"];
-    if (useDefaultService)
-        result = [NSString stringWithString:@"https://api.accessacs.com"];
-    else
-    {
-        NSString *servicePrefix = [defaults stringForKey:@"url_preference"];
-        if (![servicePrefix isEqualToString:@""])
-            result = servicePrefix;
-        else
-            result = [NSString stringWithString:@"https://api.accessacs.com"];
-    }
-#else
     result = [NSString stringWithString:@"https://api.accessacs.com"];
-#endif
     
     cachedServicePrefix = [result copy];
     return result;
-}
-
-- (void)registerDefaultsFromSettingsBundle {
-    NSString *settingsBundle = [[NSBundle mainBundle] pathForResource:@"Settings" ofType:@"bundle"];
-    if(!settingsBundle) {
-        NSLog(@"Could not find Settings.bundle");
-        return;
-    }
-    
-    NSDictionary *settings = [NSDictionary dictionaryWithContentsOfFile:[settingsBundle stringByAppendingPathComponent:@"Root.plist"]];
-    NSArray *preferences = [settings objectForKey:@"PreferenceSpecifiers"];
-    
-    NSMutableDictionary *defaultsToRegister = [[NSMutableDictionary alloc] initWithCapacity:[preferences count]];
-    for(NSDictionary *prefSpecification in preferences) {
-        NSString *key = [prefSpecification objectForKey:@"Key"];
-        if(key) {
-            [defaultsToRegister setObject:[prefSpecification objectForKey:@"DefaultValue"] forKey:key];
-        }
-    }
-    
-    [[NSUserDefaults standardUserDefaults] registerDefaults:defaultsToRegister];
-    [defaultsToRegister release];
 }
 
 @end

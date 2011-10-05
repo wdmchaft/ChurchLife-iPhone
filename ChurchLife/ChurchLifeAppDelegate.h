@@ -19,7 +19,6 @@
 - (void)deletePreferences;
 - (void)showLoginForm;
 - (void)showErrorForm;
-- (void)registerDefaultsFromSettingsBundle;
 - (void)doAutoLogin;
 - (void)completeLogin;
 
