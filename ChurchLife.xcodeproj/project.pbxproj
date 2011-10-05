@@ -68,7 +68,6 @@
 		CEDB6F5C142243FD00D641F4 /* RadialGradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDB6F5B142243F900D641F4 /* RadialGradientView.m */; };
 		CEDB6F5E142916E700D641F4 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEDB6F5D142916E500D641F4 /* AddressBook.framework */; };
 		CEDB6F6A14293C6B00D641F4 /* icon_profile.png in Resources */ = {isa = PBXBuildFile; fileRef = CEDB6F6914293C6900D641F4 /* icon_profile.png */; };
-		CEDB6F6E143B4FB800D641F4 /* Settings_bak.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CEDB6F6D143B4FB800D641F4 /* Settings_bak.bundle */; };
 		CEDB83BB13B5110B00FEC747 /* churchlife.logo.login.png in Resources */ = {isa = PBXBuildFile; fileRef = CEDB83BA13B5110A00FEC747 /* churchlife.logo.login.png */; };
 		CEDB83BD13B5112A00FEC747 /* no-person-photo.png in Resources */ = {isa = PBXBuildFile; fileRef = CEDB83BC13B5112A00FEC747 /* no-person-photo.png */; };
 		CEF5392C140E7C1C00EF40CC /* iToast.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF5392B140E7C1C00EF40CC /* iToast.m */; };
@@ -165,7 +164,6 @@
 		CEDB6F5B142243F900D641F4 /* RadialGradientView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RadialGradientView.m; sourceTree = "<group>"; };
 		CEDB6F5D142916E500D641F4 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		CEDB6F6914293C6900D641F4 /* icon_profile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_profile.png; sourceTree = "<group>"; };
-		CEDB6F6D143B4FB800D641F4 /* Settings_bak.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings_bak.bundle; sourceTree = "<group>"; };
 		CEDB83BA13B5110A00FEC747 /* churchlife.logo.login.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = churchlife.logo.login.png; sourceTree = "<group>"; };
 		CEDB83BC13B5112A00FEC747 /* no-person-photo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "no-person-photo.png"; sourceTree = "<group>"; };
 		CEF5392A140E7C1C00EF40CC /* iToast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iToast.h; sourceTree = "<group>"; };
@@ -276,7 +274,6 @@
 				BA1951FB13A1986E00AA6F59 /* InfoPlist.strings */,
 				BA1951FE13A1986E00AA6F59 /* ChurchLife-Prefix.pch */,
 				BA1951FF13A1986E00AA6F59 /* main.m */,
-				CEDB6F6D143B4FB800D641F4 /* Settings_bak.bundle */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -493,7 +490,6 @@
 				CEDB6F551421274900D641F4 /* NoConnectionViewController.xib in Resources */,
 				CEDB6F5914212DED00D641F4 /* wireless2.png in Resources */,
 				CEDB6F6A14293C6B00D641F4 /* icon_profile.png in Resources */,
-				CEDB6F6E143B4FB800D641F4 /* Settings_bak.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
