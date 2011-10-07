@@ -634,7 +634,10 @@ BOOL imageLoaded;
     ABRecordSetValue(person, kABPersonPrefixProperty, indv.title, nil);
     ABRecordSetValue(person, kABPersonFirstNameProperty, indv.firstName, nil);
     ABRecordSetValue(person, kABPersonMiddleNameProperty, indv.middleName, nil);
-    ABRecordSetValue(person, kABPersonNicknameProperty, indv.goesByName, nil);
+    
+    if (![indv.goesByName isEqualToString:@""])
+        ABRecordSetValue(person, kABPersonNicknameProperty, indv.goesByName, nil);
+    
     ABRecordSetValue(person, kABPersonLastNameProperty, indv.lastName, nil);
     ABRecordSetValue(person, kABPersonSuffixProperty, indv.suffix, nil);
     
