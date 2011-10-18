@@ -35,7 +35,6 @@ NSMutableArray *values;
 
 - (void)dealloc
 {
-    [super dealloc];
     [values release];
     [redRect release];
     [whiteRect release];
@@ -44,6 +43,7 @@ NSMutableArray *values;
     [eventName release];
     [eventTime release];
     [tv release];
+    [super dealloc];
 }
 
 - (void)didReceiveMemoryWarning

@@ -31,10 +31,10 @@ iToast *toast;
 
 - (void)dealloc
 {
-    [super dealloc];
     [toast release];
     [lastSearch release];
     [responseData release];
+    [super dealloc];
 }
 
 - (void)didReceiveMemoryWarning

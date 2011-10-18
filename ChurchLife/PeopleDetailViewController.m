@@ -38,7 +38,6 @@ BOOL imageLoaded;
 
 - (void)dealloc
 {
-    [super dealloc];
     [activeSections release];
     [selectedNumber release];
     [indvImage release];
@@ -48,6 +47,7 @@ BOOL imageLoaded;
     [tv release];
     [indv release];
     [responseData release];
+    [super dealloc];
 }
 
 - (void)didReceiveMemoryWarning

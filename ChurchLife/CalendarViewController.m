@@ -35,9 +35,9 @@ int rowCount[12];
 
 - (void)dealloc
 {
-    [super dealloc];
     [startDate release];
     [stopDate release];
+    [super dealloc];
 }
 
 - (void)didReceiveMemoryWarning
