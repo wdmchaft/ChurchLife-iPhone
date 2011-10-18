@@ -131,6 +131,12 @@ iToast *toast;
     
     AcsIndividual *indv = (AcsIndividual *)[searchResults objectAtIndex:indexPath.row];
     cell.textLabel.text = [NSString stringWithFormat:@"%@ %@", indv.firstName, indv.lastName];
+    
+    if (indv.suffix != nil)
+        cell.textLabel.text = [cell.textLabel.text stringByAppendingFormat:@" %@", indv.suffix];
+    
+    cell.textLabel.text = [cell.textLabel.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    
     if ([cell.textLabel.text isEqualToString:@"View More..."])
         cell.accessoryType = UITableViewCellAccessoryNone;
     else
