@@ -278,11 +278,13 @@ int rowCount[12];
             
             //update rowCount
             unsigned int unitFlags = NSMonthCalendarUnit | NSYearCalendarUnit;
-            NSDateComponents *dateComponents = [[NSCalendar currentCalendar] components:unitFlags fromDate:[NSDate date]];
+            AcsEvent *firstEvent = (AcsEvent *)[searchResults objectAtIndex:0];
+            
+            NSDateComponents *dateComponents = [[NSCalendar currentCalendar] components:unitFlags fromDate:firstEvent.startDate];
             [dateComponents setDay:1];
             
-            dateComponents = [[NSCalendar currentCalendar] components:NSMonthCalendarUnit fromDate:[[NSCalendar currentCalendar] dateFromComponents:
-                                                                                                    dateComponents] toDate:event.startDate options:0];
+            dateComponents = [[NSCalendar currentCalendar] components:NSMonthCalendarUnit fromDate:[[NSCalendar currentCalendar] dateFromComponents:dateComponents] toDate:event.startDate options:0];
+            
             section = [dateComponents month];
             rowCount[section] = rowCount[section] + 1;
         }
